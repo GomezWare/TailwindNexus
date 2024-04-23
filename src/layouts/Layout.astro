@@ -1,4 +1,5 @@
 ---
+const alpinejs = 'alpinejs';
 interface Props {
   title: string;
 }
@@ -13,13 +14,13 @@ const { title } = Astro.props;
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="src/css/main.css" />
     <title>{title}</title>
   </head>
   <body class="bg-slate-800">
     <header>
       <section
-        class="h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-700 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5"
+        class="h-16 sm:h-20 bg-slate-600 bg-opacity-50 border-0 sm:border-b-2 border-b-gray-700 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5"
       >
         <div>
           <a href="/"
@@ -30,41 +31,82 @@ const { title } = Astro.props;
             /></a
           >
         </div>
-        <search class="w-[25%] rounded-xl">
+        <search class="w-[25%] rounded-xl hidden sm:block">
           <label for="componentSearch" class="sr-only">
             Search bar for components
           </label>
-          <div class="relative font-light">
+          <div class="relative font-light" x-data="{ isInputEmpty: true }">
             <input
+              x-on:input="isInputEmpty = $event.target.value === ''"
               type="search"
               id="componentSearch"
-              class="w-full h-8 pl-2 rounded bg-slate-600 border-2-slate-500"
+              class="w-full h-8 pl-2 rounded bg-slate-600 border-2-slate-500 hover:bg-slate-500 transition-colors"
               placeholder="Search..."
+            />
+            <img
+              x-bind:class="{ 'hidden': !isInputEmpty }"
+              class="absolute w-6 bottom-1/2 translate-y-1/2 right-2 pointer-events-none"
+              src="icons/search.svg"
+              alt="Search magnifier icon"
             />
           </div>
         </search>
+
         <nav class="flex justify-center gap-5">
-          <a class="flex items-center gap-1" href="/my">
+          <a
+            class="flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors"
+            href="/my"
+          >
             <span class="hidden sm:contents">Profile</span>
             <img
               src="icons/user.svg"
-              class="w-7 rounded-full"
+              class="w-7 rounded-full pointer-events-none"
               alt="profile photo icon"
             />
           </a>
-          <button class="flex items-center gap-1">
+          <button
+            class="flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors"
+          >
             <span class="hidden sm:contents">Menu</span>
             <img
               src="icons/menu.svg"
-              class="w-7 rounded-full"
+              class="w-7 rounded-full pointer-events-none"
               alt="menu icon"
             />
           </button>
         </nav>
       </section>
+      <section
+        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5"
+      >
+        <search class="w-[50%] rounded-xl sm:hidden">
+          <label for="componentSearchMobile" class="sr-only">
+            Search bar for components
+          </label>
+          <div class="relative font-light" x-data="{ isInputEmpty: true }">
+            <input
+              x-on:input="isInputEmpty = $event.target.value === ''"
+              type="search"
+              id="componentSearchMobile"
+              class="w-full h-8 pl-2 rounded bg-slate-600 border-2-slate-500 hover:bg-slate-500 transition-colors"
+              placeholder="Search..."
+            />
+            <img
+              x-bind:class="{ 'hidden': !isInputEmpty }"
+              class="absolute w-6 bottom-1/2 translate-y-1/2 right-2 pointer-events-none"
+              src="icons/search.svg"
+              alt="Search magnifier icon"
+            />
+          </div>
+        </search>
+      </section>
     </header>
   </body>
-  <main class="text-custom-text-primary">
+  <main class="text-custom-text-primary mt-24">
     <slot />
   </main>
 </html>
+
+<script>
+  import "alpinejs";
+</script>
