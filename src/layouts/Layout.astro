@@ -19,7 +19,7 @@ const { title } = Astro.props;
   <body class="bg-slate-800">
     <header>
       <section
-        class="h-16 sm:h-20 bg-slate-600 bg-opacity-50 border-0 sm:border-b-2 border-b-gray-700 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5"
+        class="h-16 sm:h-20 bg-slate-600 bg-opacity-50 border-0 sm:border-b-2 border-b-gray-600 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5 z-40"
       >
         <div>
           <a href="/"
@@ -74,7 +74,7 @@ const { title } = Astro.props;
         </nav>
       </section>
       <section
-        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5"
+        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b  border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 z-40"
       >
         <search class="w-[50%] rounded-xl sm:hidden">
           <label for="componentSearchMobile" class="sr-only">
@@ -97,23 +97,23 @@ const { title } = Astro.props;
       </section>
       <nav
         id="categoriesMenuWrap"
-        class="invisible fixed top-0 w-screen h-screen backdrop-brightness-50 transition-all flex shadow-lg shadow-black backdrop-blur"
+        class="invisible fixed top-0 w-screen h-screen backdrop-brightness-50 transition-all flex shadow-lg shadow-black backdrop-blur z-50"
       >
         <div
           id="categoriesMenu"
-          class="transition-transform -translate-x-[100rem] duration-500 sm:w-[32rem] w-full bg-slate-700 bg-opacity-85 flex flex-col space-y-10 pt-10 px-2"
+          class="transition-transform relative -translate-x-[100rem] duration-500 sm:w-[32rem] w-full bg-slate-700 bg-opacity-85 flex flex-col space-y-10 pt-10 px-2"
         >
           <button
-            class="menuClose absolute sm:left-8 left-[90%] top-4 p-2.5 hover:bg-slate-500 border border-slate-500 rounded-xl"
+            class="menuClose absolute right-2 top-4 p-2.5 hover:bg-slate-500 rounded-xl"
           >
-            <img class="size-5" src="icons/closeIcon.svg" />
+            <img class="size-5" src="icons/barLeft.svg" />
           </button>
           <div
             class="w-full h-full flex flex-col items-center justify-start gap-3"
           >
             <a
               href="/allComponents"
-              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600  hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
             >
               <span
                 class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-cyan-300 to-cyan-400"
@@ -163,9 +163,87 @@ const { title } = Astro.props;
     </header>
     <main class="text-custom-text-primary mt-24">
       <slot />
+
     </main>
 
-    <footer></footer>
+    <footer class="flex flex-col justify-center items-center">
+      <div
+        class="border-t-2 border-slate-600 py-2 px-6 flex justify-between items-center w-full"
+      >
+        <div>
+          <img
+            class="w-48 sm:w-64"
+            src="../logos/TailwindFull.png"
+            alt="Tailwind Nexus Logo"
+          />
+        </div>
+        <div
+          class=" flex-col justify-center items-center space-y-3 flex-1 w-full hidden lg:flex"
+        >
+          <p class="font-code text-gray-50 text-xs mx-8 sm:mx-24 text-center">
+            Tailwind Nexus is an open source end-of-degree project so you are
+            free to review the source code and contribute to the github
+            repository.
+          </p>
+          <p class="font-code text-gray-50 text-sm">
+            David Gómez Vicente (<a
+              href="https://github.com/GomezWare"
+              target="_blank"
+              class="custom-link">GomezWare</a
+            >) - 2024
+          </p>
+        </div>
+        <div>
+          <ul class="flex gap-4">
+            <li>
+              <a
+                class="p-3 bg-slate-600 rounded-full inline-block"
+                href="https://github.com/GomezWare/TailwindNexus"
+                target="_blank"
+                ><img class="w-6" src="icons/github.svg" alt=" git logo" /></a
+              >
+            </li>
+            <li>
+              <a
+                class="p-3 bg-slate-600 rounded-full inline-block"
+                href="mailto:tailwindnexus@gmail.com?subject=Tailwind Nexus Feedback"
+                ><img class="w-6" src="icons/mail.svg" alt=" email icon" /></a
+              >
+            </li>
+            <li>
+              <a
+                class="p-3 bg-slate-600 rounded-full inline-block"
+                href="https://stackoverflow.com/users/24634865/tailwind-nexus"
+                target="_blank"
+                ><img
+                  class="w-6"
+                  src="icons/stackOverflow.svg"
+                  alt=" Stack overflow logo"
+                /></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="lg:hidden">
+        <div
+          class="flex flex-col justify-center items-center space-y-3 flex-1 w-full"
+        >
+          <p class="font-code text-gray-50 text-xs mx-8 sm:mx-24 text-center">
+            Tailwind Nexus is an open source end-of-degree project so you are
+            free to review the source code and contribute to the github
+            repository.
+          </p>
+          <p class="font-code text-gray-50 text-sm">
+            David Gómez Vicente (<a
+              href="https://github.com/GomezWare"
+              target="_blank"
+              class="custom-link">GomezWare</a
+            >) - 2024
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
 

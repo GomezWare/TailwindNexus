@@ -6,3 +6,9 @@
 input[type="search"]:focus + img {
 @apply hidden;
 }
+
+/* Class for al website links */
+
+.custom-link{
+    @apply text-cyan-500 hover:bg-cyan-800 underline
+}
