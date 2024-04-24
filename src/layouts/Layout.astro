@@ -51,7 +51,7 @@ const { title } = Astro.props;
 
         <nav class="flex justify-center gap-5">
           <a
-            class="flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors"
+            class="flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors relative"
             href="/myAccount"
           >
             <span class="hidden sm:contents">Profile</span>
@@ -74,7 +74,7 @@ const { title } = Astro.props;
         </nav>
       </section>
       <section
-        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 z-40"
+        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 !z-30"
       >
         <search class="w-[50%] rounded-xl sm:hidden">
           <label for="componentSearchMobile" class="sr-only">
