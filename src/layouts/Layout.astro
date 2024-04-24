@@ -109,11 +109,11 @@ const { title } = Astro.props;
             <img class="size-5" src="icons/closeIcon.svg" />
           </button>
           <div
-            class="w-full h-full flex flex-col items-center justify-start gap-4"
+            class="w-full h-full flex flex-col items-center justify-start gap-3"
           >
             <a
               href="/allComponents"
-              class="font-title font-semibold color py-2 px-6 bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600  hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
             >
               <span
                 class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-cyan-300 to-cyan-400"
@@ -123,7 +123,7 @@ const { title } = Astro.props;
             </a>
             <a
               href="/latest"
-              class="font-title font-semibold color py-2 px-6 bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
             >
               <span
                 class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-orange-300 to-red-400"
@@ -164,6 +164,8 @@ const { title } = Astro.props;
     <main class="text-custom-text-primary mt-24">
       <slot />
     </main>
+
+    <footer></footer>
   </body>
 </html>
 
