@@ -74,7 +74,7 @@ const { title } = Astro.props;
         </nav>
       </section>
       <section
-        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b  border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 z-40"
+        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 z-40"
       >
         <search class="w-[50%] rounded-xl sm:hidden">
           <label for="componentSearchMobile" class="sr-only">
@@ -163,7 +163,6 @@ const { title } = Astro.props;
     </header>
     <main class="text-custom-text-primary mt-24">
       <slot />
-
     </main>
 
     <footer class="flex flex-col justify-center items-center">
@@ -172,13 +171,13 @@ const { title } = Astro.props;
       >
         <div>
           <img
-            class="w-48 sm:w-64"
+            class="w-48 sm:w-64 pointer-events-none"
             src="../logos/TailwindFull.png"
             alt="Tailwind Nexus Logo"
           />
         </div>
         <div
-          class=" flex-col justify-center items-center space-y-3 flex-1 w-full hidden lg:flex"
+          class="flex-col justify-center items-center space-y-3 flex-1 w-full hidden lg:flex"
         >
           <p class="font-code text-gray-50 text-xs mx-8 sm:mx-24 text-center">
             Tailwind Nexus is an open source end-of-degree project so you are
@@ -197,7 +196,7 @@ const { title } = Astro.props;
           <ul class="flex gap-4">
             <li>
               <a
-                class="p-3 bg-slate-600 rounded-full inline-block"
+                class="p-3 bg-slate-600 rounded-full inline-block hover:bg-slate-400 transition-colors"
                 href="https://github.com/GomezWare/TailwindNexus"
                 target="_blank"
                 ><img class="w-6" src="icons/github.svg" alt=" git logo" /></a
@@ -205,14 +204,14 @@ const { title } = Astro.props;
             </li>
             <li>
               <a
-                class="p-3 bg-slate-600 rounded-full inline-block"
+                class="p-3 bg-slate-600 rounded-full inline-block hover:bg-slate-400 transition-colors"
                 href="mailto:tailwindnexus@gmail.com?subject=Tailwind Nexus Feedback"
                 ><img class="w-6" src="icons/mail.svg" alt=" email icon" /></a
               >
             </li>
             <li>
               <a
-                class="p-3 bg-slate-600 rounded-full inline-block"
+                class="p-3 bg-slate-600 rounded-full inline-block hover:bg-slate-400 transition-colors"
                 href="https://stackoverflow.com/users/24634865/tailwind-nexus"
                 target="_blank"
                 ><img
