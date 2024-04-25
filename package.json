@@ -1,7 +1,7 @@
 {
   "name": "tailwindnexus",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -15,6 +15,7 @@
     "@types/alpinejs": "^3.13.10",
     "alpinejs": "^3.13.9",
     "astro": "^4.6.3",
+    "swiper": "^11.1.1",
     "tailwindcss": "^3.4.3"
   }
 }

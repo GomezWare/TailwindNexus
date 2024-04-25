@@ -1,7 +1,20 @@
-# Image sources
+# icons
+
+All icons belongs to Tablericons
+[Tablericons](https://tablericons.com/)
+
+# logos
+
+All logos are self made with me
+
+# backgrounds
 
 All images here are Free To Use Images so theres no copyrights issues
+[heroBackground.jpg](https://www.pexels.com/es-es/foto/cuadro-abstracto-azul-y-blanco-7629493/)
 
+# Img sources
+
+All images here are Free To Use Images so theres no copyrights issues
 
 ## Hero
 

@@ -1,4 +1,67 @@
 ---
-
+import ComponentCard from "../partials/cards/ComponentCard.astro";
+import SwiperButtonsScrollbar from "../partials/swiper/SwiperButtonsScrollbar.astro";
 ---
 
+<section class="container">
+  <h2
+    class="font-bold font-title text-center md:text-left text-2xl md:text-3xl"
+  >
+    Latest Components
+  </h2>
+  <p class="font-light text-center md:text-left md:text-lg mb-6 mt-4">
+    Find out what the developers have been working on lately and take the
+    opportunity to leave a comment!
+  </p>
+  <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperLatest">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+        <ComponentCard />
+      </div>
+      <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+        <ComponentCard />
+      </div>
+      <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+        <ComponentCard />
+      </div>
+      <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+        <ComponentCard />
+      </div>
+    </div>
+    <SwiperButtonsScrollbar />
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+  import "swiper/css/bundle";
+
+  const swiper = new Swiper("#swiperLatest", {
+    modules: [Navigation, Pagination, Scrollbar],
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+      1480: {
+        slidesPerView: 3,
+      },
+    },
+    grabCursor: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+  });
+</script>
