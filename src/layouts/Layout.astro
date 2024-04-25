@@ -16,7 +16,7 @@ const { title } = Astro.props;
     <link rel="stylesheet" href="src/css/main.css" />
     <title>{title}</title>
   </head>
-  <body class="bg-slate-800">
+  <body class="bg-slate-800 scroll-smooth">
     <header>
       <section
         class="h-16 sm:h-20 bg-slate-600 bg-opacity-50 border-0 sm:border-b-2 border-b-gray-600 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5 z-40"
@@ -161,7 +161,7 @@ const { title } = Astro.props;
         <div class="sm:w-full menuClose"></div>
       </nav>
     </header>
-    <main class=" mt-36 sm:mt-28 text-gray-50">
+    <main class="mt-36 sm:mt-28 text-gray-50">
       <slot />
     </main>
 
