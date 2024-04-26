@@ -1,0 +1,270 @@
+---
+import code from "../../../data/code.json";
+
+const TWCode: string = code.tailwind;
+const JSCode: string = code.javascript;
+---
+
+<section class="container">
+  <div class="border-b py-2 border rounded">
+    <div
+      class="py-4 border-b flex flex-col-reverse md:flex-row gap-3 justify-between items-center px-16"
+    >
+      <div class="space-x-2 hidden md:block">
+        <button
+          id="mobileBtn"
+          class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
+          ><img
+            class="pointer-events-none"
+            src="icons/mobile.svg"
+            alt="View on mobile"
+          /></button
+        >
+        <button
+          id="tabletBtn"
+          class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
+          ><img
+            class="pointer-events-none"
+            src="icons/tablet.svg "
+            alt="View on Tablet"
+          /></button
+        >
+        <button
+          id="desktopBtn"
+          class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
+          ><img
+            class="pointer-events-none"
+            src="icons/desktop.svg"
+            alt="View on Desktop"
+          /></button
+        >
+      </div>
+      <div class="space-x-3 flex">
+        <button
+          id="previewBtn"
+          class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded flex items-center gap-2 border"
+          ><span class="hidden sm:block">Preview</span><img
+            class="sm:hidden lg:block lg:w-5 pointer-events-none"
+            src="icons/components.svg"
+            alt="Preview component"
+          /></button
+        >
+        <button
+          id="tailwindBtn"
+          class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded items-center flex gap-2 border"
+          ><span class="hidden sm:block">Tailwind Code</span><img
+            class="sm:hidden lg:block lg:w-5 pointer-events-none"
+            src="icons/tailwind.svg"
+            alt="Tailwind code button"
+          /></button
+        >
+        <button
+          id="javascriptBtn"
+          class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded items-center flex gap-2 border"
+          ><span class="hidden sm:block">JavaScript Code</span><img
+            class="sm:hidden lg:block lg:w-5 pointer-events-none"
+            src="icons/jscode.svg"
+            alt="javascript code button"
+          /></button
+        >
+      </div>
+    </div>
+    <div class="p-2 flex flex-col items-center justify-center">
+      <iframe
+        class="bg-slate-600 p-1"
+        srcdoc={TWCode}
+        id="preview-container"
+        style="width: 100%;"></iframe>
+      <div
+        class="hidden relative w-full"
+        data-code={TWCode}
+        id="tailwind-container"
+      >
+        <button
+          id="copyTW"
+          class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3"
+          ><img class="w-9" src="icons/copy.svg" alt="Copy code" /></button
+        >
+        <code id="tailwind-codeShow"></code>
+      </div>
+      <div
+        class="hidden relative w-full"
+        data-code={JSCode}
+        id="javascript-container"
+      >
+        <button
+          id="copyJS"
+          class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3"
+          ><img class="w-9" src="icons/copy.svg" alt="Copy code" /></button
+        >
+        <code id="js-codeShow"></code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // TODO Find a proper way to show the code
+
+  /**
+   *  Code Containers control and view
+   */
+
+  // Preview container (Shows tailwind output)
+  const previewContainer: HTMLIFrameElement =
+    document.querySelector("#preview-container");
+
+  // Tailwind container (Show Tailwind code)
+  const tailwindCodeContainer: HTMLElement = document.querySelector(
+    "#tailwind-container"
+  );
+
+  // JS container (Shows JS code)
+  const javascriptCodeContainer: HTMLElement = document.querySelector(
+    "#javascript-container"
+  );
+
+  // Tailwind source code (The code itself)
+  const tailwindCodeShower: HTMLElement =
+    document.querySelector("#tailwind-codeShow");
+
+  //  JavaScript source code (The code itself)
+  const javascriptCodeShower: HTMLElement =
+    document.querySelector("#js-codeShow");
+
+  // Get the code from Astro props via attributes
+  const TWCode = tailwindCodeContainer.getAttribute("data-code");
+  const JSCode = javascriptCodeContainer.getAttribute("data-code");
+
+  // insert the source code as text in the code showers
+  tailwindCodeShower.innerText = TWCode;
+  javascriptCodeShower.innerText = JSCode;
+
+  /**
+   *  Resize screen controls
+   */
+
+  // Get the screen resize display icons
+  const mobileBtn: HTMLButtonElement = document.querySelector("#mobileBtn");
+  const tabletBtn: HTMLButtonElement = document.querySelector("#tabletBtn");
+  const desktopBtn: HTMLButtonElement = document.querySelector("#desktopBtn");
+
+  // Aply the active class to buttons (all buttons are inactive by deafault)
+  desktopBtn.classList.add("bg-teal-600");
+
+  // Event listeners for display size control (iFrame)
+  mobileBtn.addEventListener("click", () => {
+    // Change the width of the iframe like a mobile
+    previewContainer.style.width = "30%";
+
+    // Apply the correct state to display size control buttons
+    desktopBtn.classList.remove("bg-teal-600");
+    tabletBtn.classList.remove("bg-teal-600");
+    mobileBtn.classList.add("bg-teal-600");
+  });
+
+  tabletBtn.addEventListener("click", () => {
+    // Change the width of the iframe like a Tablet
+    previewContainer.style.width = "50%";
+
+    // Apply the correct state to display size control buttons
+    desktopBtn.classList.remove("bg-teal-600");
+    tabletBtn.classList.add("bg-teal-600");
+    mobileBtn.classList.remove("bg-teal-600");
+  });
+
+  desktopBtn.addEventListener("click", () => {
+    // Change the width of the iframe like a Mobile
+    previewContainer.style.width = "100%";
+
+    // Apply the correct state to display size control buttons
+    desktopBtn.classList.add("bg-teal-600");
+    tabletBtn.classList.remove("bg-teal-600");
+    mobileBtn.classList.remove("bg-teal-600");
+  });
+
+  /**
+   *  Tabs controls
+   */
+
+  // Recover of buttons to apply the state
+  const previewBtn: HTMLButtonElement = document.querySelector("#previewBtn");
+  const tailwindBtn: HTMLButtonElement = document.querySelector("#tailwindBtn");
+  const javascriptBtn: HTMLButtonElement =
+    document.querySelector("#javascriptBtn");
+
+  // Set preview button as active
+  previewBtn.classList.add("bg-teal-600");
+
+  // Event listeners for sections icons (The show the correct containe and activate buttons)
+
+  previewBtn.addEventListener("click", () => {
+    // Display the correct contaienr and hide the others
+    previewContainer.classList.remove("hidden");
+    tailwindCodeContainer.classList.add("hidden");
+    javascriptCodeContainer.classList.add("hidden");
+
+    // Activate the pushed button and deactivate the others
+    previewBtn.classList.add("bg-teal-600");
+    tailwindBtn.classList.remove("bg-teal-600");
+    javascriptBtn.classList.remove("bg-teal-600");
+  });
+
+  tailwindBtn.addEventListener("click", () => {
+    // Display the correct contaienr and hide the others
+    previewContainer.classList.add("hidden");
+    tailwindCodeContainer.classList.remove("hidden");
+    javascriptCodeContainer.classList.add("hidden");
+
+    // Activate the pushed button and deactivate the others
+    previewBtn.classList.remove("bg-teal-600");
+    tailwindBtn.classList.add("bg-teal-600");
+    javascriptBtn.classList.remove("bg-teal-600");
+  });
+
+  javascriptBtn.addEventListener("click", () => {
+    // Display the correct contaienr and hide the others
+    previewContainer.classList.add("hidden");
+    tailwindCodeContainer.classList.add("hidden");
+    javascriptCodeContainer.classList.remove("hidden");
+
+    // Activate the pushed button and deactivate the others
+
+    previewBtn.classList.remove("bg-teal-600");
+    tailwindBtn.classList.remove("bg-teal-600");
+    javascriptBtn.classList.add("bg-teal-600");
+  });
+
+  /**
+   * Copy to clipboard functions
+   */
+
+  document.querySelector("#copyTW").addEventListener("click", (e) => {
+    // Copy the Tailwind HTML code to the user clipboard
+
+    navigator.clipboard.writeText(TWCode);
+
+    // @ts-ignore This code gets the img element in the copy button
+    const img = e.currentTarget.firstChild;
+
+    // Change the icon of the button to a tick and later change the icon
+    // source to the original one
+    img.setAttribute("src", "icons/tick.svg");
+    setTimeout(() => {
+      img.setAttribute("src", "icons/copy.svg");
+    }, 2500);
+  });
+
+  document.querySelector("#copyJS").addEventListener("click", (e) => {
+    // Copy the Tailwind HTML code to the user clipboard
+
+    navigator.clipboard.writeText(JSCode);
+
+    // @ts-ignore This is the same code as CopyTW
+    const img = e.currentTarget.firstChild;
+    img.setAttribute("src", "icons/tick.svg");
+    setTimeout(() => {
+      img.setAttribute("src", "icons/copy.svg");
+    }, 2500);
+  });
+</script>

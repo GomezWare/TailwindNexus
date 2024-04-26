@@ -1,0 +1,4 @@
+{
+    "tailwind": "<html><head><script src='https://cdn.tailwindcss.com'></script></head><body><h1 class='text-teal-300 text-3xl sm:bg-cyan-500 md:bg-red-500'>Hello world</h1></body></html>",
+    "javascript": "alert('helloWorld');"
+}
