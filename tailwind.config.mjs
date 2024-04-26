@@ -8,9 +8,9 @@ export default {
         center: true,
       },
       fontFamily: {
-        'sans': ["Inter", "sans-serif"],
-        'title': ["Montserrat", "sans-serif"],
-        'code': ["Source Code Pro", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
+        title: ["Montserrat", "sans-serif"],
+        mono: ["Source Code Pro", "monospace"],
       },
     },
   },

@@ -1,0 +1,201 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="src/css/main.css" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-slate-800 scroll-smooth">
+    <header>
+      <section
+        class="h-16 sm:h-20 bg-slate-600 bg-opacity-50 border-0 sm:border-b-2 border-b-gray-600 backdrop-blur fixed top-0 w-full flex justify-between px-8 items-center text-gray-50 gap-5 z-40"
+      >
+        <div>
+          <a href="/"
+            ><img
+              class="h-8 sm:h-16"
+              src="logos/TailwindFull.png"
+              alt="Tailwind Nexus Logo"
+            /></a
+          >
+        </div>
+        <search class="w-[25%] rounded-xl hidden sm:block">
+          <label for="componentSearch" class="sr-only">
+            Search bar for components
+          </label>
+          <div class="relative font-light">
+            <input
+              type="search"
+              id="componentSearch"
+              class="w-full h-8 pl-2 rounded bg-slate-600 border-2-slate-500 hover:bg-slate-500 transition-colors"
+              placeholder="Search..."
+            />
+            <img
+              class="absolute w-6 bottom-1/2 translate-y-1/2 right-2 pointer-events-none"
+              src="icons/search.svg"
+              alt="Search magnifier icon"
+            />
+          </div>
+        </search>
+
+        <nav class="flex justify-center gap-5">
+          <a
+            class="flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors relative"
+            href="/myAccount"
+          >
+            <span class="hidden sm:contents">Profile</span>
+            <img
+              src="icons/user.svg"
+              class="w-7 rounded-full pointer-events-none"
+              alt="profile photo icon"
+            />
+          </a>
+          <button
+            class="menuOpen flex items-center gap-1 p-1 hover:bg-slate-600 rounded transition-colors"
+          >
+            <span class="hidden sm:contents">Menu</span>
+            <img
+              src="icons/menu.svg"
+              class="w-7 rounded-full pointer-events-none"
+              alt="menu icon"
+            />
+          </button>
+        </nav>
+      </section>
+      <section
+        class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 !z-30"
+      >
+        <search class="w-[50%] rounded-xl sm:hidden">
+          <label for="componentSearchMobile" class="sr-only">
+            Search bar for components
+          </label>
+          <div class="relative font-light">
+            <input
+              type="search"
+              id="componentSearchMobile"
+              class="w-full h-8 pl-2 rounded bg-slate-600 border-2-slate-500 hover:bg-slate-500 transition-colors"
+              placeholder="Search..."
+            />
+            <img
+              class="absolute w-6 bottom-1/2 translate-y-1/2 right-2 pointer-events-none"
+              src="icons/search.svg"
+              alt="Search magnifier icon"
+            />
+          </div>
+        </search>
+      </section>
+      <nav
+        id="categoriesMenuWrap"
+        class="invisible fixed top-0 w-screen h-screen backdrop-brightness-50 transition-all flex shadow-lg shadow-black backdrop-blur z-50"
+      >
+        <div
+          id="categoriesMenu"
+          class="transition-transform relative -translate-x-[100rem] duration-500 sm:w-[32rem] w-full bg-slate-700 bg-opacity-85 flex flex-col space-y-10 pt-10 px-2"
+        >
+          <button
+            class="menuClose absolute right-2 top-4 p-2.5 hover:bg-slate-500 rounded-xl"
+          >
+            <img class="size-5" src="icons/barLeft.svg" />
+          </button>
+          <div
+            class="w-full h-full flex flex-col items-center justify-start gap-3"
+          >
+            <a
+              href="/allComponents"
+              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+            >
+              <span
+                class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-cyan-300 to-cyan-400"
+              >
+                All Components
+              </span>
+            </a>
+            <a
+              href="/latest"
+              class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+            >
+              <span
+                class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-orange-300 to-red-400"
+              >
+                Latest Components
+              </span>
+            </a>
+            <span
+              class="font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
+              >Categories</span
+            >
+            <div
+              class="w-full text-gray-50 justify-start flex-col flex items-center space-y-2 overflow-y-scroll"
+            >
+              <!-- Start loop -->
+              <a
+                href="/category/name"
+                class="w-full hover:shadow-inner hover:bg-slate-600 flex justify-between items-center py-2 px-3 transition-all"
+              >
+                <div>
+                  <span class="font-extralight mr-5">16+</span><span
+                    >Category name</span
+                  >
+                </div><img
+                  class="w-5"
+                  src="icons/chevron.svg"
+                  alt="Chevron icon"
+                />
+              </a>
+
+              <!-- Start loop -->
+            </div>
+          </div>
+        </div>
+        <div class="sm:w-full menuClose"></div>
+      </nav>
+    </header>
+    <main class="mt-36 sm:mt-28 text-gray-50 space-y-4">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<script>
+  // Script for open the categories menu
+  document.querySelectorAll(".menuOpen").forEach((btn) => {
+    /* Selects all elements that have the .menuOpen class and set an envent listener 
+    if the event is trigered makes the menu visible and trigger the opening animation
+    via asigning Tailwind classes*/
+    btn.addEventListener("click", () => {
+      document
+        .querySelector("#categoriesMenuWrap")
+        .classList.remove("invisible");
+
+      document
+        .querySelector("#categoriesMenu")
+        .classList.remove("-translate-x-[100rem]");
+      document.querySelector("body").classList.add("overflow-y-hidden");
+    });
+  });
+
+  // Script for close the categories menu
+  document.querySelectorAll(".menuClose").forEach((btn) => {
+    /* Selects all elements that have the .menuClose class and set an envent listener 
+    if the event is trigered makes the menu invisible and trigger the closing animation
+    via asigning Tailwind classes*/
+    btn.addEventListener("click", () => {
+      document.querySelector("#categoriesMenuWrap").classList.add("invisible");
+      document
+        .querySelector("#categoriesMenu")
+        .classList.add("-translate-x-[100rem]");
+      document.querySelector("body").classList.remove("overflow-y-hidden");
+    });
+  });
+</script>
