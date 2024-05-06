@@ -16,7 +16,7 @@ const category = categories.find((category) => category.id == Number(id));
 if (!category) return Astro.redirect("/404")
 
 ---
-<Layout title="Categories">
+<Layout title="Categories" footer={true}>
   <CategoryHeader name={category.name} description={category.description} />
   <GridComponents />
 </Layout>

@@ -5,6 +5,7 @@
     "paths": {
       "@data/*": ["jsons/*"],
       "@services/*": ["src/libs/services/*"],
-    }
+    },
+    "allowSyntheticDefaultImports": true
   }
 }

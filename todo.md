@@ -5,7 +5,6 @@
 [ ] Correct footer TOP (add more margin)
 [ ] Top (Mobile Search bar) Mobile more width
 
-
 ## DEVELOP
 [ ] Category Index page
 [ ] Finish all endpoints and services
@@ -18,7 +17,6 @@
     - Component Uploads
 
 ## OPTIMIZE
-[ ] Create one Layout only and control footer by parameters
 [ ] Unify OptimizedCards into Cards
 
 

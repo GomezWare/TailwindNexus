@@ -37,11 +37,21 @@ import SwiperButtonsScrollbar from "../partials/swiper/SwiperButtonsScrollbar.as
 </section>
 
 <script>
+  /**
+   * This is the Swiper library import
+   * https://swiperjs.com/
+   */
+
+  // @ts-ignore
   import Swiper from "swiper";
+
+  // @ts-ignore
   import { Navigation, Pagination, Scrollbar } from "swiper/modules";
   import "swiper/css/bundle";
 
+  // To use Swiper you only need to declare this constant with a swiper options
   const swiper = new Swiper("#swiperLatest", {
+    // The options that Swiper provides are easily discernible
     modules: [Navigation, Pagination, Scrollbar],
     slidesPerView: 1,
     spaceBetween: 30,

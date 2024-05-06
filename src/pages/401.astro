@@ -3,10 +3,10 @@
  * This is the unauthorized user page that will be displayed if the user tries to access a restricted part of the application without first logging in.
  */
 
-import LayoutNoFooter from "../layouts/LayoutNoFooter.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<LayoutNoFooter title="Page not found">
+<Layout title="Page not found" footer={false}>
   <section class="container w-screen h-screen flex justify-center items-center">
     <strong class="font-title text-7xl text-teal-400 py-3 px-3 border-r-2"
       >401</strong
@@ -16,7 +16,7 @@ import LayoutNoFooter from "../layouts/LayoutNoFooter.astro";
       User Unauthorized!
     </p>
   </section>
-</LayoutNoFooter>
+</Layout>
 
 <style>
   body {
