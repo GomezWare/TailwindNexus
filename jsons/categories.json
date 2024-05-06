@@ -1,0 +1,94 @@
+[
+    {
+        "id": 1,
+        "name": "Categoria 1",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Categoria 2",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Categoria 3",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Categoria 4",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ]
+    }
+]

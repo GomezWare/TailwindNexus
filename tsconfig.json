@@ -1,3 +1,10 @@
 {
-  "extends": "astro/tsconfigs/base"
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@data/*": ["jsons/*"],
+      "@services/*": ["src/libs/services/*"],
+    }
+  }
 }

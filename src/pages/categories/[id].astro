@@ -1,0 +1,22 @@
+---
+/**
+ * This is the category page, it will show the category indicated in the url
+ */
+
+import categories from "@data/categories.json";
+import Layout from "../../layouts/Layout.astro";
+
+import CategoryHeader from "../../components/Category/CategoryHeader.astro";
+import GridComponents from "../../components/partials/grids/GridComponents.astro";
+
+const { id } = Astro.params;
+if (!id) return Astro.redirect("/404");
+
+const category = categories.find((category) => category.id == Number(id));
+if (!category) return Astro.redirect("/404")
+
+---
+<Layout title="Categories">
+  <CategoryHeader name={category.name} description={category.description} />
+  <GridComponents />
+</Layout>

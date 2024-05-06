@@ -1,0 +1,100 @@
+---
+/**
+ * This component is the category selection menu and is used on all pages.
+ */
+
+// TODO Data fetching
+---
+
+<nav
+  id="categoriesMenuWrap"
+  class="invisible fixed top-0 w-screen h-screen backdrop-brightness-50 transition-all flex shadow-lg shadow-black backdrop-blur z-50"
+>
+  <div
+    id="categoriesMenu"
+    class="transition-transform relative -translate-x-[100rem] duration-500 sm:w-[32rem] w-full bg-slate-700 bg-opacity-85 flex flex-col space-y-10 pt-10 px-2"
+  >
+    <button
+      class="menuClose absolute right-2 top-4 p-2.5 hover:bg-slate-500 rounded-xl"
+    >
+      <img class="size-5" src="icons/barLeft.svg" />
+    </button>
+    <div class="w-full h-full flex flex-col items-center justify-start gap-3">
+      <a
+        href="/allComponents"
+        class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+      >
+        <span
+          class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-cyan-300 to-cyan-400"
+        >
+          All Components
+        </span>
+      </a>
+      <a
+        href="/latest"
+        class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
+      >
+        <span
+          class="group-hover:bg-gradient-to-br bg-clip-text group-hover:text-transparent from-orange-300 to-red-400"
+        >
+          Latest Components
+        </span>
+      </a>
+      <span class="font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
+        >Categories</span
+      >
+      <div
+        class="w-full text-gray-50 justify-start flex-col flex items-center space-y-2 overflow-y-scroll"
+      >
+        {
+          categories.map((category) => (
+            <a
+              href={`/categories/${category.id}`}
+              class="w-full hover:shadow-inner hover:bg-slate-600 flex justify-between items-center py-2 px-3 transition-all"
+            >
+              <div>
+                <span class="font-extralight mr-5">16+</span>
+                <span>{category.name}</span>
+              </div>
+              <img class="w-5" src="icons/chevron.svg" alt="Chevron icon" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <div class="sm:w-full menuClose"></div>
+</nav>
+
+<script>
+  // Script for open the categories menu
+  document.querySelectorAll(".menuOpen").forEach((btn) => {
+    /* Selects all elements that have the .menuOpen class and set an envent listener 
+      if the event is trigered makes the menu visible and trigger the opening animation
+      via asigning Tailwind classes*/
+    btn.addEventListener("click", () => {
+      document
+        .querySelector("#categoriesMenuWrap")
+        .classList.remove("invisible");
+
+      document
+        .querySelector("#categoriesMenu")
+        .classList.remove("-translate-x-[100rem]");
+      document.querySelector("body").classList.add("overflow-y-hidden");
+    });
+  });
+
+  // Script for close the categories menu
+  document.querySelectorAll(".menuClose").forEach((btn) => {
+    /* Selects all elements that have the .menuClose class and set an envent listener 
+      if the event is trigered makes the menu invisible and trigger the closing animation
+      via asigning Tailwind classes*/
+    btn.addEventListener("click", () => {
+      document.querySelector("#categoriesMenuWrap").classList.add("invisible");
+      document
+        .querySelector("#categoriesMenu")
+        .classList.add("-translate-x-[100rem]");
+      document.querySelector("body").classList.remove("overflow-y-hidden");
+    });
+  });
+</script>
