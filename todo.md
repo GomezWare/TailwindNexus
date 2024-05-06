@@ -1,7 +1,6 @@
 # TODOS
 
 ## FIXES
-[ ] Change folder names to Pascal-Case
 [ ] Correct footer TOP (add more margin)
 [ ] Top (Mobile Search bar) Mobile more width
 
