@@ -1,7 +1,7 @@
 [ ] Cambiar documentos del proyecto
 [ ] Cambiar nomeclatura carpetas Pascal
 [ ] Unificar cards
-[ ] Cambiar SRC imagenes
+[X] Cambiar SRC imagenes
 [ ] Simplificar layout por parametros
 [ ] Endpoints / servicios
 [ ] Documentados servicios endpoints

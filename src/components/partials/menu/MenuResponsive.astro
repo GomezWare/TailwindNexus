@@ -3,7 +3,10 @@
  * This component is the category selection menu and is used on all pages.
  */
 
-// TODO Data fetching
+// Category fetch via API
+// FIXME Corregir errores del dominio
+
+const categories = await fetch("http://localhost:4321/api/menu").then((res) => res.json());
 ---
 
 <nav
@@ -17,7 +20,7 @@
     <button
       class="menuClose absolute right-2 top-4 p-2.5 hover:bg-slate-500 rounded-xl"
     >
-      <img class="size-5" src="icons/barLeft.svg" />
+      <img class="size-5" src="/icons/barLeft.svg" />
     </button>
     <div class="w-full h-full flex flex-col items-center justify-start gap-3">
       <a
@@ -53,10 +56,10 @@
               class="w-full hover:shadow-inner hover:bg-slate-600 flex justify-between items-center py-2 px-3 transition-all"
             >
               <div>
-                <span class="font-extralight mr-5">16+</span>
+                <span class="font-extralight mr-5">{category.totalComponents}+</span>
                 <span>{category.name}</span>
               </div>
-              <img class="w-5" src="icons/chevron.svg" alt="Chevron icon" />
+              <img class="w-5" src="/icons/chevron.svg" alt="Chevron icon" />
             </a>
           ))
         }

@@ -1,7 +1,7 @@
 import categories from '@data/categories.json'
 
 const getMenu = ()=>{
-    return categories.map(category => ({id:category.id,name:category.name}));
+    return categories.map(category => ({id:category.id,name:category.name,totalComponents: category.components.length}));
 }
 
 
