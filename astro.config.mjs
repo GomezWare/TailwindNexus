@@ -7,4 +7,7 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   integrations: [tailwind(), alpinejs()],
   output: "server",
+  devToolbar: {
+    enabled: false,
+  },
 });
