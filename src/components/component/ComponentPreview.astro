@@ -1,4 +1,7 @@
 ---
+/**
+ * Component preview allows users to preview components and view the source code so that they can import it directly into their projects.
+ */
 import code from "../../../data/code.json";
 
 const TWCode: string = code.tailwind;
@@ -70,13 +73,20 @@ const JSCode: string = code.javascript;
       </div>
     </div>
     <div class="p-2 flex flex-col items-center justify-center">
+      {
+        /* 
+      This iframe has the ability to transpile taiwind code,
+      this has been achieved by injecting code from Astro and through the Tailwind CDN
+      it can also process Alpine but for security reasons it will not be able to execute the contents of the script tag, to prevent fishing, cookie theft and ip grabbing.
+      */
+      }
       <iframe
         class="bg-slate-600 p-1"
         srcdoc={TWCode}
         id="preview-container"
         style="width: 100%;"></iframe>
       <div
-        class="hidden relative w-full "
+        class="hidden relative w-full"
         data-code={TWCode}
         id="tailwind-container"
       >
@@ -107,7 +117,7 @@ const JSCode: string = code.javascript;
   // TODO Find a proper way to show the code
 
   /**
-   *  Code Containers control and view
+   *  Containers
    */
 
   // Preview container (Shows tailwind output)
@@ -124,6 +134,10 @@ const JSCode: string = code.javascript;
     "#javascript-container"
   );
 
+  /**
+   * Getting the Frontmatter variables via x-data
+   */
+
   // Tailwind source code (The code itself)
   const tailwindCodeShower: HTMLElement =
     document.querySelector("#tailwind-codeShow");
@@ -136,9 +150,14 @@ const JSCode: string = code.javascript;
   const TWCode = tailwindCodeContainer.getAttribute("data-code");
   const JSCode = javascriptCodeContainer.getAttribute("data-code");
 
-  // insert the source code as text in the code showers
+  /**
+   * Inserting the code into containers
+   */
+
+  // Insert the source code as text into code display
   tailwindCodeShower.innerText = TWCode;
   javascriptCodeShower.innerText = JSCode;
+  previewContainer.srcdoc = TWCode;
 
   /**
    *  Resize screen controls
@@ -149,7 +168,7 @@ const JSCode: string = code.javascript;
   const tabletBtn: HTMLButtonElement = document.querySelector("#tabletBtn");
   const desktopBtn: HTMLButtonElement = document.querySelector("#desktopBtn");
 
-  // Aply the active class to buttons (all buttons are inactive by deafault)
+  // Apply the active class to buttons (all buttons are inactive by deafault)
   desktopBtn.classList.add("bg-teal-600");
 
   // Event listeners for display size control (iFrame)

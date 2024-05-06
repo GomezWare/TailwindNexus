@@ -1,4 +1,4 @@
 {
-    "tailwind": "<html><head><script src='https://cdn.tailwindcss.com'></script></head><body><h1 class='text-teal-300 text-3xl sm:bg-cyan-500 md:bg-red-500'>Hello world</h1></body></html>",
-    "javascript": "alert('helloWorld');"
+    "tailwind": "<html><head><script src=\"https://cdn.tailwindcss.com\"></script><script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script></head><body><h1 class=\"text-teal-300 text-3xl sm:bg-cyan-500 md:bg-red-500\" x-on:click=\"window.alert('¡Hola! Has hecho clic en el botón.')\">Hello world</h1></body></html>",
+    "javascript": "<script>function showAlert() { window.alert('¡Hola! Has hecho clic en el botón.');}</script>"
 }

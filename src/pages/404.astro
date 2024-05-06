@@ -1,12 +1,35 @@
 ---
+/**
+ * This is the resource not found page, it will appear if the url is wrong.
+ */
 import LayoutNoFooter from "../layouts/LayoutNoFooter.astro";
+
+export const prerender = true;
+
+/**
+ * If a user goes to a incorrect route for example /component/noExist
+ * Even if Astro already redirects to the 404 page, this way we ensure that the routes are followed and the links to the resources are not broken.
+ */
+
+if (Astro.url.pathname != "/404") {
+  return Astro.redirect("/404");
+}
 ---
 
 <LayoutNoFooter title="Page not found">
   <section class="container w-screen h-screen flex justify-center items-center">
-    <strong class="font-title text-7xl text-teal-400 py-3 px-3 border-r-2">404</strong>
-    <p class="text-center py-3 px-3 text-xl"><span class="font-bold text-rose-500">Error:</span>
-        Page not found
+    <strong class="font-title text-7xl text-teal-400 py-3 px-3 border-r-2"
+      >404</strong
+    >
+    <p class="text-center py-3 px-3 text-xl">
+      <span class="font-bold text-rose-500">Error:</span>
+      Page not found
     </p>
   </section>
 </LayoutNoFooter>
+
+<style>
+  body {
+    overflow-y: hidden;
+  }
+</style>
