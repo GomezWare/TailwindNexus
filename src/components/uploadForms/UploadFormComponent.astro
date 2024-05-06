@@ -1,0 +1,147 @@
+---
+/**
+ * This is the form to upload components, if you are not logged in you cannot get to this page.
+ */
+---
+
+<section class="container">
+  <form class="w-full space-y-20">
+    <div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
+            for="componentName"
+          >
+            Component name
+          </label>
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="componentName"
+            type="text"
+            placeholder="My component"
+          />
+          <p class="text-red-600 italic">Please fill out this field.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
+            for="componentDescription"
+          >
+            Description
+          </label>
+          <textarea
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="componentDescription"
+            rows="4"
+            placeholder="This is my nice component"></textarea>
+          <p class="text-red-600 italic">Please fill out this field.</p>
+        </div>
+      </div>
+
+      <div class="w-full xl:w-1/3 mb-6 md:mb-0">
+        <label
+          class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
+          for="componentCategory"
+        >
+          Component category
+        </label>
+        <div class="relative">
+          <select
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="componentCategory"
+          >
+            <option>New Mexico</option>
+            <option>Missouri</option>
+            <option>Texas</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+              class="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              ><path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              ></path></svg
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
+            for="TWCode"
+          >
+            Tailwind Code
+          </label>
+          <textarea
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="TWCode"
+            rows="4"
+            placeholder={`<h1 class="text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500" x-on:click="">Hello world</h1>`}
+          ></textarea>
+          <p class="text-red-600 italic">Please fill out this field.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
+            for="JSCode"
+          >
+            JavaScript Code
+          </label>
+          <textarea
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="JSCode"
+            rows="4"
+            placeholder={`function showAlert() { window.alert('Hello world');}`}
+          ></textarea>
+          <p class="text-red-600 italic">Please fill out this field.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0 space-y-6">
+          <label
+            class="flex items-center gap-4 uppercase tracking-wide text-gray-200 font-bold mb-2 text-sm"
+            for="cdn"
+          >
+            <input type="checkbox" id="cdn" class="size-6 accent-teal-400" />
+            Works on Tailwind CDN?
+          </label>
+          <label
+            class="flex items-center gap-4 uppercase tracking-wide text-gray-200 font-bold mb-2 text-sm"
+            for="alpine"
+          >
+            <input type="checkbox" id="alpine" class="size-6 accent-teal-400" />
+            Need's Alpine for functions?
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="gap-6 w-full flex flex-col xl:flex-row justify-center xl:justify-start">
+      <label for="submit" class="sr-only"> submit component </label>
+      <button
+        id="submit"
+        type="button"
+        class="px-8 py-2 bg-slate-600 rounded border hover:bg-cyan-600 transition-colors w-auto"
+        >Submit Component</button
+      >
+      <label for="clear" class="sr-only"> Clear forms </label>
+      <input
+        type="reset"
+        value="Clear"
+        class="cursor-pointer px-8 py-2 bg-rose-600 rounded border hover:bg-rose-400 transition-colors w-auto"
+      />
+    </div>
+  </form>
+</section>
