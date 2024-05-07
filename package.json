@@ -7,9 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "createDatabase": "node scripts/createDB.js",
-    "deleteDatabase": "node scripts/deleteDB.js"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.0",
