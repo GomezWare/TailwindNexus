@@ -4,7 +4,7 @@
 
 ## DEVELOP
 [ ] Category Index page
-[ ] Finish all endpoints and services
+[ ] Finish endpoints and services
 - GET
     - Users
     - Categories
@@ -18,7 +18,6 @@
 
 
 ## DOC
-[ ] DOC Endpoints/Controllers
 [ ] Update project Docs
 
 

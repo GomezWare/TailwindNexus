@@ -1,3 +1,5 @@
+// TODO Document this service when its finally complete
+
 import categories from '@data/categories.json'
 
 const getMenu = ()=>{
