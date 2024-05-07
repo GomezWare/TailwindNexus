@@ -1,0 +1,45 @@
+---
+/**
+ * This is the user page, it will show the user indicated in the url
+ */
+
+import Layout from "../../layouts/Layout.astro";
+import UserInfo from "../../components/user/UserInfo.astro";
+import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
+
+// Get id via Astro params
+const { id } = Astro.params;
+
+console.log(Astro.url.origin + "/api/user/" + id);
+
+// Fetch datas from the API
+const user = await fetch(Astro.url.origin + "/api/user/" + id).then((data) =>
+  data.json()
+);
+
+// If the api returned a blank array (null response) redirect user to 404
+if (user.length == 0) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title="User" footer={true}>
+  <UserInfo />
+  <!--
+  <section class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        user.components.map((component) => (
+          <ComponentCard
+            id={component.id}
+            name={component.name}
+            thumbnail={component.thumbnail}
+            needsAlpine={component.needsAlpine}
+            needsCDN={component.needsCDN}
+            userData={component.user}
+            totalComments={component.comments.length}
+          />
+        ))
+      }
+       -->
+</Layout>

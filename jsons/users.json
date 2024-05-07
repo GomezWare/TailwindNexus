@@ -1,0 +1,146 @@
+[
+    {
+        "id": 1,
+        "name": "pepe",
+        "avatar": "http://",
+        "email": "pepe@hotmail.com",
+        "password": "HASH",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ],
+        "comments": [
+            {
+                "id": 1,
+                "content": "contenido del comentario",
+                "createdAt": "20241212:1230",
+                "component": {
+                    "id": 1,
+                    "name": "componentName"
+                }
+            }
+        ],
+        "following": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ],
+        "followers": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "pepe",
+        "avatar": "http://",
+        "email": "pepe@hotmail.com",
+        "password": "HASH",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ],
+        "comments": [
+            {
+                "id": 1,
+                "content": "contenido del comentario",
+                "createdAt": "20241212:1230",
+                "component": {
+                    "id": 1,
+                    "name": "componentName"
+                }
+            }
+        ],
+        "following": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ],
+        "followers": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "pepe",
+        "avatar": "http://",
+        "email": "pepe@hotmail.com",
+        "password": "HASH",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
+            }
+        ],
+        "comments": [
+            {
+                "id": 1,
+                "content": "contenido del comentario",
+                "createdAt": "20241212:1230",
+                "component": {
+                    "id": 1,
+                    "name": "componentName"
+                }
+            }
+        ],
+        "following": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ],
+        "followers": [
+            {
+                "id": 2,
+                "name": "pepe",
+                "avatar": "url()"
+            }
+        ]
+    },
+]

@@ -1,6 +1,7 @@
 # TASKS
 
 ## FIXES
+[ ] FIX user page
 
 ## DEVELOP
 

@@ -2,6 +2,12 @@
 /**
  * Displays a user's information on the user page.
  */
+
+interface Props {
+  username: string;
+  components: number;
+  followers: number;
+}
 ---
 
 <section class="container">
@@ -11,7 +17,7 @@
     </div>
     <div>
       <h2 class="text-xl font-medium font-title line-clamp-1 px-1/2">
-        Username Username Username Username Username Username
+        {}
       </h2>
     </div>
     <div class="flex space content-between gap-4">
