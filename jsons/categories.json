@@ -19,6 +19,20 @@
                     "avatar": "url()"
                 },
                 "totalComments": 2
+            },
+            {
+                "id": 2,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "url()"
+                },
+                "totalComments": 2
             }
         ]
     },

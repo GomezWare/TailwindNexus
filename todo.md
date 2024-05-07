@@ -1,8 +1,6 @@
-# TODOS
+# TASKS
 
 ## FIXES
-[ ] Correct footer TOP (add more margin)
-[ ] Top (Mobile Search bar) Mobile more width
 
 ## DEVELOP
 [ ] Category Index page

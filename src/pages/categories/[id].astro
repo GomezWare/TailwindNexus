@@ -1,22 +1,29 @@
 ---
 /**
  * This is the category page, it will show the category indicated in the url
+ *
+ * Needs a ID via Astro params URL
  */
 
-import categories from "@data/categories.json";
 import Layout from "../../layouts/Layout.astro";
 
 import CategoryHeader from "../../components/category/CategoryHeader.astro";
 import GridComponents from "../../components/partials/grids/GridComponents.astro";
 
 const { id } = Astro.params;
-if (!id) return Astro.redirect("/404");
 
-const category = categories.find((category) => category.id == Number(id));
-if (!category) return Astro.redirect("/404")
-
+const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
+  (res) => {
+    if (res.status == 200) {
+      return res.json();
+    } else {
+      return Astro.redirect("/404");
+    }
+  }
+);
 ---
+
 <Layout title="Categories" footer={true}>
   <CategoryHeader name={category.name} description={category.description} />
-  <GridComponents />
+  <GridComponents components={category.components} />
 </Layout>

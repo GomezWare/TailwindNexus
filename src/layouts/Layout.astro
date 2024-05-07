@@ -33,7 +33,7 @@ const { title, footer } = Astro.props;
             /></a
           >
         </div>
-        <search class="w-[25%] rounded-xl hidden sm:block">
+        <search class="w-[30%] rounded-xl hidden sm:block">
           <label for="componentSearch" class="sr-only">
             Search bar for components
           </label>
@@ -79,7 +79,7 @@ const { title, footer } = Astro.props;
       <section
         class="h-12 sm:h-20 bg-slate-600 bg-opacity-50 border-b border-b-gray-600 backdrop-blur fixed top-16 w-full sm:hidden flex justify-center px-8 items-center text-gray-50 gap-5 !z-30"
       >
-        <search class="w-[50%] rounded-xl sm:hidden">
+        <search class="w-full rounded-xl sm:hidden">
           <label for="componentSearchMobile" class="sr-only">
             Search bar for components
           </label>
@@ -105,8 +105,8 @@ const { title, footer } = Astro.props;
     </main>
     {
       footer && (
-        <footer class="flex flex-col justify-center items-center pb-5 mt-12">
-          <div class="border-t-2 border-slate-600 py-2 px-6 flex justify-between items-center w-full">
+        <footer class="flex flex-col justify-center items-center mt-36">
+          <div class="border-t-2 border-slate-600 pt-2 pb-16 px-6 flex justify-between items-center w-full">
             <div>
               <img
                 class="w-48 sm:w-64 pointer-events-none"
