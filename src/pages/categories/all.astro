@@ -1,6 +1,6 @@
 ---
 /**
- * This is the latest page, it will show the latest components created
+ * This is the all page, it will show all components
  *
  */
 
@@ -10,25 +10,25 @@ import CategoryHeader from "../../components/category/CategoryHeader.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 
 // Fetch datas from the API
-const latest = await fetch(Astro.url.origin + "/api/latest").then((data) =>
-  data.json()
+const components = await fetch(Astro.url.origin + "/api/components").then(
+  (data) => data.json()
 );
 
 // If the api returned a blank array (null response) redirect user to 404
-if (latest.length == 0) {
+if (components.length == 0) {
   return Astro.redirect("/404");
 }
 ---
 
 <Layout title="Categories" footer={true}>
   <CategoryHeader
-    name="Latest components"
-    description="On this page you can find the latest components that users have been creating."
+    name="All components"
+    description="All types of components for your projects, for more specific components use the categories or use the filters."
   />
   <section class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {
-        latest.map((component) => (
+        components.map((component) => (
           <ComponentCard
             id={component.id}
             name={component.name}

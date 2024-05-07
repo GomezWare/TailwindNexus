@@ -11,4 +11,9 @@ const getComponent = (id) => {
   return component;
 };
 
-export { getComponents, getComponent };
+const getLatest = () => {
+  const latest = components.sort((a, b) => a.createdAt - b.createdAt);
+  return latest;
+};
+
+export { getComponents, getComponent, getLatest };
