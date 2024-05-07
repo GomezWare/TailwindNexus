@@ -1,15 +1,14 @@
 // TODO Document this service when its finally complete
 
-import components from '@data/components.json'
-
+import components from "@data/components.json";
 
 const getComponents = () => {
-    return components;
-}
+  return components;
+};
 
 const getComponent = (id) => {
-    const category = components.find((category) => category.id == id);
-    return category
-}
+  const component = components.find((component) => component.id == id);
+  return component;
+};
 
-export { getComponents, getComponent }
+export { getComponents, getComponent };

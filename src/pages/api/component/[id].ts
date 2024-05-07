@@ -1,11 +1,11 @@
 /**
- * This Endpoint return a JSON with a categories specified with an ID
- * Uses the function getCategory in categories services
+ * This Endpoint return a JSON with a component specified with an ID
+ * Uses the function getComponent in component services
  */
 
 // Imports
 import type { APIRoute } from "astro";
-import { getCategory } from "@services/categories";
+import { getComponent } from "@services/components";
 
 // REST API Route
 
@@ -15,7 +15,7 @@ export const GET: APIRoute = ({ params }) => {
   const id = params.id;
 
   // Create the response with the data that the service returned (the JSON itself)
-  const response = getCategory(id) || [];
-  // If the response is null or category doesnt exists return a blank JSON
+  const response = getComponent(id) || [];
+  // If the response is null or component doesnt exists return a blank JSON
   return new Response(JSON.stringify(response));
 };

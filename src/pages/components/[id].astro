@@ -1,0 +1,19 @@
+---
+/**
+ * This is the component page, it will show the component indicated in the url
+ *
+ * Needs a ID via Astro params URL
+ */
+
+import Layout from "../../layouts/Layout.astro";
+
+import ComponentHeader from "../../components/component/ComponentHeader.astro";
+import ComponentPreview from "../../components/component/ComponentPreview.astro";
+
+const { id } = Astro.params;
+---
+
+<Layout title="Component" footer={true}>
+  <ComponentHeader />
+  <ComponentPreview />
+</Layout>

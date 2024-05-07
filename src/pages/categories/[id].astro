@@ -9,6 +9,7 @@ import Layout from "../../layouts/Layout.astro";
 
 import CategoryHeader from "../../components/category/CategoryHeader.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
+
 const { id } = Astro.params;
 
 const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
