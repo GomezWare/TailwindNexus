@@ -8,22 +8,35 @@
 import Layout from "../../layouts/Layout.astro";
 
 import CategoryHeader from "../../components/category/CategoryHeader.astro";
-import GridComponents from "../../components/partials/grids/GridComponents.astro";
-
+import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 const { id } = Astro.params;
 
 const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
-  (res) => {
-    if (res.status == 200) {
-      return res.json();
-    } else {
-      return Astro.redirect("/404");
-    }
-  }
+  (data) => data.json()
 );
+
+if (category.length == 0) {
+  return Astro.redirect("/404");
+}
 ---
 
 <Layout title="Categories" footer={true}>
   <CategoryHeader name={category.name} description={category.description} />
-  <GridComponents components={category.components} />
+  <section class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        category.components.map((component) => (
+          <ComponentCard
+            id={component.id}
+            name={component.name}
+            thumbnail={component.thumbnail}
+            needsAlpine={component.needsAlpine}
+            needsCDN={component.needsCDN}
+            userData={component.user}
+            totalComments={component.totalComments}
+          />
+        ))
+      }
+    </div>
+  </section>
 </Layout>

@@ -1,40 +1,62 @@
 ---
-/** 
+/**
  * component card, provides basic data to the user about the component.
-*/
+ *
+ * Reviceves the components data via props
+ */
+
+interface Props {
+  id: Number;
+  name: string;
+  thumbnail: string;
+  needsAlpine: boolean;
+  needsCDN: boolean;
+  userData;
+  totalComments: Number;
+}
+
+const { id, name, thumbnail, needsAlpine, needsCDN, totalComments, userData } =
+  Astro.props;
 ---
+
 <div class="flex flex-col border-slate-600 border p-1.5 rounded">
-  <a href="/component/name" class="relative">
-    <img src="https://ximg.es/400x300" class="w-full" alt="Component preview" />
+  <a href={`/components/${id}`} class="relative">
+    <img src={thumbnail} class="w-full" alt="Component preview" />
     <div class="absolute bottom-2 right-3 flex gap-4">
-      <div
-        class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border"
-      >
-        <img class="w-7" src="/icons/alpine.svg" alt="Tailwind logo" />AlpineJS
-      </div>
-      <div
-        class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border"
-      >
-        <img class="w-7" src="/icons/tailwind.svg" alt="Tailwind logo" />
-        Tailwind CDN
-      </div>
+      {
+        needsAlpine && (
+          <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+            <img class="w-7" src="/icons/alpine.svg" alt="Tailwind logo" />
+            AlpineJS
+          </div>
+        )
+      }
+      {
+        needsCDN && (
+          <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+            <img class="w-7" src="/icons/tailwind.svg" alt="Tailwind logo" />
+            Tailwind CDN
+          </div>
+        )
+      }
     </div>
   </a>
   <div class="mt-2">
-    <a href="/component/name" class="font-bold text-xl line-clamp-1 custom-link px-5"
-      >Component Name omponent Name omponent Name omponent Name</a
+    <a
+      href={"/components/" + id}
+      class="font-bold text-xl line-clamp-1 custom-link px-5">{name}</a
     >
     <div class="flex justify-between mt-3">
       <div class="flex justify-center items-center gap-1">
         <img src="/icons/comments.svg" alt="Comments icon" />
-        <span class="text-xl font-bold">12</span>
+        <span class="text-xl font-bold">{totalComments}</span>
       </div>
       <div class="flex justify-end gap-3 items-bottom">
-        <a class="self-end custom-link text-white" href="/user/name"
-          ><span class="text-clamp-1">Username</span></a
+        <a class="self-end custom-link text-white" href={`/users/${id}`}
+          ><span class="text-clamp-1">{userData.name}</span></a
         >
-        <a href="/user/name"
-          ><img src="https://ximg.es/128" class="w-16 rounded-full" /></a
+        <a href={`/users/${id}`}
+          ><img src={userData.avatar} class="w-16 rounded-full" /></a
         >
       </div>
     </div>
