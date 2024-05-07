@@ -9,11 +9,32 @@ import Layout from "../../layouts/Layout.astro";
 
 import ComponentHeader from "../../components/component/ComponentHeader.astro";
 import ComponentPreview from "../../components/component/ComponentPreview.astro";
+import UserCard from "src/components/partials/cards/UserCard.astro";
 
+// Get id via Astro params
 const { id } = Astro.params;
+
+// Fetch datas from the API
+const component = await fetch(Astro.url.origin + "/api/component/" + id).then(
+  (data) => data.json()
+);
+
+// If the api returned a blank array (null response) redirect user to 404
+if (component.length == 0) {
+  return Astro.redirect("/404");
+}
 ---
 
 <Layout title="Component" footer={true}>
-  <ComponentHeader />
-  <ComponentPreview />
+  <ComponentHeader name={component.name} description={component.description} />
+  <UserCard
+    id={component.user.id}
+    username={component.user.name}
+    avatar={component.user.avatar}
+    totalComponents={component.user.totalComponents}
+  />
+  <ComponentPreview
+    tailwind={component.tailwind}
+    javascript={component.javascript}
+  />
 </Layout>

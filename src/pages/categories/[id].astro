@@ -10,12 +10,15 @@ import Layout from "../../layouts/Layout.astro";
 import CategoryHeader from "../../components/category/CategoryHeader.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 
+// Get id via Astro params
 const { id } = Astro.params;
 
+// Fetch datas from the API
 const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
   (data) => data.json()
 );
 
+// If the api returned a blank array (null response) redirect user to 404
 if (category.length == 0) {
   return Astro.redirect("/404");
 }

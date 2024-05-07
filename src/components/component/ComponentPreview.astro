@@ -2,10 +2,13 @@
 /**
  * Component preview allows users to preview components and view the source code so that they can import it directly into their projects.
  */
-import code from "@data/code.json";
 
-const TWCode: string = code.tailwind;
-const JSCode: string = code.javascript;
+interface Props {
+  tailwind: string;
+  javascript: string;
+}
+
+const { tailwind, javascript } = Astro.props;
 ---
 
 <section class="container">
@@ -84,12 +87,12 @@ const JSCode: string = code.javascript;
       }
       <iframe
         class="bg-slate-200 p-0.5 h-[35rem]"
-        srcdoc={TWCode}
+        srcdoc={tailwind}
         id="preview-container"
         style="width: 100%;"></iframe>
       <div
         class="hidden relative w-full"
-        data-code={TWCode}
+        data-code={tailwind}
         id="tailwind-container"
       >
         <button
@@ -101,7 +104,7 @@ const JSCode: string = code.javascript;
       </div>
       <div
         class="hidden relative w-full"
-        data-code={JSCode}
+        data-code={javascript}
         id="javascript-container"
       >
         <button

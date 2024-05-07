@@ -16,9 +16,10 @@
         "needsAlpine": false,
         "needsCDN": true,
         "user": {
-            "id": 2,
+            "id": 1,
             "name": "pepe",
-            "avatar": "https://ximg.es/128x128"
+            "avatar": "https://ximg.es/128x128",
+            "totalComponents": 5
         },
         "comments": [
             {
@@ -52,7 +53,8 @@
         "user": {
             "id": 2,
             "name": "pepe",
-            "avatar": "https://ximg.es/128x128"
+            "avatar": "https://ximg.es/128x128",
+            "totalComponents": 3
         },
         "comments": [
             {

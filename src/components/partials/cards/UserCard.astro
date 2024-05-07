@@ -1,0 +1,44 @@
+---
+/**
+ * User card, represent basic information about users
+ *
+ * Reviceves the user data via props
+ */
+
+interface Props {
+  id: number;
+  username: string;
+  avatar: string;
+  totalComponents: number;
+}
+
+const { id, username, avatar, totalComponents } = Astro.props;
+---
+
+<section class="container">
+  <div
+    class="p-3 border w-full md:w-[32rem] rounded flex justify-between items-center"
+  >
+    <div class="flex items-center gap-4">
+      <a href={`/users/${id}`}>
+        <img class="rounded-full w-12 md:w-20" src={avatar} alt="User Avatar" />
+      </a>
+      <div>
+        <a href={`/users/${id}`} class="line-clamp-1 custom-link">{username}</a>
+        <span class="text-nowrap font-light">{totalComponents} Components</span>
+      </div>
+    </div>
+    <div class="flex items-end justify-center">
+      <!--
+        <button
+        class="px-4 py-1 text-sm rounded border-teal-400 hover:bg-teal-500 transition-colors border bg-slate-500"
+        >Follow</button
+      >
+      <button
+        class="px-4 py-1 text-sm rounded border-rose-400 hover:bg-rose-500 transition-colors border bg-slate-500"
+        >Unfollow</button
+      >
+    -->
+    </div>
+  </div>
+</section>

@@ -3,48 +3,22 @@
  * displays the name and description of the components in the components page.
  * It also shows the user who created it, allowing you to follow or unfollow them via a button.
  */
+
+interface Props {
+  name: string;
+  description: string;
+}
+
+const { name, description } = Astro.props;
 ---
 
 <section class="container">
   <p
     class="text-center font-title md:text-left lg:w-2/5 text-3xl text-cyan-400 font-medium mb-2"
   >
-    Component name
+    {name}
   </p>
   <p class="md:w-4/5 lg:w-2/5 font-light mb-5">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto nemo
-    doloremque aliquid sed enim est fugit facilis sint adipisci. Dolore,
-    quodexcepturi. Adipisci magnam laboriosam excepturi, velit mollitia ullam
-    iusto?
+    {description}
   </p>
-
-  <div
-    class="p-3 border w-full md:w-[32rem] rounded flex justify-between items-center"
-  >
-    <div class="flex items-center gap-4">
-      <a href="/user/name">
-        <img
-          class="rounded-full w-12 md:w-20"
-          src="http://ximg.es/128"
-          alt="User Avatar"
-        />
-      </a>
-      <div>
-        <a href="/user/name" class="line-clamp-1">Username Username Username</a>
-        <span class="text-nowrap font-light">10 Components</span>
-      </div>
-    </div>
-    <div class="flex items-end justify-center">
-      <!--
-        <button
-        class="px-4 py-1 text-sm rounded border-teal-400 hover:bg-teal-500 transition-colors border bg-slate-500"
-        >Follow</button
-      >
-      <button
-        class="px-4 py-1 text-sm rounded border-rose-400 hover:bg-rose-500 transition-colors border bg-slate-500"
-        >Unfollow</button
-      >
-    -->
-    </div>
-  </div>
 </section>
