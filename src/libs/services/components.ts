@@ -12,7 +12,7 @@ const getComponent = (id) => {
 };
 
 const getLatest = () => {
-  const latest = components.sort((a, b) => a.createdAt - b.createdAt);
+  const latest = components.slice().sort((a, b) => a.createdAt - b.createdAt);
   return latest;
 };
 

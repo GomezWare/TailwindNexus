@@ -68,5 +68,75 @@
                 "createdAt": "20241212:1230"
             }
         ]
+    },
+    {
+        "id": "3",
+        "name": "Component 2",
+        "description": "desc 2",
+        "category": {
+            "id": 1,
+            "name": "Badges",
+            "description": "descripcion compo"
+        },
+        "thumbnail": "https://ximg.es/400x300",
+        "tailwind": "<html><head><script src=\"https://cdn.tailwindcss.com\"></script><script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script></head><body><h1 class=\"text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500\" x-on:click=\"window.alert('¡Hola! Has hecho clic en el botón.')\">Hello world</h1><h1 class=\"text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500\" x-on:click=\"window.alert('¡Hola! Has hecho clic en el botón.')\">Hello world</h1></body></html>",
+        "javascript": "<script>function showAlert() { window.alert('¡Hola! Has hecho clic en el botón.');}</script>",
+        "createdAt": 3,
+        "updatedAt": 4,
+        "needsCDN": true,
+        "needsAlpine": true,
+        "user": {
+            "id": 2,
+            "name": "pepe",
+            "avatar": "https://ximg.es/128x128",
+            "totalComponents": 3
+        },
+        "comments": [
+            {
+                "id": 1,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "content": "contenido del comentario",
+                "createdAt": "20241212:1230"
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Component 2",
+        "description": "desc 2",
+        "category": {
+            "id": 1,
+            "name": "Badges",
+            "description": "descripcion compo"
+        },
+        "thumbnail": "https://ximg.es/400x300",
+        "tailwind": "<html><head><script src=\"https://cdn.tailwindcss.com\"></script><script defer src=\"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js\"></script></head><body><h1 class=\"text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500\" x-on:click=\"window.alert('¡Hola! Has hecho clic en el botón.')\">Hello world</h1><h1 class=\"text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500\" x-on:click=\"window.alert('¡Hola! Has hecho clic en el botón.')\">Hello world</h1></body></html>",
+        "javascript": "<script>function showAlert() { window.alert('¡Hola! Has hecho clic en el botón.');}</script>",
+        "createdAt": 3,
+        "updatedAt": 4,
+        "needsCDN": true,
+        "needsAlpine": true,
+        "user": {
+            "id": 2,
+            "name": "pepe",
+            "avatar": "https://ximg.es/128x128",
+            "totalComponents": 3
+        },
+        "comments": [
+            {
+                "id": 1,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "content": "contenido del comentario",
+                "createdAt": "20241212:1230"
+            }
+        ]
     }
 ]
