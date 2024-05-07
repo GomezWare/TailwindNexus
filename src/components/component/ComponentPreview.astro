@@ -75,7 +75,7 @@ const JSCode: string = code.javascript;
     <div class="p-2 flex flex-col items-center justify-center">
       {
         /* 
-      This iframe has the ability to transpile taiwind code,
+      This iframe has the ability to transpile tailwind code,
       this has been achieved by injecting code from Astro and through the Tailwind CDN
       it can also process Alpine but for security reasons it will not be able to execute the contents of the script tag, to prevent fishing, cookie theft and ip grabbing.
 
@@ -83,7 +83,7 @@ const JSCode: string = code.javascript;
       */
       }
       <iframe
-        class="bg-slate-200 p-0.5 h-96"
+        class="bg-slate-200 p-0.5 h-[35rem]"
         srcdoc={TWCode}
         id="preview-container"
         style="width: 100%;"></iframe>
@@ -176,7 +176,7 @@ const JSCode: string = code.javascript;
   // Event listeners for display size control (iFrame)
   mobileBtn.addEventListener("click", () => {
     // Change the width of the iframe like a mobile
-    previewContainer.style.width = "30%";
+    previewContainer.style.width = "40%";
 
     // Apply the correct state to display size control buttons
     desktopBtn.classList.remove("bg-teal-600");
@@ -186,7 +186,7 @@ const JSCode: string = code.javascript;
 
   tabletBtn.addEventListener("click", () => {
     // Change the width of the iframe like a Tablet
-    previewContainer.style.width = "50%";
+    previewContainer.style.width = "70%";
 
     // Apply the correct state to display size control buttons
     desktopBtn.classList.remove("bg-teal-600");
