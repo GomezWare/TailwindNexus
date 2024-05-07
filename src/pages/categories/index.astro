@@ -2,10 +2,15 @@
 /**
  * This page display all categories in a Grid
  */
-
 import Layout from "src/layouts/Layout.astro";
+import CategoryHeader from "src/components/category/CategoryHeader.astro";
+import CategoryList from "src/components/category/CategoryList.astro";
 ---
 
 <Layout title="categorias" footer={true}>
-  <h1>Listado de categorias</h1>
+  <CategoryHeader
+    name="All Categories"
+    description="Find the components you need filtered by categories, this is the list of all available categories."
+  />
+  <CategoryList />
 </Layout>

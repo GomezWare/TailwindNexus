@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Categoria 1",
-        "description": "descripcion cat",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis efficitur sem. Donec ligula purus, vulputate sed dignissim eget, vulputate nec risus.",
         "createdAt": "20241212:1230",
         "updatedAt": "20342421:1212",
         "components": [
@@ -43,6 +43,88 @@
     {
         "id": 2,
         "name": "Categoria 2",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "updatedAt": "20241212:1230",
+                "thumbnail": "https://ximg.es/400x300",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "totalComments": 2
+            },
+            {
+                "id": 2,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "updatedAt": "20241212:1230",
+                "thumbnail": "https://ximg.es/400x300",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "totalComments": 2
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Categoria 3",
+        "description": "descripcion cat",
+        "createdAt": "20241212:1230",
+        "updatedAt": "20342421:1212",
+        "components": [
+            {
+                "id": 1,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "updatedAt": "20241212:1230",
+                "thumbnail": "https://ximg.es/400x300",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "totalComments": 2
+            },
+            {
+                "id": 2,
+                "name": "componentName",
+                "description": "descripcion compo",
+                "createdAt": "20241212:1230",
+                "updatedAt": "20241212:1230",
+                "thumbnail": "https://ximg.es/400x300",
+                "needsAlpine": false,
+                "needsCDN": true,
+                "user": {
+                    "id": 2,
+                    "name": "pepe",
+                    "avatar": "https://ximg.es/128x128"
+                },
+                "totalComments": 2
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Categoria 4",
         "description": "descripcion cat",
         "createdAt": "20241212:1230",
         "updatedAt": "20342421:1212",

@@ -3,23 +3,23 @@
 ## FIXES
 
 ## DEVELOP
+
 [ ] Category Index page
 [ ] Finish endpoints and services
+
 - GET
-    - Users
-    - Categories
-    - Components
-    - Latests
+  - Users
 - POST
-    - Component Uploads
+  - Component Uploads
 
 ## OPTIMIZE
+
 [ ] Unify OptimizedCards into Cards
 
-
 ## DOC
+
 [ ] Update project Docs
 
-
 ## EVIROMENT TASKS
-[ ] Install docker / hub / componser 
+
+[ ] Install docker / hub / componser
