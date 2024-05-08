@@ -16,4 +16,13 @@ const getLatest = () => {
   return latest;
 };
 
-export { getComponents, getComponent, getLatest };
+// TODO Data validation
+const addComponent = (componentData) => {
+  if (true) {
+    return componentData;
+  } else {
+    return { error: "Error?" };
+  }
+};
+
+export { getComponents, getComponent, getLatest, addComponent };

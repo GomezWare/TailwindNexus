@@ -15,10 +15,6 @@ const user = await fetch(Astro.url.origin + "/api/user/" + id).then((data) =>
   data.json()
 );
 
-
-console.log( user.components);
-
-
 // If the api returned a blank array (null response) redirect user to 404
 if (user.length == 0) {
   return Astro.redirect("/404");
