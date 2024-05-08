@@ -22,7 +22,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
           ><img
             class="pointer-events-none"
-            src="/icons/mobile.svg"
+            src="/img/icons/mobile.svg"
             alt="View on mobile"
           /></button
         >
@@ -31,7 +31,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
           ><img
             class="pointer-events-none"
-            src="/icons/tablet.svg "
+            src="/img/icons/tablet.svg "
             alt="View on Tablet"
           /></button
         >
@@ -40,7 +40,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1 bg-slate-500 rounded hover:opacity-80 transition-opacity border"
           ><img
             class="pointer-events-none"
-            src="/icons/desktop.svg"
+            src="/img/icons/desktop.svg"
             alt="View on Desktop"
           /></button
         >
@@ -51,7 +51,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded flex items-center gap-2 border"
           ><span class="hidden sm:block">Preview</span><img
             class="sm:hidden lg:block lg:w-5 pointer-events-none"
-            src="/icons/components.svg"
+            src="/img/icons/components.svg"
             alt="Preview component"
           /></button
         >
@@ -60,7 +60,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded items-center flex gap-2 border"
           ><span class="hidden sm:block">Tailwind Code</span><img
             class="sm:hidden lg:block lg:w-5 pointer-events-none"
-            src="/icons/tailwind.svg"
+            src="/img/icons/tailwind.svg"
             alt="Tailwind code button"
           /></button
         >
@@ -69,7 +69,7 @@ const { tailwind, javascript } = Astro.props;
           class="p-1.5 bg-slate-500 hover:opacity-80 transition-opacity rounded items-center flex gap-2 border"
           ><span class="hidden sm:block">JavaScript Code</span><img
             class="sm:hidden lg:block lg:w-5 pointer-events-none"
-            src="/icons/jscode.svg"
+            src="/img/icons/jscode.svg"
             alt="javascript code button"
           /></button
         >
@@ -98,7 +98,7 @@ const { tailwind, javascript } = Astro.props;
         <button
           id="copyTW"
           class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3"
-          ><img class="w-9" src="/icons/copy.svg" alt="Copy code" /></button
+          ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
         <code class="font-mono" id="tailwind-codeShow"></code>
       </div>
@@ -110,7 +110,7 @@ const { tailwind, javascript } = Astro.props;
         <button
           id="copyJS"
           class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3"
-          ><img class="w-9" src="/icons/copy.svg" alt="Copy code" /></button
+          ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
         <code class="font-mono" id="js-codeShow"></code>
       </div>
@@ -273,9 +273,9 @@ const { tailwind, javascript } = Astro.props;
 
     // Change the icon of the button to a tick and later change the icon
     // source to the original one
-    img.setAttribute("src", "icons/tick.svg");
+    img.setAttribute("src", "/img/icons/tick.svg");
     setTimeout(() => {
-      img.setAttribute("src", "icons/copy.svg");
+      img.setAttribute("src", "/img/icons/copy.svg");
     }, 2500);
   });
 
@@ -286,9 +286,9 @@ const { tailwind, javascript } = Astro.props;
 
     // @ts-ignore This is the same code as CopyTW
     const img = e.currentTarget.firstChild;
-    img.setAttribute("src", "icons/tick.svg");
+    img.setAttribute("src", "/img/icons/tick.svg");
     setTimeout(() => {
-      img.setAttribute("src", "icons/copy.svg");
+      img.setAttribute("src", "/img/icons/copy.svg");
     }, 2500);
   });
 </script>
