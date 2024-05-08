@@ -10,12 +10,14 @@ import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 // Get id via Astro params
 const { id } = Astro.params;
 
-console.log(Astro.url.origin + "/api/user/" + id);
-
 // Fetch datas from the API
 const user = await fetch(Astro.url.origin + "/api/user/" + id).then((data) =>
   data.json()
 );
+
+
+console.log( user.components);
+
 
 // If the api returned a blank array (null response) redirect user to 404
 if (user.length == 0) {
@@ -24,10 +26,15 @@ if (user.length == 0) {
 ---
 
 <Layout title="User" footer={true}>
-  <UserInfo />
-  <!--
+  <UserInfo
+    username={user.name}
+    avatar={user.avatar}
+    components={user.components.length}
+    followers={user.followers.length}
+  />
+
   <section class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
       {
         user.components.map((component) => (
           <ComponentCard
@@ -36,10 +43,11 @@ if (user.length == 0) {
             thumbnail={component.thumbnail}
             needsAlpine={component.needsAlpine}
             needsCDN={component.needsCDN}
-            userData={component.user}
-            totalComments={component.comments.length}
+            userData={user}
+            totalComments={component.totalComments}
           />
         ))
       }
-       -->
-</Layout>
+    </div>
+  </section></Layout
+>

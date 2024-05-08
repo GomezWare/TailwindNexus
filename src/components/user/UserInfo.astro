@@ -5,26 +5,29 @@
 
 interface Props {
   username: string;
+  avatar: string;
   components: number;
   followers: number;
 }
+
+const { username, avatar, components, followers } = Astro.props;
 ---
 
 <section class="container">
   <div class="flex flex-col space-y-3 justify-center items-center">
     <div>
-      <img class="w-44" src="https://ximg.es/128" />
+      <img class="w-44" src={avatar} />
     </div>
     <div>
       <h2 class="text-xl font-medium font-title line-clamp-1 px-1/2">
-        {}
+        {username}
       </h2>
     </div>
     <div class="flex space content-between gap-4">
       <h3>
-        <span class="text-lg font-bold text-teal-400">10</span> Components
+        <span class="text-lg font-bold text-teal-400">{components}</span> Components
       </h3><h3>
-        <span class="text-lg font-bold text-teal-400">232</span> Followers
+        <span class="text-lg font-bold text-teal-400">{followers}</span> Followers
       </h3>
     </div>
   </div>

@@ -52,10 +52,12 @@ const { id, name, thumbnail, needsAlpine, needsCDN, totalComments, userData } =
         <span class="text-xl font-bold">{totalComments}</span>
       </div>
       <div class="flex justify-end gap-3 items-bottom">
-        <a class="self-end custom-link text-white" href={`/users/${id}`}
+        <a
+          class="self-end custom-link text-white"
+          href={`/users/${userData.id}`}
           ><span class="text-clamp-1">{userData.name}</span></a
         >
-        <a href={`/users/${id}`}
+        <a href={`/users/${userData.id}`}
           ><img src={userData.avatar} class="w-16 rounded-full" /></a
         >
       </div>
