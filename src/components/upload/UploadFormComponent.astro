@@ -2,10 +2,15 @@
 /**
  * This is the form to upload components, if you are not logged in you cannot get to this page.
  */
+
+// Fetch categories data
+const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
+  res.json()
+);
 ---
 
 <section class="container">
-  <form class="w-full space-y-20">
+  <form id="uploadForm" class="w-full space-y-20">
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
@@ -16,7 +21,7 @@
             Component name
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="componentName"
             type="text"
             placeholder="My component"
@@ -33,7 +38,7 @@
             Description
           </label>
           <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="componentDescription"
             rows="4"
             placeholder="This is my nice component"></textarea>
@@ -53,9 +58,11 @@
             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="componentCategory"
           >
-            <option>New Mexico</option>
-            <option>Missouri</option>
-            <option>Texas</option>
+            {
+              categories.map((category) => (
+                <option value={category.id}>{category.name}</option>
+              ))
+            }
           </select>
           <div
             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -82,7 +89,7 @@
             Tailwind Code
           </label>
           <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="TWCode"
             rows="4"
             placeholder={`<h1 class="text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500" x-on:click="">Hello world</h1>`}
@@ -99,7 +106,7 @@
             JavaScript Code
           </label>
           <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border hover:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="JSCode"
             rows="4"
             placeholder={`function showAlert() { window.alert('Hello world');}`}
@@ -128,7 +135,9 @@
         </div>
       </div>
     </div>
-    <div class="gap-6 w-full flex flex-col xl:flex-row justify-center xl:justify-start">
+    <div
+      class="gap-6 w-full flex flex-col xl:flex-row justify-center xl:justify-start"
+    >
       <label for="submit" class="sr-only"> submit component </label>
       <button
         id="submit"
@@ -145,3 +154,94 @@
     </div>
   </form>
 </section>
+
+<script>
+  // Accessing form fields
+  const form = document.querySelector("#uploadForm");
+
+  // Event listeners for input fields to show/hide error messages
+  const inputFields = form.querySelectorAll<
+    HTMLInputElement | HTMLTextAreaElement
+  >("input[type='text'], textarea");
+  inputFields.forEach((inputField) => {
+    inputField.addEventListener("input", () => {
+      const errorParagraph = inputField.nextElementSibling;
+      if (!inputField.value.trim()) {
+        errorParagraph.classList.remove("hidden");
+        errorParagraph.previousElementSibling.classList.add("border-red-500");
+      } else {
+        errorParagraph.classList.add("hidden");
+        errorParagraph.previousElementSibling.classList.remove(
+          "border-red-500"
+        );
+      }
+    });
+  });
+
+  document.querySelector("#submit").addEventListener("click", () => {
+    const componentNameInput =
+      form.querySelector<HTMLInputElement>("#componentName");
+    const componentDescriptionInput = form.querySelector<HTMLInputElement>(
+      "#componentDescription"
+    );
+    const componentCategoryInput =
+      form.querySelector<HTMLSelectElement>("#componentCategory");
+    const tailwindCodeInput =
+      form.querySelector<HTMLTextAreaElement>("#TWCode");
+    const javascriptCodeInput =
+      form.querySelector<HTMLTextAreaElement>("#JSCode");
+
+    // Obtain fields values
+    const componentName = componentNameInput.value;
+    const componentDescription = componentDescriptionInput.value;
+    const componentCategory = componentCategoryInput.value;
+    const tailwind = tailwindCodeInput.value;
+    const javascript = javascriptCodeInput.value;
+    const needsCDN = (
+      form.querySelector<HTMLInputElement>("#cdn") as HTMLInputElement
+    ).checked;
+    const needsAlpine = (
+      form.querySelector<HTMLInputElement>("#alpine") as HTMLInputElement
+    ).checked;
+
+    // Basic Validationv if empty
+    if (
+      componentName &&
+      componentDescription &&
+      componentCategory &&
+      tailwind &&
+      javascript
+    ) {
+      // JSON to send
+      const formData = {
+        name: componentName,
+        description: componentDescription,
+        tailwind: tailwind,
+        javascript: javascript,
+        needsCDN: needsCDN,
+        needsAlpine: needsAlpine,
+        categoryId: componentCategory,
+        userId: "?",
+      };
+
+      console.log(formData);
+
+      // Send posting data to the server
+      const response = fetch(window.location.origin + "/api/components", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } else {
+      // Error message
+      // TODO a dialog or something
+      alert("Error");
+    }
+  });
+</script>

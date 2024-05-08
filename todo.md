@@ -4,11 +4,6 @@
 
 ## DEVELOP
 
-[ ] Finish endpoints and services
-
-- POST
-  - Component Uploads
-
 ## OPTIMIZE
 
 ## DOC
