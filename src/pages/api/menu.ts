@@ -14,9 +14,9 @@ export const GET: APIRoute = async () => {
   const response = await getMenu();
 
   // If data is succefully retrieved send the data else send a 500 error response
-  if (response) {
+
     return new Response(JSON.stringify(response));
-  }
+
   // API Response
   return new Response(null, {
     status: 500,
