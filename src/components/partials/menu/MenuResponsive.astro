@@ -44,7 +44,9 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
           Latest Components
         </span>
       </a>
-      <a href="/categories" class="custom-link font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
+      <a
+        href="/categories"
+        class="custom-link font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
         >Categories</a
       >
       <div
@@ -58,11 +60,15 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             >
               <div>
                 <span class="font-extralight mr-5">
-                  {category.totalComponents}+
+                  {category.numComponents}+
                 </span>
                 <span>{category.name}</span>
               </div>
-              <img class="w-5" src="/img/icons/chevron.svg" alt="Chevron icon" />
+              <img
+                class="w-5"
+                src="/img/icons/chevron.svg"
+                alt="Chevron icon"
+              />
             </a>
           ))
         }
