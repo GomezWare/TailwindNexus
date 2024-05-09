@@ -9,8 +9,8 @@ CREATE TABLE
         email TEXT,
         password TEXT,
         avatar TEXT,
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP
+        created_at INTEGER,
+        updated_at INTEGER
     );
 
 CREATE TABLE
@@ -18,8 +18,8 @@ CREATE TABLE
         category_id INTEGER PRIMARY KEY AUTO_INCREMENT,
         name TEXT,
         description TEXT,
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP
+        created_at INTEGER,
+        updated_at INTEGER
     );
 
 CREATE TABLE
@@ -34,8 +34,8 @@ CREATE TABLE
         needs_cdn BOOLEAN,
         tailwind_code TEXT,
         javascript_code TEXT,
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP,
+        created_at INTEGER,
+        updated_at INTEGER,
         FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
     );
@@ -46,8 +46,8 @@ CREATE TABLE
         user_id INTEGER,
         component_id INTEGER,
         content TEXT,
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP,
+        created_at INTEGER,
+        updated_at INTEGER,
         FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (component_id) REFERENCES components (component_id) ON DELETE CASCADE ON UPDATE CASCADE
     );
@@ -57,8 +57,8 @@ CREATE TABLE
         follow_id INTEGER PRIMARY KEY AUTO_INCREMENT,
         follower_id INTEGER,
         followed_id INTEGER,
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP,
+        created_at INTEGER,
+        updated_at INTEGER,
         FOREIGN KEY (follower_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (followed_id) REFERENCES users (user_id) ON DELETE CASCADE ON UPDATE CASCADE
     );
