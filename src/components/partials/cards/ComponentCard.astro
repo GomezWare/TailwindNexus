@@ -1,4 +1,6 @@
 ---
+import type { Code } from "astro:components";
+
 /**
  * component card, provides basic data to the user about the component.
  *
@@ -9,14 +11,33 @@ interface Props {
   id: Number;
   name: string;
   thumbnail: string;
-  needsAlpine: boolean;
-  needsCDN: boolean;
+  needsAlpine;
+  needsCDN;
   userData;
   totalComments: Number;
 }
 
 const { id, name, thumbnail, needsAlpine, needsCDN, totalComments, userData } =
   Astro.props;
+
+let alpine;
+let cdn;
+/*
+ * FIX booleans doesnt work because needs conversions
+ * Conversions via if-else
+ */
+
+if (needsAlpine) {
+  alpine = true;
+} else {
+  alpine = false;
+}
+
+if (needsCDN) {
+  cdn = true;
+} else {
+  cdn = false;
+}
 ---
 
 <div class="flex flex-col border-slate-600 border p-1.5 rounded">
@@ -24,7 +45,7 @@ const { id, name, thumbnail, needsAlpine, needsCDN, totalComments, userData } =
     <img src={thumbnail} class="w-full" alt="Component preview" />
     <div class="absolute bottom-2 right-3 flex gap-4">
       {
-        needsAlpine && (
+        alpine && (
           <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
             <img class="w-7" src="/img/icons/alpine.svg" alt="Tailwind logo" />
             AlpineJS
@@ -32,9 +53,13 @@ const { id, name, thumbnail, needsAlpine, needsCDN, totalComments, userData } =
         )
       }
       {
-        needsCDN && (
+        cdn && (
           <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
-            <img class="w-7" src="/img/icons/tailwind.svg" alt="Tailwind logo" />
+            <img
+              class="w-7"
+              src="/img/icons/tailwind.svg"
+              alt="Tailwind logo"
+            />
             Tailwind CDN
           </div>
         )

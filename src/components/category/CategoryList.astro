@@ -15,7 +15,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
 ---
 
 <section class="container mt-14">
-  <div class="grid grid-cols-2 gap-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
     {
       categories.map((category) => (
         <Fragment>
