@@ -12,8 +12,6 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
   // Else return the menu Data
   return res.json();
 });
-
-console.log(categories);
 ---
 
 <nav

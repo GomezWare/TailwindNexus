@@ -15,12 +15,12 @@
                 "thumbnail": "https://ximg.es/400x300",
                 "needsAlpine": false,
                 "needsCDN": true,
+                "totalComments": 2,
                 "user": {
                     "id": 2,
                     "name": "pepe",
                     "avatar": "https://ximg.es/128x128"
-                },
-                "totalComments": 2
+                }
             },
             {
                 "id": 2,

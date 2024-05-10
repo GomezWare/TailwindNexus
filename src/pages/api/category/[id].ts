@@ -10,12 +10,12 @@ import { getCategory } from "@services/categories";
 // REST API Route
 
 // GET
-export const GET: APIRoute = ({ params }) => {
+export const GET: APIRoute = async ({ params }) => {
   // Recover the category id via URL
   const id = params.id;
 
   // Create the response with the data that the service returned (the JSON itself)
-  const response = getCategory(id) || [];
+  const response = await getCategory(id) || [];
   // If the response is null or category doesnt exists return a blank JSON
-  return new Response(JSON.stringify(response));
+  return new Response(await JSON.stringify(response));
 };
