@@ -2,6 +2,7 @@
 
 import users from "@data/users.json";
 
+
 const getUsers = () => {
   return users;
 };
