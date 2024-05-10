@@ -20,7 +20,9 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
       categories.map((category) => (
         <Fragment>
           {category.err ? (
-            <span class="text-2xl w-full text-center col-span-2 text-rose-400">Cannot display categories, seems to be a server error.</span>
+            <span class="text-2xl w-full text-center col-span-2 text-rose-400">
+              Cannot display categories, seems to be a server error.
+            </span>
           ) : (
             <a
               href={`/categories/${category.id}`}
@@ -33,7 +35,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
                 </span>
               </div>
               <span class="font-extralight mr-5 text-nowrap">
-                {category.totalComponents}+ Components
+                {category.numComponents}+ Components
               </span>
             </a>
           )}

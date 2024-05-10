@@ -2,12 +2,6 @@
 import categories from "@data/categories.json";
 import { dbQuery } from "@utils/dbQuery";
 
-import type { RowDataPacket } from "mysql2";
-/**
- *
- *
- * @return {*}
- */
 const getMenu = async () => {
   try {
     const [rows, fields] = await dbQuery(
