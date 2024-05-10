@@ -130,7 +130,7 @@ const getUser = async (id) => {
     return user;
   } catch (error) {
     console.error(error);
-    throw error;
+    return [];
   }
 };
 
