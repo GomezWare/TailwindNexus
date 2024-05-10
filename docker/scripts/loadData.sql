@@ -15,7 +15,7 @@ VALUES
         'admin',
         'admin@admin.com',
         SHA2 ('admin', 256),
-        '/uploads/avatars/1.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
@@ -34,7 +34,7 @@ VALUES
         'user1',
         'user1@mail.com',
         SHA2 ('user1', 256),
-        '/uploads/avatars/2.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
@@ -50,10 +50,10 @@ INSERT INTO
     )
 VALUES
     (
-        'user12',
+        'user2',
         'user2@mail.com',
         SHA2 ('user2', 256),
-        '/uploads/avatars/3.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
@@ -79,7 +79,7 @@ VALUES
         UNIX_TIMESTAMP ()
     );
 
-    INSERT INTO
+INSERT INTO
     categories (name, description, created_at, updated_at)
 VALUES
     (
@@ -88,7 +88,6 @@ VALUES
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
-
 
 /* Components */
 INSERT INTO
@@ -111,7 +110,7 @@ VALUES
         2,
         'Reactive button rounded',
         'A rounded button that change when the user hover it.',
-        '',
+        'https://ximg.es/300x200',
         false,
         true,
         '<button>Click me<button>',
@@ -119,15 +118,6 @@ VALUES
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
-
-UPDATE components
-SET
-    thumbnail = CONCAT (
-        '/uploads/component_thumbnail-',
-        LAST_INSERT_ID (),
-        '.png'
-    );
-
 
 INSERT INTO
     components (
@@ -149,21 +139,13 @@ VALUES
         2,
         'Reactive button square',
         'A squared button that change when the user hover it.',
-        '',
+        'https://ximg.es/300x200',
         false,
         true,
         '<button>Click me<button>',
         'console.log(\'hello world\');',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
-    );
-
-UPDATE components
-SET
-    thumbnail = CONCAT (
-        '/uploads/component_thumbnail-',
-        LAST_INSERT_ID (),
-        '.png'
     );
 
 INSERT INTO
@@ -186,21 +168,13 @@ VALUES
         3,
         'Tick badge',
         'You can use this on your photo.',
-        '',
+        'https://ximg.es/300x200',
         false,
         true,
         '<button>Click me<button>',
         'console.log(\'hello world\');',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
-    );
-
-UPDATE components
-SET
-    thumbnail = CONCAT (
-        '/uploads/component_thumbnail-',
-        LAST_INSERT_ID (),
-        '.png'
     );
 
 /* Comment */
