@@ -17,18 +17,12 @@ const { id } = Astro.params;
 const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
   (res) => {
     if (res.status === 500 || res.ok === false) {
-      return { err: true };
+      return [];
     }
     return res.json();
   }
 );
-
-// If the api returned a blank array (null response) redirect user to 404
-if (category.length == 0) {
-  return Astro.redirect("/404");
-}
-
-// If there is a problem with the API or server redirect user to page 500
+// If the api returned a blank array (null response) or doeesnt work redirect user to 404 page
 if (category.length == 0) {
   return Astro.redirect("/404");
 }
