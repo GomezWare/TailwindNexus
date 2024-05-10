@@ -149,6 +149,9 @@ GROUP BY
     /* Data is sended to the API, since this query can return more than 1 category if 
     we pass an array we need to get only the first row*/
     const category = rows[0];
+
+   
+
     return category;
   } catch (error) {
     console.log(error);

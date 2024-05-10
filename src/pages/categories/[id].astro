@@ -28,7 +28,21 @@ if (category.length == 0) {
 }
 
 // Flag to know if category have components
-const doesntHaveComponents = !!category.components.length;
+
+let doesntHaveComponents;
+
+/* FIX if a category doesnt have components, insert a defult null component,
+     we dont want that so we need to filter the data and if there is a null component 
+     return only the category with blank component array
+
+     We know that because null component id is null.
+     */
+
+if (category.components[0].id !== null) {
+  doesntHaveComponents = true;
+} else {
+  doesntHaveComponents = false;
+}
 ---
 
 <Layout title="Categories" footer={true}>
