@@ -58,6 +58,7 @@ VALUES
         UNIX_TIMESTAMP ()
     );
 
+/* Categories*/
 INSERT INTO
     categories (name, description, created_at, updated_at)
 VALUES
@@ -78,6 +79,7 @@ VALUES
         UNIX_TIMESTAMP ()
     );
 
+/* Components */
 INSERT INTO
     components (
         category_id,
@@ -151,3 +153,83 @@ SET
         LAST_INSERT_ID (),
         '.png'
     );
+
+/* Comment */
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        2,
+        1,
+        'Very Good Component, from user1',
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
+    );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        3,
+        1,
+        'Very Good Component, from user2',
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
+    );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        2,
+        2,
+        'Very Good Component, from user1',
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
+    );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        3,
+        2,
+        'Very Good Component, from user2',
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
+    );
+
+/* Follows */
+INSERT INTO
+    follow (follower_id, followed_id, created_at, updated_at)
+VALUES
+    (3, 2, UNIX_TIMESTAMP (), UNIX_TIMESTAMP ());
+
+INSERT INTO
+    follow (follower_id, followed_id, created_at, updated_at)
+VALUES
+    (2, 3, UNIX_TIMESTAMP (), UNIX_TIMESTAMP ());
