@@ -3,15 +3,12 @@ import categories from "@data/categories.json";
 import { dbQuery } from "@utils/dbQuery";
 
 import type { RowDataPacket } from "mysql2";
-
-
+/**
+ *
+ *
+ * @return {*}
+ */
 const getMenu = async () => {
-  /**
-   * Get's the menu data
-   *
-   * @return {Object}
-   */
-
   try {
     const [rows, fields] = await dbQuery(
       `SELECT c.category_id, c.name, c.description, COUNT(co.component_id) AS num_components FROM categories c LEFT JOIN components co ON c.category_id = co.category_id GROUP BY c.category_id`
@@ -25,13 +22,12 @@ const getMenu = async () => {
         description: row.description,
         numComponents: row.num_components,
       };
-    });    
+    });
 
     return categories;
-    
   } catch (err) {
-    
-    console.log(err); 
+    console.log(err);
+    return undefined;
   }
 };
 
