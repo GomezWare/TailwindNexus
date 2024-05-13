@@ -113,10 +113,10 @@ VALUES
         'https://ximg.es/300x200',
         false,
         true,
-        '<button>Click me<button>',
-        'console.log(\'hello world\');',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        '<button id="button" class="size-5 rounded border border-cyan-500 hover:bg-slate-500 bg-slate-600">Click me</button>',
+        'document.querySelector("#button").addEventListener(\'click\', ()=>{alert("Hello World")})',
+        UNIX_TIMESTAMP () + 10,
+        UNIX_TIMESTAMP () + 10
     );
 
 INSERT INTO
@@ -142,10 +142,10 @@ VALUES
         'https://ximg.es/300x200',
         false,
         true,
-        '<button class="bg-red-500">Click me</button>',
-        'console.log(\'hello world\');',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        '<button id="button" class="size-5 border border-cyan-500 hover:bg-slate-500 bg-slate-600">Click me</button>',
+        'document.querySelector("#button").addEventListener(\'click\', ()=>{alert("Hello World")})',
+        UNIX_TIMESTAMP () + 20,
+        UNIX_TIMESTAMP () + 20
     );
 
 INSERT INTO
@@ -171,10 +171,10 @@ VALUES
         'https://ximg.es/300x200',
         false,
         true,
-        '<button>Click me<button>',
-        'console.log(\'hello world\');',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        '<div class"absolute w-24 h-16 bg-red-400 border"><div class="relative bg-slate-300 border bottom-2 left-2 ">Badge Test</div></div>',
+        '// No script needed',
+        UNIX_TIMESTAMP () + 30,
+        UNIX_TIMESTAMP () + 30
     );
 
 /* Comment */
@@ -191,8 +191,8 @@ VALUES
         2,
         1,
         'Very Good Component, from user1',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        UNIX_TIMESTAMP () + 10,
+        UNIX_TIMESTAMP () + 10
     );
 
 INSERT INTO
@@ -208,8 +208,8 @@ VALUES
         3,
         1,
         'Very Good Component, from user2',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        UNIX_TIMESTAMP () + 20,
+        UNIX_TIMESTAMP () + 20
     );
 
 INSERT INTO
@@ -225,8 +225,8 @@ VALUES
         2,
         2,
         'Very Good Component, from user1',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        UNIX_TIMESTAMP () + 30,
+        UNIX_TIMESTAMP () + 30
     );
 
 INSERT INTO
@@ -242,8 +242,8 @@ VALUES
         3,
         2,
         'Very Good Component, from user2',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        UNIX_TIMESTAMP () + 40,
+        UNIX_TIMESTAMP () + 40
     );
 
 /* Follows */
