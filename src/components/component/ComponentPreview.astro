@@ -162,7 +162,13 @@ const { tailwind, javascript } = Astro.props;
   // Insert the source code as text into code display
   tailwindCodeShower.innerText = TWCode;
   javascriptCodeShower.innerText = JSCode;
-  previewContainer.srcdoc = TWCode;
+
+  // HTML Injection with tailwind
+  previewContainer.srcdoc =
+    `<html><head><script src="https://cdn.tailwindcss.com">` +
+    `${"</" + "script></head><body>"}` +
+    TWCode +
+    "</body></html>";
 
   /**
    *  Resize screen controls
