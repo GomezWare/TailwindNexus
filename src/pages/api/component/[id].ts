@@ -16,6 +16,16 @@ export const GET: APIRoute = async ({ params }) => {
 
   // Create the response with the data that the service returned (the JSON itself)
   const response = (await getComponent(id)) || [];
-  // If the response is null or component doesnt exists return a blank JSON
-  return new Response(JSON.stringify(response));
+
+  // If data is succefully retrieved send the data else send a 500 error response
+  if (response) {
+    // API Response
+    return new Response(JSON.stringify(response));
+  } else {
+    // If the response fails respond with a 500 server status
+    return new Response(JSON.stringify([]), {
+      status: 500,
+      statusText: "Internal server error",
+    });
+  }
 };

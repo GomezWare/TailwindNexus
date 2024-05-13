@@ -10,7 +10,11 @@ import { dbQuery } from "@utils/dbQuery";
  */
 const getUser = async (id) => {
   try {
-    // Consulta para obtener los datos básicos del usuario
+    /*
+     * To get user data i decided to make firtst the queries and later build the object
+     */
+
+    // Query to get basic data from the user
     const [userDataRows, userDataFields] = await dbQuery(
       `
       SELECT 
@@ -27,7 +31,7 @@ const getUser = async (id) => {
       [id]
     );
 
-    // Consulta para obtener los componentes del usuario con el total de comentarios por componente
+    // Query to get user components
     const [componentsRows, componentsFields] = await dbQuery(
       `
       SELECT 
@@ -51,7 +55,7 @@ const getUser = async (id) => {
       [id]
     );
 
-    // Consulta para obtener los comentarios del usuario
+    // Query to get user comments
     const [commentsRows, commentsFields] = await dbQuery(
       `
       SELECT 
@@ -71,7 +75,7 @@ const getUser = async (id) => {
       [id]
     );
 
-    // Consulta para obtener los seguidores del usuario
+    // Query to get user followers
     const [followersRows, followersFields] = await dbQuery(
       `
       SELECT 
@@ -88,7 +92,7 @@ const getUser = async (id) => {
       [id]
     );
 
-    // Consulta para obtener a quién sigue el usuario
+    // Query to get users that follow the user (Followed)
     const [followingRows, followingFields] = await dbQuery(
       `
       SELECT 
@@ -105,7 +109,7 @@ const getUser = async (id) => {
       [id]
     );
 
-    // Construir objeto de usuario combinando los resultados de todas las consultas
+    // Build the object with all the queried data
     const user = {
       id: userDataRows[0].id,
       name: userDataRows[0].name,
@@ -130,7 +134,7 @@ const getUser = async (id) => {
     return user;
   } catch (error) {
     console.error(error);
-    return [];
+    return undefined;
   }
 };
 

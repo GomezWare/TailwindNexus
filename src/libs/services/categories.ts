@@ -46,8 +46,6 @@ LEFT JOIN
   }
 };
 
-
-
 /**
  * Function to get a category data from ID param
  *
@@ -105,11 +103,9 @@ GROUP BY
     we pass an array we need to get only the first row*/
     const category = rows[0];
 
-   
-
     return category;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     return undefined;
   }
 };

@@ -142,7 +142,7 @@ VALUES
         'https://ximg.es/300x200',
         false,
         true,
-        '<button>Click me<button>',
+        '<button class="bg-red-500">Click me</button>',
         'console.log(\'hello world\');',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()

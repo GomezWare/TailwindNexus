@@ -7,9 +7,10 @@ import { dbQuery } from "@utils/dbQuery";
  * @return {Array<Object>}
  */
 const getComponents = async () => {
-  // Execting the query in the DB
-  const [rows, fields] = await dbQuery(
-    `SELECT 
+  try {
+    // Execting the query in the DB
+    const [rows, fields] = await dbQuery(
+      `SELECT 
     components.component_id AS id,
     components.name,
     components.description,
@@ -61,20 +62,25 @@ LEFT JOIN
     users AS comment_users ON comments.user_id = comment_users.user_id
 GROUP BY 
     components.component_id;`
-  );
+    );
 
-  // FIX Query return a null fieldset on comments when component doesnt have any comment
-  // So if the first comment got a id with null value we reassing the value of comments to a blank array
-  const components = rows;
+    // FIX Query return a null fieldset on comments when component doesnt have any comment
+    // So if the first comment got a id with null value we reassing the value of comments to a blank array
+    const components = rows;
 
-  components.forEach((component) => {
-    if (component.comments[0].id == null) {
-      component.comments = [];
-    }
-  });
+    components.forEach((component) => {
+      if (component.comments[0].id == null) {
+        component.comments = [];
+      }
+    });
 
-  // Return all components
-  return components;
+    // Return all components
+    return components;
+  } catch (err) {
+    // If there is an error
+    console.log(err);
+    return undefined;
+  }
 };
 
 /**
@@ -84,9 +90,10 @@ GROUP BY
  * @returns {Object}
  */
 const getComponent = async (id) => {
-  // Execting the query in the DB
-  const [rows, fields] = await dbQuery(
-    `SELECT 
+  try {
+    // Execting the query in the DB
+    const [rows, fields] = await dbQuery(
+      `SELECT 
     components.component_id AS id,
     components.name,
     components.description,
@@ -140,21 +147,26 @@ WHERE
     components.component_id = ?
 GROUP BY 
     components.component_id;`,
-    [id]
-  );
+      [id]
+    );
 
-  // FIX Query return a null fieldset on comments when component doesnt have any comment
-  // So if the first comment got a id with null value we reassing the value of comments to a blank array
+    // FIX Query return a null fieldset on comments when component doesnt have any comment
+    // So if the first comment got a id with null value we reassing the value of comments to a blank array
 
-  // In this case we get the first position only becuse we dont want an array for only 1 or 0 results
-  const component = rows[0];
+    // In this case we get the first position only becuse we dont want an array for only 1 or 0 results
+    const component = rows[0];
 
-  if (component.comments[0].id == null) {
-    component.comments = [];
+    if (component.comments[0].id == null) {
+      component.comments = [];
+    }
+
+    // Return all components
+    return component;
+  } catch (err) {
+    // If there is an error
+    console.log(err);
+    return undefined;
   }
-
-  // Return all components
-  return component;
 };
 
 /**
@@ -163,9 +175,10 @@ GROUP BY
  * @return {*}
  */
 const getLatest = async () => {
-  // Execting the query in the DB
-  const [rows, fields] = await dbQuery(
-    `SELECT 
+  try {
+    // Execting the query in the DB
+    const [rows, fields] = await dbQuery(
+      `SELECT 
     components.component_id AS id,
     components.name,
     components.description,
@@ -221,20 +234,25 @@ ORDER BY
     UNIX_TIMESTAMP(components.created_at) DESC
 LIMIT 15;
 `
-  );
+    );
 
-  // FIX Query return a null fieldset on comments when component doesnt have any comment
-  // So if the first comment got a id with null value we reassing the value of comments to a blank array
-  const components = rows;
+    // FIX Query return a null fieldset on comments when component doesnt have any comment
+    // So if the first comment got a id with null value we reassing the value of comments to a blank array
+    const components = rows;
 
-  components.forEach((component) => {
-    if (component.comments[0].id == null) {
-      component.comments = [];
-    }
-  });
+    components.forEach((component) => {
+      if (component.comments[0].id == null) {
+        component.comments = [];
+      }
+    });
 
-  // Return latest components
-  return components;
+    // Return latest components
+    return components;
+  } catch (err) {
+    // If there is an error
+    console.log(err);
+    return undefined;
+  }
 };
 
 // TODO Data validation as util
@@ -242,7 +260,7 @@ const addComponent = (componentData) => {
   if (true) {
     return componentData;
   } else {
-    return { error: "Error?" };
+    return undefined;
   }
 };
 
