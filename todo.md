@@ -1,7 +1,7 @@
 # TASKS
 
 ## FIXES
-[ ] Fix Component preview
+[ ] Clear apply class to input fields
 
 ## DEVELOP
 
@@ -11,3 +11,4 @@
 [ ] Update project Docs
 
 ## EVIROMENT TASKS
+[ ] Merge BD implementation

@@ -10,8 +10,14 @@ import { validateComponent } from "@utils/validateComponent";
 
 // REST API Route
 
+async function sleep() {
+  return new Promise((resolve, reject) =>
+    setTimeout(() => resolve({}), Math.random() * 1000)
+  );
+}
 // GET
 export const GET: APIRoute = async () => {
+  await sleep();
   // Create the response with the data that the service returned (the JSON itself)
   const response = (await getComponents()) || [];
 
@@ -30,7 +36,8 @@ export const GET: APIRoute = async () => {
 
 // POST
 export const POST: APIRoute = async ({ request }) => {
-  // TODO call a function to generate the Thumbnail
+  // TODO call a function to generate the Thumbnail and get the route
+  // TODO Protect endpoints with JWT
   try {
     // If the POST body is not a JSON
     if (request.headers.get("Content-Type") === "application/json") {
@@ -42,7 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
         body.userId,
         body.name,
         body.description,
-        "Thumbnail",
+        "https://ximg.es/300x200",
         Boolean(body.needsAlpine),
         Boolean(body.needsCDN),
         body.tailwind,

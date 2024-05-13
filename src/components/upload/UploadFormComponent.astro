@@ -157,6 +157,11 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
 </section>
 
 <script>
+  import {
+    validateComponent,
+    getErrorsComponent,
+  } from "@utils/validateComponent";
+
   // Accessing form fields
   const form = document.querySelector("#uploadForm");
 
@@ -180,24 +185,22 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
   });
 
   document.querySelector("#submit").addEventListener("click", () => {
-    const componentNameInput =
-      form.querySelector<HTMLInputElement>("#componentName");
-    const componentDescriptionInput = form.querySelector<HTMLInputElement>(
-      "#componentDescription"
-    );
-    const componentCategoryInput =
-      form.querySelector<HTMLSelectElement>("#componentCategory");
-    const tailwindCodeInput =
-      form.querySelector<HTMLTextAreaElement>("#TWCode");
-    const javascriptCodeInput =
-      form.querySelector<HTMLTextAreaElement>("#JSCode");
-
     // Obtain fields values
-    const componentName = componentNameInput.value;
-    const componentDescription = componentDescriptionInput.value;
-    const componentCategory = componentCategoryInput.value;
-    const tailwind = tailwindCodeInput.value;
-    const javascript = javascriptCodeInput.value;
+    const componentName =
+      form.querySelector<HTMLInputElement>("#componentName").value;
+
+    /* Fix Data types
+        Category was obtained like a string so we need to parse to number */
+    const componentDescription = form.querySelector<HTMLInputElement>(
+      "#componentDescription"
+    ).value;
+
+    const componentCategory = Number(
+      form.querySelector<HTMLSelectElement>("#componentCategory").value
+    );
+    const tailwind = form.querySelector<HTMLTextAreaElement>("#TWCode").value;
+    const javascript = form.querySelector<HTMLTextAreaElement>("#JSCode").value;
+
     const needsCDN = (
       form.querySelector<HTMLInputElement>("#cdn") as HTMLInputElement
     ).checked;
@@ -205,28 +208,22 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       form.querySelector<HTMLInputElement>("#alpine") as HTMLInputElement
     ).checked;
 
-    // Basic Validationv if empty
-    if (
-      componentName &&
-      componentDescription &&
-      componentCategory &&
-      tailwind &&
-      javascript
-    ) {
-      // JSON to send
-      const request = {
-        userId: 1,
-        name: componentName,
-        description: componentDescription,
-        tailwind: tailwind,
-        javascript: javascript,
-        needsCDN: needsCDN,
-        needsAlpine: needsAlpine,
-        categoryId: componentCategory,
-      };
+    // request body buiilded to be Stringify
+    const request = {
+      userId: 1,
+      name: componentName,
+      description: componentDescription,
+      tailwind: tailwind,
+      javascript: javascript,
+      needsCDN: needsCDN,
+      needsAlpine: needsAlpine,
+      categoryId: componentCategory,
+    };
 
+    // Run validations via validations util
+    if (validateComponent) {
       // Send posting data to the server
-      const response = fetch(window.location.origin + "/api/components", {
+      fetch(window.location.origin + "/api/components", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -235,12 +232,17 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          if (!data.inserted) {
+            throw Error("Server Error");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     } else {
-      // Error message
+      // Get errors
+      const components = getErrorsComponent(request);
       // TODO a dialog or something
-      alert("Fill all fields");
     }
   });
 </script>
