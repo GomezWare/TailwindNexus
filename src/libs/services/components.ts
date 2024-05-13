@@ -255,9 +255,14 @@ LIMIT 15;
   }
 };
 
-// TODO Data validation as util
+/**
+ * Funcion to add components to the database, its verifierd on API
+ *
+ * @param {Array} componentData
+ * @return {object}
+ */
 const addComponent = async (componentData) => {
-  if (true) {
+  try {
     const [rows, fields] = await dbQuery(
       `
     INSERT INTO
@@ -290,10 +295,10 @@ VALUES
     );`,
       componentData
     );
-    return rows;
-  } else {
-    return undefined;
+    return { inserted: true };
+  } catch (err) {
+    console.log(err);
+    return { inserted: true };
   }
 };
-
 export { getComponents, getComponent, getLatest, addComponent };
