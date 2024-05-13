@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
  echo "Choose MySQL root password: "
  read -s pass1
 

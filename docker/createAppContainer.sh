@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
  echo "Do you set .env variables first? [y/n]: "
  read -s confirmation
 
