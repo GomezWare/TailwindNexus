@@ -231,7 +231,7 @@ LEFT JOIN
 GROUP BY 
     components.component_id
 ORDER BY 
-    UNIX_TIMESTAMP(components.created_at) DESC
+   components.created_at DESC
 LIMIT 15;
 `
     );
