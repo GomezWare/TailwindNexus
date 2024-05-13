@@ -10,9 +10,9 @@ import { getLatest } from "@services/components";
 // REST API Route
 
 // GET
-export const GET: APIRoute = () => {
-  // Create the response with the data that the service returned (the JSON itself)
-
+export const GET: APIRoute = async () => {
+  // Create the response with the data that the service Database returned (the JSON itself);
+  const response = await getLatest();
   // API Response
-  return new Response(JSON.stringify(getLatest()));
+  return new Response(JSON.stringify(response));
 };

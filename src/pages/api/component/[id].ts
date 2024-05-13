@@ -10,12 +10,12 @@ import { getComponent } from "@services/components";
 // REST API Route
 
 // GET
-export const GET: APIRoute = ({ params }) => {
+export const GET: APIRoute = async ({ params }) => {
   // Recover the category id via URL
   const id = params.id;
 
   // Create the response with the data that the service returned (the JSON itself)
-  const response = getComponent(id) || [];
+  const response = (await getComponent(id)) || [];
   // If the response is null or component doesnt exists return a blank JSON
   return new Response(JSON.stringify(response));
 };

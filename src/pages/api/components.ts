@@ -10,11 +10,11 @@ import { getComponents, addComponent } from "@services/components";
 // REST API Route
 
 // GET
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   // Create the response with the data that the service returned (the JSON itself)
-
-  // API Response
-  return new Response(JSON.stringify(getComponents()));
+  const response = (await getComponents()) || [];
+  // If the response is null or component doesnt exists return a blank JSON
+  return new Response(JSON.stringify(response));
 };
 
 // POST
