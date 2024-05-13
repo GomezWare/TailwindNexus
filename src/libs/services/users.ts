@@ -1,5 +1,3 @@
-// TODO Document this service when its finally complete
-
 import { dbQuery } from "@utils/dbQuery";
 
 /**
@@ -7,6 +5,7 @@ import { dbQuery } from "@utils/dbQuery";
  *
  * @param {number} id
  * @return {object}
+ * 
  */
 const getUser = async (id) => {
   try {
@@ -88,9 +87,7 @@ const getUser = async (id) => {
           users u ON f.follower_id = u.user_id
       WHERE
           f.followed_id = ?
-      `,
-      [id]
-    );
+      `,[id]);
 
     // Query to get users that follow the user (Followed)
     const [followingRows, followingFields] = await dbQuery(

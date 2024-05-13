@@ -6,6 +6,7 @@
 // Imports
 import type { APIRoute } from "astro";
 import { getComponents, addComponent } from "@services/components";
+import { validateComponent } from "@utils/validateComponent";
 
 // REST API Route
 
@@ -29,23 +30,40 @@ export const GET: APIRoute = async () => {
 
 // POST
 export const POST: APIRoute = async ({ request }) => {
-  // If the POST body is not a JSON
-  if (request.headers.get("Content-Type") === "application/json") {
-    // Getting the JSON
-    const body = await request.json();
-    // Component object
-    const component = [
-      body.categoryId,
-      body.userId,
-      body.name,
-      body.description,
-      "https://ximg.es/300x200",
-      body.needsAlpine,
-      body.needsCDN,
-      String(body.tailwind),
-      String(body.javascript),
-    ];
-    return new Response(JSON.stringify(addComponent(component) || []));
+  // TODO call a function to generate the Thumbnail
+  try {
+    // If the POST body is not a JSON
+    if (request.headers.get("Content-Type") === "application/json") {
+      // Getting the JSON
+      const body = await request.json();
+      // Component data array
+      const component = [
+        body.categoryId,
+        body.userId,
+        body.name,
+        body.description,
+        "Thumbnail",
+        Boolean(body.needsAlpine),
+        Boolean(body.needsCDN),
+        body.tailwind,
+        body.javascript,
+      ];
+
+      // Validate data and make the request to the database
+      if (validateComponent(component)) {
+        return new Response(
+          JSON.stringify((await addComponent(component)) || [])
+        );
+      } else {
+        return new Response(JSON.stringify("Validation Failed"), {
+          status: 403,
+          statusText: "Validation Failed",
+        });
+      }
+    }
+    return new Response(null, { status: 400, statusText: "Bad Request" });
+  } catch (err) {
+    console.log(err);
+    return new Response(null, { status: 500, statusText: "Server error" });
   }
-  return new Response(null, { status: 400, statusText: "Bad Request" });
 };

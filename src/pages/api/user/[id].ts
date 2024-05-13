@@ -12,7 +12,7 @@ import { getUser } from "@services/users";
 // GET
 export const GET: APIRoute = async ({ params }) => {
   // Recover the category id via URL
-  const id = params.id;
+  const id = Number(params.id);
 
   // Create the response with the data that the service returned (the JSON itself)
   const response = (await getUser(id)) || [];

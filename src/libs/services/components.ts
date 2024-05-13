@@ -258,7 +258,8 @@ LIMIT 15;
 // TODO Data validation as util
 const addComponent = async (componentData) => {
   if (true) {
-    const [rows, fields] = await dbQuery(`
+    const [rows, fields] = await dbQuery(
+      `
     INSERT INTO
     components (
         category_id,
@@ -275,18 +276,21 @@ const addComponent = async (componentData) => {
     )
 VALUES
     (
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
         UNIX_TIMESTAMP () + 10,
         UNIX_TIMESTAMP () + 10
-    );`, componentData);
+    );`,
+      componentData
+    );
+    return rows;
   } else {
     return undefined;
   }
