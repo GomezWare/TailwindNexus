@@ -147,6 +147,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       >
       <label for="clear" class="sr-only"> Clear forms </label>
       <input
+        id="clear"
         type="reset"
         value="Clear"
         class="cursor-pointer px-8 py-2 bg-rose-600 rounded border hover:bg-rose-400 transition-colors w-auto"
@@ -213,7 +214,8 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       javascript
     ) {
       // JSON to send
-      const formData = {
+      const request = {
+        userId: 1,
         name: componentName,
         description: componentDescription,
         tailwind: tailwind,
@@ -221,10 +223,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
         needsCDN: needsCDN,
         needsAlpine: needsAlpine,
         categoryId: componentCategory,
-        userId: "?",
       };
-
-      console.log(formData);
 
       // Send posting data to the server
       const response = fetch(window.location.origin + "/api/components", {
@@ -232,7 +231,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(request),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -241,7 +240,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     } else {
       // Error message
       // TODO a dialog or something
-      alert("Error");
+      alert("Fill all fields");
     }
   });
 </script>

@@ -256,9 +256,37 @@ LIMIT 15;
 };
 
 // TODO Data validation as util
-const addComponent = (componentData) => {
+const addComponent = async (componentData) => {
   if (true) {
-    return componentData;
+    const [rows, fields] = await dbQuery(`
+    INSERT INTO
+    components (
+        category_id,
+        user_id,
+        name,
+        description,
+        thumbnail,
+        needs_alpine,
+        needs_cdn,
+        tailwind_code,
+        javascript_code,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        UNIX_TIMESTAMP () + 10,
+        UNIX_TIMESTAMP () + 10
+    );`, componentData);
   } else {
     return undefined;
   }
