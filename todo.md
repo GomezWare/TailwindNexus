@@ -1,7 +1,6 @@
 # TASKS
 
 ## FIXES
-[ ] Clear apply class to input fields
 
 ## DEVELOP
 

@@ -1,63 +1,147 @@
 /**
  * This util is for validate components on server
  *
- * @param {Array} componentData
+ * @param {Object} componentData
  * @returns {boolean}
  */
 const validateComponent = (componentData) => {
-  // Verify that data is provided and that it is an array
-  if (!Array.isArray(componentData) || componentData.length !== 9) {
+  // Validate if we have all the data
+  if (
+    !componentData.categoryId ||
+    !componentData.name ||
+    !componentData.description ||
+    !componentData.tailwind ||
+    !componentData.javascript
+  ) {
     return false;
   }
 
-  // Validate that categoryId and userId are positive numbers
-  if (typeof componentData[0] !== "number" || componentData[0] <= 0) {
-    return false;
-  }
-  if (typeof componentData[1] !== "number" || componentData[1] <= 0) {
+  // Validate that categoryId are positive numbers
+  if (
+    typeof componentData.categoryId !== "number" ||
+    componentData.categoryId <= 0
+  ) {
     return false;
   }
 
   // Validate that name is between 4 and 128 characters and is not empty.
   if (
-    typeof componentData[2] !== "string" ||
-    componentData[2].trim().length < 4 ||
-    componentData[2].trim().length > 128 ||
-    componentData[2].trim() === ""
+    typeof componentData.name !== "string" ||
+    componentData.name.trim().length < 4 ||
+    componentData.name.trim().length > 128 ||
+    componentData.name.trim() === ""
   ) {
     return false;
   }
 
   // Validate that description is less than 512 characters and not empty
   if (
-    typeof componentData[3] !== "string" ||
-    componentData[3].trim().length >= 512 ||
-    componentData[3].trim() === ""
+    typeof componentData.description !== "string" ||
+    componentData.description.trim().length >= 512 ||
+    componentData.description.trim() === ""
   ) {
     return false;
   }
 
   // Validate that needsAlpine and needsCDN are Booleans
   if (
-    typeof componentData[5] !== "boolean" ||
-    typeof componentData[6] !== "boolean"
+    typeof componentData.needsAlpine !== "boolean" ||
+    typeof componentData.needsCDN !== "boolean"
   ) {
     return false;
   }
 
   // Validate that tailwind is a string and does not contain <script> tags or events or iFrames.
   if (
-    typeof componentData[7] !== "string" ||
-    /<script[\s\S]*?>/i.test(componentData[7]) ||
-    /on\w+\s*=/i.test(componentData[7]) ||
-    /<iframe[\s\S]*?>/i.test(componentData[7]) ||
-    componentData[2].trim() === ""
+    typeof componentData.tailwind !== "string" ||
+    /<script[\s\S]*?>/i.test(componentData.tailwind) ||
+    /on\w+\s*=/i.test(componentData.tailwind) ||
+    /<iframe[\s\S]*?>/i.test(componentData.tailwind) ||
+    componentData.tailwind.trim() === ""
   ) {
     return false;
   }
 
   // Validate that javascript is a string of characters
-  if (typeof componentData[8] !== "string" || componentData[2].trim() === "") {
+  if (
+    typeof componentData.javascript !== "string" ||
+    componentData.javascript.trim() === ""
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * This util is for validate components on the client and get the error list
+ *
+ * @param {object} componentData
+ * @returns {boolean}
+ */
+const validateComponentClient = (componentData) => {
+  // Validate if we have all the data
+  if (
+    !componentData.categoryId ||
+    !componentData.name ||
+    !componentData.description ||
+    !componentData.tailwind ||
+    !componentData.javascript
+  ) {
+    return false;
+  }
+
+  // Validate that categoryId are positive numbers
+  if (
+    typeof componentData.categoryId !== "number" ||
+    componentData.categoryId <= 0
+  ) {
+    return false;
+  }
+
+  // Validate that name is between 4 and 128 characters and is not empty.
+  if (
+    typeof componentData.name !== "string" ||
+    componentData.name.trim().length < 4 ||
+    componentData.name.trim().length > 128 ||
+    componentData.name.trim() === ""
+  ) {
+    return false;
+  }
+
+  // Validate that description is less than 512 characters and not empty
+  if (
+    typeof componentData.description !== "string" ||
+    componentData.description.trim().length >= 512 ||
+    componentData.description.trim() === ""
+  ) {
+    return false;
+  }
+
+  // Validate that needsAlpine and needsCDN are Booleans
+  if (
+    typeof componentData.needsCDN !== "boolean" ||
+    typeof componentData.needsAlpine !== "boolean"
+  ) {
+    return false;
+  }
+
+  // Validate that tailwind is a string and does not contain <script> tags or events or iFrames.
+  if (
+    typeof componentData.tailwind !== "string" ||
+    /<script[\s\S]*?>/i.test(componentData.tailwind) ||
+    /on\w+\s*=/i.test(componentData.tailwind) ||
+    /<iframe[\s\S]*?>/i.test(componentData.tailwind) ||
+    componentData.tailwind.trim() === ""
+  ) {
+    return false;
+  }
+
+  // Validate that javascript is a string of characters
+  if (
+    typeof componentData.javascript !== "string" ||
+    componentData.javascript.trim() === ""
+  ) {
     return false;
   }
 
@@ -67,56 +151,66 @@ const validateComponent = (componentData) => {
 /**
  * This util is for validate components on client
  *
- * @param {Array} componentData
- * @returns {boolean}
+ * @param {Object} componentData
+ * @returns {Array}
  */
 const getErrorsComponent = (componentData) => {
   let errors = [];
 
-  // Verify that data is provided and that it is an array
-  if (!Array.isArray(componentData) || componentData.length !== 9) {
-    errors.push("Some fields are empty.");
+  // Validate if we have all the data
+  if (
+    !componentData.categoryId ||
+    !componentData.name ||
+    !componentData.description ||
+    !componentData.tailwind ||
+    !componentData.javascript
+  ) {
+    errors.push("There are empty fields in the form.");
   }
 
   // Validate that name is between 4 and 128 characters and is not empty.
   if (
-    typeof componentData[2] !== "string" ||
-    componentData[2].trim().length < 4 ||
-    componentData[2].trim().length > 128 ||
-    componentData[2].trim() === ""
+    typeof componentData.name !== "string" ||
+    componentData.name.trim().length < 4 ||
+    componentData.name.trim().length > 128 ||
+    componentData.name.trim() === ""
   ) {
-    errors.push("Component name must be between 4 and 128 characters.");
+    errors.push("The component name must be between 4 and 128 characters.");
   }
 
   // Validate that description is less than 512 characters and not empty
   if (
-    typeof componentData[3] !== "string" ||
-    componentData[3].trim().length >= 512 ||
-    componentData[3].trim() === ""
+    typeof componentData.description !== "string" ||
+    componentData.description.trim().length >= 512 ||
+    componentData.description.trim() === ""
   ) {
-    errors.push("Description must be less than 512 characters");
+    errors.push("Description must be less than 512 characters.");
   }
 
   // Validate that tailwind is a string and does not contain <script> tags or events or iFrames.
   if (
-    typeof componentData[7] !== "string" ||
-    /<script[\s\S]*?>/i.test(componentData[7]) ||
-    /on\w+\s*=/i.test(componentData[7]) ||
-    /<iframe[\s\S]*?>/i.test(componentData[7])
+    typeof componentData.tailwind !== "string" ||
+    /<script[\s\S]*?>/i.test(componentData.tailwind) ||
+    /on\w+\s*=/i.test(componentData.tailwind) ||
+    /<iframe[\s\S]*?>/i.test(componentData.tailwind) ||
+    componentData.tailwind.trim() === ""
   ) {
     errors.push(
-      "Tailwind code is empty or contains some script elements (No <script>, <iframes> tags or onClick events are allowed)."
+      "The tailwind code is empty or has forbidden tags (You cannot use tags such as &lt;script&gt, &lt;iframe&gt; or on events)."
     );
   }
 
   // Validate that javascript is a string of characters
-  if (typeof componentData[8] !== "string" || componentData[8].trim() === "") {
+  if (
+    typeof componentData.javascript !== "string" ||
+    componentData.javascript.trim() === ""
+  ) {
     errors.push(
-      "No javascript code has been added, if you do not want to include it add a comment in the field ( //comment )"
+      "The javascript code is empty, if your component does not have code provide a comment."
     );
   }
 
   return errors;
 };
 
-export { validateComponent, getErrorsComponent };
+export { validateComponent, getErrorsComponent, validateComponentClient };

@@ -38,28 +38,41 @@ export const GET: APIRoute = async () => {
 export const POST: APIRoute = async ({ request }) => {
   // TODO call a function to generate the Thumbnail and get the route
   // TODO Protect endpoints with JWT
+  // TODO Generate thumbnail
   try {
     // If the POST body is not a JSON
     if (request.headers.get("Content-Type") === "application/json") {
       // Getting the JSON
       const body = await request.json();
       // Component data array
-      const component = [
-        body.categoryId,
-        body.userId,
-        body.name,
-        body.description,
-        "https://ximg.es/300x200",
-        Boolean(body.needsAlpine),
-        Boolean(body.needsCDN),
-        body.tailwind,
-        body.javascript,
-      ];
+      const component = {
+        categoryId: body.categoryId,
+        userId: 1,
+        name: body.name,
+        description: body.description,
+        thumbnail: "https://ximg.es/300x200",
+        needsAlpine: Boolean(body.needsAlpine),
+        needsCDN: Boolean(body.needsCDN),
+        tailwind: body.tailwind,
+        javascript: body.javascript,
+      };
 
       // Validate data and make the request to the database
       if (validateComponent(component)) {
         return new Response(
-          JSON.stringify((await addComponent(component)) || [])
+          JSON.stringify(
+            (await addComponent([
+              component.categoryId,
+              component.userId,
+              component.name,
+              component.description,
+              component.thumbnail,
+              component.needsAlpine,
+              component.needsCDN,
+              component.tailwind,
+              component.javascript,
+            ])) || []
+          )
         );
       } else {
         return new Response(JSON.stringify("Validation Failed"), {

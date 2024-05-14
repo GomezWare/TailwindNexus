@@ -295,10 +295,10 @@ VALUES
     );`,
       componentData
     );
-    return { inserted: true };
+    return { inserted:rows['insertId'] };
   } catch (err) {
     console.log(err);
-    return { inserted: true };
+    return { inserted: -1 };
   }
 };
 export { getComponents, getComponent, getLatest, addComponent };
