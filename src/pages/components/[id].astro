@@ -10,6 +10,7 @@ import Layout from "../../layouts/Layout.astro";
 import ComponentHeader from "../../components/component/ComponentHeader.astro";
 import ComponentPreview from "../../components/component/ComponentPreview.astro";
 import UserCard from "src/components/partials/cards/UserCard.astro";
+import ComponentSharer from "src/components/component/ComponentSharer.astro";
 
 // Get id via Astro params
 const { id } = Astro.params;
@@ -33,8 +34,11 @@ if (component.length == 0) {
     avatar={component.user.avatar}
     totalComponents={component.user.totalComponents}
   />
+
   <ComponentPreview
     tailwind={component.tailwind}
     javascript={component.javascript}
   />
+
+  <ComponentSharer id={id} />
 </Layout>

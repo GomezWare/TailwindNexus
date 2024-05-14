@@ -10,10 +10,10 @@ const { id } = Astro.props;
 
 // URI Construction and encoding
 
-const url = encodeURI(Astro.url.origin + "/users/" + id);
+const url = encodeURI(Astro.url.origin + "/components/" + id);
 ---
 
-<section class="container gap-4 flex flex-row items-center justify-center">
+<section class="container flex flex-row gap-4 items-center justify-center">
   <span class="text-2xl font-medium -mb-4">Share:</span>
   <div class="flex gap-3 bg-slate-700 mt-8 rounded p-3">
     <a
@@ -27,13 +27,13 @@ const url = encodeURI(Astro.url.origin + "/users/" + id);
       /></a
     >
     <a
-      href={`https://twitter.com/intent/tweet?url=${url}&text=Check%20out%20this%20profile%20on%20Tailwind%20Nexus%2C%20the%20collaborative%20component%20repository."}`}
+      href={`https://twitter.com/intent/tweet?url=${url}&text=Check%20out%20this%20component%20at%20Tailwind%20Nexus%2C%20the%20collaborative%20component%20repository."}`}
       target="_blank"
       class="size-16 sm:size-20 rounded bg-gray-900 hover:bg-gray-800 flex justify-center cursor-pointer transition-colors border"
       ><img class="w-12 sm:w-16" src="/img/icons/x.svg" alt="X share" /></a
     >
     <a
-      href={`http://www.reddit.com/submit?url=${url}&title=Check%20out%20this%20profile%20on%20Tailwind%20Nexus%2C%20the%20collaborative%20component%20repository.&type=LINK`}
+      href={`http://www.reddit.com/submit?url=${url}&title=Check%20out%20this%20component%20at%20Tailwind%20Nexus%2C%20the%20collaborative%20component%20repository.&type=LINK`}
       target="_blank"
       class="size-16 sm:size-20 rounded bg-orange-600 hover:bg-orange-500 flex justify-center cursor-pointer transition-colors border"
       ><img
@@ -43,7 +43,7 @@ const url = encodeURI(Astro.url.origin + "/users/" + id);
       /></a
     >
     <a
-      href={`mailto:yourfriend@mail.com?subject=Check%20out%20this%20profile%20on%20TW!&body=Tailwind%20Nexus%20is%20a%20collaborative%20component%20repository%20where%20anyone%20can%20upload%20components.%0D%0A%0D%0AI%20leave%20my%20account%20here%20in%20case%20you%20are%20interested.%0D%0A%0D%0A${url}`}
+      href={`mailto:yourfriend@mail.com?subject=Check%20out%20this%20component%20on%20TW!&body=Tailwind%20Nexus%20is%20a%20collaborative%20component%20repository%20where%20anyone%20can%20upload%20components.%0D%0A%0D%0A${url}`}
       target="_blank"
       class="size-16 sm:size-20 rounded bg-rose-600 hover:bg-rose-500 flex justify-center cursor-pointer transition-colors border"
       ><img
