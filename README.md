@@ -1,54 +1,63 @@
-# Astro Starter Kit: Basics
+# Tailwind Nexus
 
-```sh
-npm create astro@latest -- --template basics
-```
+## About Tailwind Nexus
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### What is tailwind nexus?
+Tailwind Nexus aims to be a platform to upload [Tailwind](https://tailwindcss.com/) components along with their functionality.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Due to its nature it can be deployed locally, providing a secure space where your company, yourself or your friends can upload components. ﬁ
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Why does Tailwind Nexus exist?
 
-## 🚀 Project Structure
+Tailwind nexus is a final degree project which is under development, the objective was to demonstrate that you can create a platform without 
+relying on PHP with the BFF (BackendForFrontend) pattern and with the help of the Astro framework [Astro](https://astro.new/latest)
 
-Inside of your Astro project, you'll see the following folders and files:
+## Installation
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### Prerequisites
+**Easy install**
+The easy way
+- Have [Docker](https://www.docker.com/get-started/) installed and configured.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+**No Docker**
+If you don`t want to use Docker
+- Have [NodeJS](https://www.docker.com/get-started/) installed.
+- Have [NPM](https://www.docker.com/get-started/) installed.
+- A Database server runing [MySQL](https://dev.mysql.com/downloads/mysql/), [MariaDB](https://mariadb.org/) or [PHPMyAdmin](https://www.phpmyadmin.net/).
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Easy Installation
+1. Clone the repository:
+   ``` git clone GomezWare/TailwindNexus ```
+   
+2. Enter the docker folder
+   ``` cd ./TailwindNexus/docker ```
+   
+3. Run the Scripts
+   ``` bash createMySqlContainer.sh ```
+   You will promted to enter the root password
 
-Any static assets, like images, can be placed in the `public/` directory.
+   ``` createAppContainer.sh ```
+   
+4. Enter the website using navigator
+   [localhost:4321](localhost:4321)
 
-## 🧞 Commands
+### No Docker Installation
 
-All commands are run from the root of the project, from a terminal:
+1. Setting up your database server
+   You will need a database, a user and an open port to be able to connect to the application-
+   The model and Test data SQL files are in ``` docker/scripts ``` 
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+3. Installing dependencies with npm
+   Go to the folder root:
+   ``` cd ./TailwindNexus ```
+   And run a npm i
+   ``` npm install ```
 
-## 👀 Want to learn more?
+4. Editing the .env
+   Open ```.env``` file in the project and change the database options according to your server configuration.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+5. Run the project
+   Use ``` npm run dev ``` in the root directory
+
+6. Enter the website using navigator
+   [localhost:4321](localhost:4321)
