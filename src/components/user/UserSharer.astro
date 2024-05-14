@@ -13,8 +13,8 @@ const { id } = Astro.props;
 const url = encodeURI(Astro.url.origin + "/users/" + id);
 ---
 
-<section class="container gap-4 flex flex-row items-center justify-center">
-  <span class="text-2xl font-medium -mb-4">Share:</span>
+<section class="container flex flex-col items-center justify-center">
+  <span class="text-2xl font-medium -mb-4 font-title">Share:</span>
   <div class="flex gap-3 bg-slate-700 mt-8 rounded p-3">
     <a
       href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
