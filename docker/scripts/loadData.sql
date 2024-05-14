@@ -15,7 +15,7 @@ VALUES
         'admin',
         'admin@admin.com',
         SHA2 ('admin', 256),
-        '/uploads/avatars/1.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
@@ -34,7 +34,7 @@ VALUES
         'user1',
         'user1@mail.com',
         SHA2 ('user1', 256),
-        '/uploads/avatars/2.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
@@ -50,14 +50,15 @@ INSERT INTO
     )
 VALUES
     (
-        'user12',
+        'user2',
         'user2@mail.com',
         SHA2 ('user2', 256),
-        '/uploads/avatars/3.png',
+        'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
 
+/* Categories*/
 INSERT INTO
     categories (name, description, created_at, updated_at)
 VALUES
@@ -79,6 +80,17 @@ VALUES
     );
 
 INSERT INTO
+    categories (name, description, created_at, updated_at)
+VALUES
+    (
+        'Null Category',
+        'Category for debugin purporses.',
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
+    );
+
+/* Components */
+INSERT INTO
     components (
         category_id,
         user_id,
@@ -98,21 +110,42 @@ VALUES
         2,
         'Reactive button rounded',
         'A rounded button that change when the user hover it.',
-        '',
+        'https://ximg.es/300x200',
         false,
         true,
-        '<button>Click me<button>',
-        'console.log(\'hello world\');',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        '<button id="button" class="size-5 rounded border border-cyan-500 hover:bg-slate-500 bg-slate-600">Click me</button>',
+        'document.querySelector("#button").addEventListener(\'click\', ()=>{alert("Hello World")})',
+        UNIX_TIMESTAMP () + 10,
+        UNIX_TIMESTAMP () + 10
     );
 
-UPDATE components
-SET
-    thumbnail = CONCAT (
-        '/uploads/component_thumbnail-',
-        LAST_INSERT_ID (),
-        '.png'
+INSERT INTO
+    components (
+        category_id,
+        user_id,
+        name,
+        description,
+        thumbnail,
+        needs_alpine,
+        needs_cdn,
+        tailwind_code,
+        javascript_code,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        1,
+        2,
+        'Reactive button square',
+        'A squared button that change when the user hover it.',
+        'https://ximg.es/300x200',
+        false,
+        true,
+        '<button id="button" class="size-5 border border-cyan-500 hover:bg-slate-500 bg-slate-600">Click me</button>',
+        'document.querySelector("#button").addEventListener(\'click\', ()=>{alert("Hello World")})',
+        UNIX_TIMESTAMP () + 20,
+        UNIX_TIMESTAMP () + 20
     );
 
 INSERT INTO
@@ -135,19 +168,91 @@ VALUES
         3,
         'Tick badge',
         'You can use this on your photo.',
-        '',
+        'https://ximg.es/300x200',
         false,
         true,
-        '<button>Click me<button>',
-        'console.log(\'hello world\');',
-        UNIX_TIMESTAMP (),
-        UNIX_TIMESTAMP ()
+        '<div class"absolute w-24 h-16 bg-red-400 border"><div class="relative bg-slate-300 border bottom-2 left-2 ">Badge Test</div></div>',
+        '// No script needed',
+        UNIX_TIMESTAMP () + 30,
+        UNIX_TIMESTAMP () + 30
     );
 
-UPDATE components
-SET
-    thumbnail = CONCAT (
-        '/uploads/component_thumbnail-',
-        LAST_INSERT_ID (),
-        '.png'
+/* Comment */
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        2,
+        1,
+        'Very Good Component, from user1',
+        UNIX_TIMESTAMP () + 10,
+        UNIX_TIMESTAMP () + 10
     );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        3,
+        1,
+        'Very Good Component, from user2',
+        UNIX_TIMESTAMP () + 20,
+        UNIX_TIMESTAMP () + 20
+    );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        2,
+        2,
+        'Very Good Component, from user1',
+        UNIX_TIMESTAMP () + 30,
+        UNIX_TIMESTAMP () + 30
+    );
+
+INSERT INTO
+    comments (
+        user_id,
+        component_id,
+        content,
+        created_at,
+        updated_at
+    )
+VALUES
+    (
+        3,
+        2,
+        'Very Good Component, from user2',
+        UNIX_TIMESTAMP () + 40,
+        UNIX_TIMESTAMP () + 40
+    );
+
+/* Follows */
+INSERT INTO
+    follow (follower_id, followed_id, created_at, updated_at)
+VALUES
+    (3, 2, UNIX_TIMESTAMP (), UNIX_TIMESTAMP ());
+
+INSERT INTO
+    follow (follower_id, followed_id, created_at, updated_at)
+VALUES
+    (2, 3, UNIX_TIMESTAMP (), UNIX_TIMESTAMP ());

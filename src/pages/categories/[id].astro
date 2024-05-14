@@ -15,32 +15,70 @@ const { id } = Astro.params;
 
 // Fetch datas from the API
 const category = await fetch(Astro.url.origin + "/api/category/" + id).then(
-  (data) => data.json()
+  (res) => {
+    if (res.status === 500 || res.ok === false) {
+      return [];
+    }
+    return res.json();
+  }
 );
-
-// If the api returned a blank array (null response) redirect user to 404
+// If the api returned a blank array (null response) or doesnt work redirect user to 404 page
 if (category.length == 0) {
   return Astro.redirect("/404");
+}
+
+// Flag to know if category have components
+
+let doesntHaveComponents;
+
+/* FIX if a category doesnt have components, insert a defult null component,
+     we dont want that so we need to filter the data and if there is a null component 
+     return only the category with blank component array
+
+     We know that because null component id is null.
+     */
+
+if (category.components[0].id !== null) {
+  doesntHaveComponents = true;
+} else {
+  doesntHaveComponents = false;
 }
 ---
 
 <Layout title="Categories" footer={true}>
   <CategoryHeader name={category.name} description={category.description} />
   <section class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {
         category.components.map((component) => (
-          <ComponentCard
-            id={component.id}
-            name={component.name}
-            thumbnail={component.thumbnail}
-            needsAlpine={component.needsAlpine}
-            needsCDN={component.needsCDN}
-            userData={component.user}
-            totalComments={component.totalComments}
-          />
+          <Fragment>
+            {doesntHaveComponents ? (
+              <ComponentCard
+                id={component.id}
+                name={component.name}
+                thumbnail={component.thumbnail}
+                needsAlpine={component.needsAlpine}
+                needsCDN={component.needsCDN}
+                userData={component.user}
+                totalComments={component.totalComments}
+              />
+            ) : (
+              <div class="col-span-3 flex flex-col items-center">
+                <p class=" mx-auto w-1/3 text-center  p-5 text-teal-200">
+                  This category has no components yet 😞 <br />
+                  contribute to tailwind nexus and start uploading! ❤️
+                </p>
+                <a
+                  class="bg-slate-700 hover:bg-slate-500 border p-3 rounded font-title text-teal-400 transition-colors"
+                  href="/upload"
+                >
+                  Upload Components
+                </a>
+              </div>
+            )}
+          </Fragment>
         ))
       }
-    </div>
-  </section>
+  </div>
+    </section>
 </Layout>

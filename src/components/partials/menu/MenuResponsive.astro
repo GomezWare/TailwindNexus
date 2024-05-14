@@ -4,10 +4,14 @@
  */
 
 // Category fetch via API (The Astro call is for get the origin if is changed in production)
-
-const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
-  res.json()
-);
+const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
+  // If there is a problem in the server return a special response for display a warning in the menu
+  if (res.status === 500) {
+    return [{ err: true }];
+  }
+  // Else return the menu Data
+  return res.json();
+});
 ---
 
 <nav
@@ -44,26 +48,42 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
           Latest Components
         </span>
       </a>
-      <a href="/categories" class="custom-link font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
+      <a
+        href="/categories"
+        class="custom-link font-title text-xl font-semibold mb-4 text-gray-50 mt-4"
         >Categories</a
       >
       <div
         class="w-full text-gray-50 justify-start flex-col flex items-center space-y-2 overflow-y-scroll"
       >
         {
+          // Category menu render
+          /*
+          If fetch returned a error menu display a warning
+          */
           categories.map((category) => (
-            <a
-              href={`/categories/${category.id}`}
-              class="w-full hover:shadow-inner hover:bg-slate-600 flex justify-between items-center py-2 px-3 transition-all"
-            >
-              <div>
-                <span class="font-extralight mr-5">
-                  {category.totalComponents}+
-                </span>
-                <span>{category.name}</span>
-              </div>
-              <img class="w-5" src="/img/icons/chevron.svg" alt="Chevron icon" />
-            </a>
+            <Fragment>
+              {category.err ? (
+                <span class="text-rose-500">There was a server error.</span>
+              ) : (
+                <a
+                  href={`/categories/${category.id}`}
+                  class="w-full hover:shadow-inner hover:bg-slate-600 flex justify-between items-center py-2 px-3 transition-all"
+                >
+                  <div>
+                    <span class="font-extralight mr-5">
+                      {category.numComponents}+
+                    </span>
+                    <span>{category.name}</span>
+                  </div>
+                  <img
+                    class="w-5"
+                    src="/img/icons/chevron.svg"
+                    alt="Chevron icon"
+                  />
+                </a>
+              )}
+            </Fragment>
           ))
         }
       </div>

@@ -14,17 +14,43 @@ export const prerender = true;
 if (Astro.url.pathname != "/404") {
   return Astro.redirect("/404");
 }
+
+/* Checks if the server is under maintenance and assigns the status
+ * for display in the page.
+ */
+
+let isOnManteniance;
+
+if (import.meta.env.SERVER_MAINTENANCE == "true") {
+  isOnManteniance = true;
+} else {
+  isOnManteniance = false;
+}
 ---
 
 <Layout title="Page not found" footer={true}>
   <section class="container w-screen h-screen flex justify-center items-center">
-    <strong class="font-title text-7xl text-teal-400 py-3 px-3 border-r-2"
-      >404</strong
-    >
-    <p class="text-center py-3 px-3 text-xl">
-      <span class="font-bold text-rose-500">Error:</span>
-      Page not found
-    </p>
+    {
+      isOnManteniance ? (
+        <p class="text-center py-3 px-3 text-xl">
+          <span class="font-bold text-teal-400">
+            The server is currently under maintenance
+          </span>
+          <br />
+          Sorry for the inconvenience.
+        </p>
+      ) : (
+        <Fragment>
+          <strong class="font-title text-7xl text-teal-400 py-3 px-3 border-r-2">
+            404
+          </strong>
+          <p class="text-center py-3 px-3 text-xl">
+            <span class="font-bold text-rose-500">Error:</span>
+            Page not found
+          </p>
+        </Fragment>
+      )
+    }
   </section>
 </Layout>
 

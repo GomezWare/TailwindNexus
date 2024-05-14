@@ -1,5 +1,4 @@
 CREATE DATABASE tnexus;
-
 USE tnexus;
 
 CREATE TABLE

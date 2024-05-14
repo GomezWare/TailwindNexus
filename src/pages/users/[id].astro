@@ -19,6 +19,17 @@ const user = await fetch(Astro.url.origin + "/api/user/" + id).then((data) =>
 if (user.length == 0) {
   return Astro.redirect("/404");
 }
+
+// Variable to know if user have components
+let haveComponents;
+
+// Check
+
+if (user.components.length == 0) {
+  haveComponents = false;
+} else {
+  haveComponents = true;
+}
 ---
 
 <Layout title="User" footer={true}>
@@ -32,17 +43,27 @@ if (user.length == 0) {
   <section class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
       {
-        user.components.map((component) => (
-          <ComponentCard
-            id={component.id}
-            name={component.name}
-            thumbnail={component.thumbnail}
-            needsAlpine={component.needsAlpine}
-            needsCDN={component.needsCDN}
-            userData={user}
-            totalComments={component.totalComments}
-          />
-        ))
+        haveComponents ? (
+          <Fragment>
+            {user.components.map((component) => (
+              <ComponentCard
+                id={component.id}
+                name={component.name}
+                thumbnail={component.thumbnail}
+                needsAlpine={component.needsAlpine}
+                needsCDN={component.needsCDN}
+                userData={user}
+                totalComments={component.totalComments}
+              />
+            ))}
+          </Fragment>
+        ) : (
+          <div class="col-span-3 flex flex-col border rounded bg-slate-700 items-center">
+            <p class=" mx-auto w-1/3 text-center p-5 text-teal-200">
+              This user has not uploaded any components yet 😞
+            </p>
+          </div>
+        )
       }
     </div>
   </section></Layout

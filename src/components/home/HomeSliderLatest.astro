@@ -10,6 +10,14 @@ import SwiperButtonsScrollbar from "../partials/swiper/SwiperButtonsScrollbar.as
 const latest = await fetch(Astro.url.origin + "/api/latest").then((data) =>
   data.json()
 );
+
+// Checks if respnse was blank
+let blankResponse;
+if (latest.length == 0) {
+  blankResponse = true;
+} else {
+  blankResponse = false;
+}
 ---
 
 <section class="container">
@@ -23,26 +31,33 @@ const latest = await fetch(Astro.url.origin + "/api/latest").then((data) =>
     Find out what the developers have been working on lately and take the
     opportunity to leave a comment!
   </p>
-  <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperLatest">
-    <div class="swiper-wrapper">
-      {
-        latest.map((component) => (
-          <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
-            <ComponentCard
-              id={component.id}
-              name={component.name}
-              needsAlpine={component.needsAlpine}
-              needsCDN={component.needsCDN}
-              thumbnail={component.thumbnail}
-              totalComments={component.comments.length}
-              userData={component.user}
-            />
+
+  {
+    blankResponse ? (
+      <span class="text-rose-500 text-xl underline mx-auto">There was a server error.</span>
+    ) : (
+      <Fragment>
+        <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperLatest">
+          <div class="swiper-wrapper">
+            {latest.map((component) => (
+              <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+                <ComponentCard
+                  id={component.id}
+                  name={component.name}
+                  needsAlpine={component.needsAlpine}
+                  needsCDN={component.needsCDN}
+                  thumbnail={component.thumbnail}
+                  totalComments={component.comments.length}
+                  userData={component.user}
+                />
+              </div>
+            ))}
           </div>
-        ))
-      }
-    </div>
-    <SwiperButtonsScrollbar />
-  </div>
+          <SwiperButtonsScrollbar />
+        </div>
+      </Fragment>
+    )
+  }
 </section>
 
 <script>
