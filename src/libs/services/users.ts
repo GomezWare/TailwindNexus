@@ -3,11 +3,11 @@ import { dbQuery } from "@utils/dbQuery";
 /**
  * Return all information of a user
  *
- * @param {number} id
+ * @param {Number} id
  * @return {object}
- * 
+ *
  */
-const getUser = async (id) => {
+const getUser = async (id: Number) => {
   try {
     /*
      * To get user data i decided to make firtst the queries and later build the object
@@ -87,9 +87,12 @@ const getUser = async (id) => {
           users u ON f.follower_id = u.user_id
       WHERE
           f.followed_id = ?
-      `,[id]);
+      `,
+      [id]
+    );
 
     // Query to get users that follow the user (Followed)
+
     const [followingRows, followingFields] = await dbQuery(
       `
       SELECT 
@@ -130,7 +133,6 @@ const getUser = async (id) => {
 
     return user;
   } catch (error) {
-    console.error(error);
     return undefined;
   }
 };

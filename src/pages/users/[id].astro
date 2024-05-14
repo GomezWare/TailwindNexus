@@ -6,6 +6,7 @@
 import Layout from "../../layouts/Layout.astro";
 import UserInfo from "../../components/user/UserInfo.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
+import Sharer from "src/components/partials/Sharer.astro";
 
 // Get id via Astro params
 const { id } = Astro.params;
@@ -39,6 +40,8 @@ if (user.components.length == 0) {
     components={user.components.length}
     followers={user.followers.length}
   />
+
+  <Sharer id={id} link={"/users/"} />
 
   <section class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
