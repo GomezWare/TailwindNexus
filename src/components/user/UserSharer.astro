@@ -4,14 +4,13 @@
  */
 
 interface Props {
-    id;
-    link;
+  id;
 }
-const { id, link } = Astro.props;
+const { id } = Astro.props;
 
 // URI Construction and encoding
 
-const url = encodeURI(Astro.url.origin + link + id);
+const url = encodeURI(Astro.url.origin + "/users/" + id);
 ---
 
 <section class="container flex flex-col items-center justify-center">
