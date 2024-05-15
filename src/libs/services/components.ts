@@ -160,6 +160,9 @@ GROUP BY
       component.comments = [];
     }
 
+    // Ordering the components comments to see last comments first
+    component.comments.sort((a, b) => b.createdAt - a.createdAt);
+
     // Return all components
     return component;
   } catch (err) {
@@ -290,15 +293,16 @@ VALUES
       ?,
       ?,
       ?,
-        UNIX_TIMESTAMP () + 10,
-        UNIX_TIMESTAMP () + 10
+        UNIX_TIMESTAMP (),
+        UNIX_TIMESTAMP ()
     );`,
       componentData
     );
-    return { inserted:rows['insertId'] };
+    return { inserted: rows["insertId"] };
   } catch (err) {
     console.log(err);
     return { inserted: -1 };
   }
 };
+
 export { getComponents, getComponent, getLatest, addComponent };
