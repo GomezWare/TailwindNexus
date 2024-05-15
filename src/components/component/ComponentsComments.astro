@@ -1,4 +1,7 @@
 ---
+/**
+ * Here we represent the components comments list, doesnt show if a component doesnt have comments
+ */
 import CommentCard from "../partials/cards/CommentCard.astro";
 
 interface Props {
@@ -6,7 +9,6 @@ interface Props {
 }
 const { comments } = Astro.props;
 ---
-
 
 <section class="container">
   <div class="space-y-3">
