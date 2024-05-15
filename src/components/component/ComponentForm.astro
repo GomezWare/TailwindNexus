@@ -71,9 +71,9 @@ const { componentId } = Astro.props;
         },
         body: JSON.stringify(request),
       }).then((res) => {
-        console.log(res.json());
+        // When the comment is sended reload the page to show the result
+        window.location.reload;
       });
-      // When the comment is sended reload the page to show
     }
   });
 </script>
