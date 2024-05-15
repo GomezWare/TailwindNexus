@@ -1,10 +1,15 @@
 ---
+import CommentCard from "../partials/cards/CommentCard.astro";
+
 interface Props {
   comments;
 }
-
 const { comments } = Astro.props;
-
-console.log(comments);
-
 ---
+
+
+<section class="container">
+  <div class="space-y-3">
+    {comments.map((comment) => <CommentCard comment={comment} />)}
+  </div>
+</section>

@@ -40,8 +40,8 @@ if (component.length == 0) {
   <ComponentPreview
     tailwind={component.tailwind}
     javascript={component.javascript}
-  />
-  <ComponerCommentCount count={component.comments.length}/>
-  <ComponentSharer id={id} />
+    />
+    <ComponentSharer id={id} />
+    <ComponerCommentCount count={component.comments.length}/>
   <ComponentsComments comments={component.comments} />
 </Layout>

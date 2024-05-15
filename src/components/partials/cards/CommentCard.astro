@@ -1,0 +1,36 @@
+---
+/**
+ * This component is for representing a comment in a card
+ *
+ */
+
+interface Props {
+  comment;
+}
+const { comment } = Astro.props;
+
+const timestamp = new Date(comment.createdAt * 1000);
+const date = timestamp
+  .toISOString()
+  .replace("T", " ")
+  .replace(/\.\d+Z$/, "");
+---
+
+<div class="flex justify-start gap-4 bg-slate-700 p-4 lg:w-2/3 rounded">
+  <a class="w-16 md:w-24 shrink-0"href={"/users/" + comment.user.id}>
+    <img class="w-full" src={comment.user.avatar} alt="User avatar" />
+  </a>
+  <div class="">
+    <p>
+      <a class="custom-link text-xl" href={"/users/" + comment.user.id}
+        >{comment.user.name}</a
+      >
+      <span class="ml-4">
+        {date}
+      </span>
+    </p>
+    <p class="mt-2 font-light">
+      {comment.content}
+    </p>
+  </div>
+</div>
