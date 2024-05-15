@@ -11,11 +11,13 @@ import ComponentHeader from "../../components/component/ComponentHeader.astro";
 import ComponentPreview from "../../components/component/ComponentPreview.astro";
 import UserCard from "src/components/partials/cards/UserCard.astro";
 import ComponentSharer from "src/components/component/ComponentSharer.astro";
+import ComponentsComments from "src/components/component/ComponentsComments.astro";
+import ComponerCommentCount from "src/components/component/ComponerCommentCount.astro";
 
 // Get id via Astro params
 const { id } = Astro.params;
 
-// Fetch datas from the API
+// Fetch data from the API
 const component = await fetch(Astro.url.origin + "/api/component/" + id).then(
   (data) => data.json()
 );
@@ -39,6 +41,7 @@ if (component.length == 0) {
     tailwind={component.tailwind}
     javascript={component.javascript}
   />
-
+  <ComponerCommentCount count={component.comments.length}/>
   <ComponentSharer id={id} />
+  <ComponentsComments comments={component.comments} />
 </Layout>
