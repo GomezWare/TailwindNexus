@@ -1,0 +1,107 @@
+---
+/**
+ * Slider to display components that have been recently created by users
+ */
+
+import ComponentCard from "../partials/cards/ComponentCard.astro";
+import SwiperButtonsScrollbar from "../partials/swiper/SwiperButtonsScrollbar.astro";
+
+// Fetch data from the API
+const best = await fetch(Astro.url.origin + "/api/best").then((data) =>
+  data.json()
+);
+
+// Checks if respnse was blank
+let blankResponse;
+if (best.length == 0) {
+  blankResponse = true;
+} else {
+  blankResponse = false;
+}
+---
+
+<section class="container pt-16">
+  <a
+    href="/categories/best"
+    class="custom-link font-bold font-title text-center md:text-left text-2xl md:text-3xl"
+  >
+    Best Components
+  </a>
+  <p class="font-light text-center md:text-left md:text-lg mb-6 mt-4">
+    Here are the most commented comments of all Tailwind Nexus, remember that
+    your opinions are very much appreciated and should be respected.
+  </p>
+
+  {
+    blankResponse ? (
+      <span class="text-rose-500 text-xl underline mx-auto">
+        There was a server error.
+      </span>
+    ) : (
+      <Fragment>
+        <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperBest">
+          <div class="swiper-wrapper">
+            {best.map((component) => (
+              <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
+                <ComponentCard
+                  id={component.id}
+                  name={component.name}
+                  needsAlpine={component.needsAlpine}
+                  needsCDN={component.needsCDN}
+                  thumbnail={component.thumbnail}
+                  totalComments={component.comments.length}
+                  userData={component.user}
+                />
+              </div>
+            ))}
+          </div>
+          <SwiperButtonsScrollbar />
+        </div>
+      </Fragment>
+    )
+  }
+</section>
+
+<script>
+  /**
+   * This is the Swiper library import
+   * https://swiperjs.com/
+   */
+
+  // @ts-ignore
+  import Swiper from "swiper";
+
+  // @ts-ignore
+  import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+  import "swiper/css/bundle";
+
+  // To use Swiper you only need to declare this constant with a swiper options
+  const swiper = new Swiper("#swiperBest", {
+    // The options that Swiper provides are easily discernible
+    modules: [Navigation, Pagination, Scrollbar],
+    slidesPerView: 1,
+    spaceBetween: 30,
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+      1480: {
+        slidesPerView: 3,
+      },
+    },
+    grabCursor: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+  });
+</script>

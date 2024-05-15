@@ -10,14 +10,8 @@ import { validateComponent } from "@utils/validateComponent";
 
 // REST API Route
 
-async function sleep() {
-  return new Promise((resolve, reject) =>
-    setTimeout(() => resolve({}), Math.random() * 1000)
-  );
-}
 // GET
 export const GET: APIRoute = async () => {
-  await sleep();
   // Create the response with the data that the service returned (the JSON itself)
   const response = (await getComponents()) || [];
 

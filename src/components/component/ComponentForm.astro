@@ -1,0 +1,79 @@
+---
+interface Props {
+  componentId;
+}
+
+// This property is inserted via a data-x attribute
+const { componentId } = Astro.props;
+---
+
+<section class="container pb-4">
+  <form>
+    <div
+      class="flex justify-start relative items-center gap-16 bg-slate-700 p-4 lg:w-2/3 rounded"
+    >
+      <a class="w-16 md:w-24 shrink-0">
+        <img class="w-full" src="https://ximg.es/128x128" alt="Your avatar" />
+      </a>
+      <div class="w-full flex flex-col justify-evenly items-center">
+        <textarea
+          id="comment"
+          data-component={componentId}
+          class="bg-slate-500 text-gray-50 p-2 rounded w-full"></textarea>
+
+        <p id="error" class="hidden absolute top-1 text-rose-500">
+          The comment is empty
+        </p>
+      </div>
+      <div>
+        <button
+          type="button"
+          id="send"
+          class="size-16 flex justify-center items-center bg-slate-500 hover:bg-slate-400 transition-colors rounded"
+          ><img
+            class="w-8"
+            src="/img/icons/plane.svg"
+            alt="Send Button"
+          /></button
+        >
+      </div>
+    </div>
+  </form>
+</section>
+<script>
+  /** Script for posting comments */
+
+  // Recover the send button and assing an On-Click event
+  document.querySelector("#send").addEventListener("click", () => {
+    // Recover the comment data via the TextArea
+    const comment: HTMLTextAreaElement = document.querySelector("#comment");
+
+    // Recovers the component id via props (Are imported via page)
+    const componentId = comment.getAttribute("data-component");
+
+    // Create the resquest Object
+    const request = {
+      componentId: componentId,
+      content: comment.value,
+    };
+
+    // Checks if comment is blank and show an error using tailwind classes, else send the comment to Api
+    if (request.content.trim() == "") {
+      document.querySelector("#error").classList.remove("hidden");
+      comment.classList.add("border");
+      comment.classList.add("border-rose-600");
+    } else {
+      // Send data to the API via a Fetch
+      fetch(window.location.origin + "/api/comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(request),
+      }).then((res) => {
+        // When the comment is sended reload the page to show the result
+        window.location.reload;
+      });
+    }
+  });
+</script>
