@@ -22,11 +22,9 @@ const searchResults = await fetch(Astro.url.origin + "/api/search", {
   body: JSON.stringify({ param: query }),
 }).then((res) => res.json());
 
-console.log(searchResults);
-
 // Flag to know if search have results
 let noResults;
-if (searchResults.length !== null) {
+if (searchResults.length == 0) {
   noResults = true;
 } else {
   noResults = false;
@@ -58,15 +56,15 @@ if (searchResults.length !== null) {
           </Fragment>
         ))
       }
-      {
-        noResults && (
-          <div class="col-span-3 flex flex-col items-center bg-slate-700">
-            <p class=" mx-auto w-1/3 text-center  p-5 text-teal-300">
-              No results...
-            </p>
-          </div>
-        )
-      }
     </div>
+    {
+      noResults && (
+        <div class="col-span-3 flex flex-col items-center bg-slate-700">
+          <p class=" mx-auto w-1/3 text-center  p-5 text-teal-300">
+            No results...
+          </p>
+        </div>
+      )
+    }
   </section>
 </Layout>

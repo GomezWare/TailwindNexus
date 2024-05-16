@@ -140,7 +140,11 @@ const { title, footer } = Astro.props;
                     href="https://github.com/GomezWare/TailwindNexus"
                     target="_blank"
                   >
-                    <img class="w-6" src="/img/icons/github.svg" alt=" git logo" />
+                    <img
+                      class="w-6"
+                      src="/img/icons/github.svg"
+                      alt=" git logo"
+                    />
                   </a>
                 </li>
                 <li>
@@ -148,7 +152,11 @@ const { title, footer } = Astro.props;
                     class="p-3 bg-slate-600 rounded-full inline-block hover:bg-slate-400 transition-colors"
                     href="mailto:tailwindnexus@gmail.com?subject=Tailwind Nexus Feedback"
                   >
-                    <img class="w-6" src="/img/icons/mail.svg" alt=" email icon" />
+                    <img
+                      class="w-6"
+                      src="/img/icons/mail.svg"
+                      alt=" email icon"
+                    />
                   </a>
                 </li>
                 <li>
@@ -192,3 +200,30 @@ const { title, footer } = Astro.props;
     }
   </body>
 </html>
+
+<script>
+  // TODO Document search function
+
+  // Recover of search fields
+  const searchBar = document.querySelector(
+    "#componentSearch"
+  ) as HTMLInputElement;
+  const searchBarMobile = document.querySelector(
+    "#componentSearchMobile"
+  ) as HTMLInputElement;
+
+  // Event listeners
+  searchBar.addEventListener("search", () => {
+    const query = searchBar.value;
+    const url = new URL(`${window.location.origin}/search/`);
+    url.searchParams.append("q", query);
+    window.location.href = url.toString();
+  });
+
+  searchBarMobile.addEventListener("search", () => {
+    const query = searchBarMobile.value;
+    const url = new URL(`${window.location.origin}/search/`);
+    url.searchParams.append("q", query);
+    window.location.href = url.toString();
+  });
+</script>
