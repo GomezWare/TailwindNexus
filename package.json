@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^8.2.5",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.8.3",
     "mysql2": "^3.9.7",
