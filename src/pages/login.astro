@@ -1,0 +1,17 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+import AuthLoginForm from "src/components/auth/AuthLoginForm.astro";
+
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+
+if (session) {
+  return Astro.redirect("/users/myaccount");
+}
+---
+
+<Layout title="Sign-in" footer={true}>
+  <AuthLoginForm />
+</Layout>

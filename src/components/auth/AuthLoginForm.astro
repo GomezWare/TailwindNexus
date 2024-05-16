@@ -1,0 +1,32 @@
+<section
+  class="container -mt-36 h-screen w-screen flex justify-center items-center"
+>
+  <div class="w-96 px-4 rounded bg-slate-700">
+    <div class="flex flex-col gap-2 p-4">
+      <label for="mail"> Email: </label>
+      <input class="rounded border text-gray-900 px-3" type="email" />
+      <label for="password"> Password: </label>
+      <input class="rounded border text-gray-900 px-3" type="password" />
+    </div>
+    <div class="border-t p-3">
+      <button
+        id="git-login"
+        class="bg-slate-600 p-2 rounded border hover:bg-slate-500"
+        >GitHub Sign-in</button
+      >
+    </div>
+  </div>
+</section>
+
+<script>
+  // Auth event listener
+  const { signIn } = await import("auth-astro/client");
+  document.querySelector("#git-login").addEventListener("click", async () => {
+    const userData = await signIn("github", {
+      redirect: false,
+      callbackUrl: `${window.location.origin}/myaccount`,
+    });
+
+    console.log(userData);
+  });
+</script>

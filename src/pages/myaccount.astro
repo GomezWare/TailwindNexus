@@ -1,0 +1,66 @@
+---
+/**
+ * This is the user page, it will show the user indicated in the url
+ */
+
+import Layout from "../layouts/Layout.astro";
+import UserInfo from "../components/user/UserInfo.astro";
+import UserSharer from "src/components/user/UserSharer.astro";
+import { getSession } from "auth-astro/server";
+import { registerUser, checkUserMail } from "@services/auth";
+
+// Recover the session
+const session = await getSession(Astro.request);
+
+// User validations
+
+// Redirect if user not logged
+if (!session) {
+  return Astro.redirect("/login");
+}
+
+// Try to get user id
+const userId = await checkUserMail(session.user.email);
+
+console.log(userId);
+
+// Check if user exist else creates the user and reload the page
+if (userId == -1) {
+  try {
+    await registerUser(
+      session.user.name,
+      session.user.email,
+      session.user.image
+    );
+    return Astro.redirect("/myaccount");
+  } catch (error) {
+    console.log(error);
+    return Astro.redirect("/404");
+  }
+}
+
+// Fetch datas from the API
+const user = await fetch(Astro.url.origin + "/api/user/" + userId).then(
+  (data) => data.json()
+);
+
+// Variable to know if user have components
+---
+
+<Layout title="User" footer={true}>
+  <UserInfo
+    username={user.name}
+    avatar={user.avatar}
+    components={user.components.length}
+    followers={user.followers.length}
+  />
+  <section>
+    <button
+      id="logout"
+      class="bg-rose-600 p-2 rounded border hover:bg-rose-500"
+    >
+      Logout
+    </button>
+  </section>
+  <UserSharer id={userId} />
+</Layout>
