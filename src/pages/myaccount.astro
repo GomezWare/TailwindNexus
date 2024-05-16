@@ -64,3 +64,12 @@ const user = await fetch(Astro.url.origin + "/api/user/" + userId).then(
   </section>
   <UserSharer id={userId} />
 </Layout>
+
+<script>
+  import { signOut } from "auth-astro/client";
+
+  document.querySelector("#logout").addEventListener("click", () => {
+    signOut();
+    window.location.reload;
+  });
+</script>
