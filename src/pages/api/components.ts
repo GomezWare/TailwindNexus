@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     // Try to get the user id from the database
-    const userId = checkUserMail(session?.user.email);
+    const userId = await checkUserMail(session?.user.email);
 
     // If the POST body is not a JSON
     if (request.headers.get("Content-Type") === "application/json") {

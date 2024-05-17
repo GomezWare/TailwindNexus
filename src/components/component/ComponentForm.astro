@@ -13,6 +13,7 @@ const session = await getSession(Astro.request);
 // This variable checks if user is logged and hide the form
 let isUserLogged = false;
 if (session?.user) isUserLogged = true;
+
 ---
 {isUserLogged && (
 <section class="container pb-4">
@@ -83,7 +84,7 @@ if (session?.user) isUserLogged = true;
         body: JSON.stringify(request),
       }).then((res) => {
         // When the comment is sended reload the page to show the result
-        window.location.reload;
+        window.location.href = window.location.href;
       });
     }
   });

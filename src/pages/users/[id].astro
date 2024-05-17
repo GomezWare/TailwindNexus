@@ -44,7 +44,8 @@ if (user.components.length == 0) {
   <UserSharer id={id} />
 
   <section class="container">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
+    <h2 class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left">{user.name}'s components:</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
       {
         haveComponents ? (
           <Fragment>

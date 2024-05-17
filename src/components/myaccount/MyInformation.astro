@@ -26,14 +26,21 @@ const { username, avatar, components, followers } = Astro.props;
     <div class="flex space content-between gap-4">
       <h3>
         <span class="text-lg font-bold text-teal-400">{components}</span> Components
-      </h3><h3>
+      </h3>
+      <h3>
         <span class="text-lg font-bold text-teal-400">{followers}</span> Followers
       </h3>
     </div>
-    <div class="pt-4">
+    <div class="flex flex-col gap-3 pt-4">
+      <a
+        class="bg-teal-600 text-center p-2 py-1 rounded border hover:bg-teal-500 w-52"
+        href={Astro.url.origin + "/upload"}
+      >
+        Upload new component
+      </a>
       <button
         id="logout"
-        class="bg-rose-600 p-2 rounded border hover:bg-rose-500 w-52"
+        class="bg-rose-600 p-2 py-1 rounded border hover:bg-rose-500 w-52"
       >
         Logout
       </button>
