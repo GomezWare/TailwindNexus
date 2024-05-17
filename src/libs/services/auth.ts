@@ -54,7 +54,8 @@ const checkUserMail = async (mail) => {
     }
   } catch (error) {
     console.log(error);
-    return -1;
+    // Special return if server is down
+    return -404;
   }
 };
 

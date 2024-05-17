@@ -4,14 +4,13 @@
  */
 
 import Layout from "../layouts/Layout.astro";
-import UserInfo from "../components/user/UserInfo.astro";
+import MyInformation from "../components/myaccount/MyInformation.astro";
 import UserSharer from "src/components/user/UserSharer.astro";
 import { getSession } from "auth-astro/server";
 import { registerUser, checkUserMail } from "@services/auth";
 
 // Recover the session
 const session = await getSession(Astro.request);
-
 // User validations
 
 // Redirect if user not logged
@@ -20,7 +19,13 @@ if (!session) {
 }
 
 // Try to get user id
-const userId = await checkUserMail(session.user.email);
+let userId = -1;
+userId = await checkUserMail(session.user.email);
+
+// Redirect to 404 if there is a database error
+if (userId == -404) {
+  return Astro.redirect("/404");
+}
 
 console.log(userId);
 
@@ -48,28 +53,13 @@ const user = await fetch(Astro.url.origin + "/api/user/" + userId).then(
 ---
 
 <Layout title="User" footer={true}>
-  <UserInfo
+  <MyInformation
     username={user.name}
     avatar={user.avatar}
     components={user.components.length}
     followers={user.followers.length}
   />
-  <section>
-    <button
-      id="logout"
-      class="bg-rose-600 p-2 rounded border hover:bg-rose-500"
-    >
-      Logout
-    </button>
-  </section>
+
   <UserSharer id={userId} />
 </Layout>
 
-<script>
-  import { signOut } from "auth-astro/client";
-
-  document.querySelector("#logout").addEventListener("click", () => {
-    signOut();
-    window.location.reload;
-  });
-</script>

@@ -13,5 +13,5 @@
 [ ] Document Endpoints
 [ ] Document Services
 [ ] Add async to async functions
-
+[ ] Document Auth
 ## EVIROMENT TASKS
