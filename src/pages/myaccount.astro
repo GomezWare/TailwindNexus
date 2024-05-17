@@ -27,8 +27,6 @@ if (userId == -404) {
   return Astro.redirect("/404");
 }
 
-console.log(userId);
-
 // Check if user exist else creates the user and reload the page
 if (userId == -1) {
   try {

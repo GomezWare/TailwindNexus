@@ -1,19 +1,27 @@
 ---
+import { getSession } from "auth-astro/server";
+
 interface Props {
   componentId;
 }
 
 // This property is inserted via a data-x attribute
 const { componentId } = Astro.props;
----
 
+const session = await getSession(Astro.request);
+
+// This variable checks if user is logged and hide the form
+let isUserLogged = false;
+if (session?.user) isUserLogged = true;
+---
+{isUserLogged && (
 <section class="container pb-4">
   <form>
     <div
       class="flex justify-start relative items-center gap-16 bg-slate-700 p-4 lg:w-2/3 rounded"
     >
       <a class="w-16 md:w-24 shrink-0">
-        <img class="w-full" src="https://ximg.es/128x128" alt="Your avatar" />
+        <img class="w-full" src={session.user.image} alt="Your avatar" />
       </a>
       <div class="w-full flex flex-col justify-evenly items-center">
         <textarea
@@ -40,6 +48,9 @@ const { componentId } = Astro.props;
     </div>
   </form>
 </section>
+)}
+
+
 <script>
   /** Script for posting comments */
 
