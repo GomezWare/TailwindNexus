@@ -253,7 +253,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       })
         .then((res) => res.json())
         .then((data) => {
-          if (!data.inserted) {
+          if (data.inserted == -1) {
             throw Error("Server Error");
           }
           window.location.href =

@@ -7,6 +7,8 @@
 import type { APIRoute } from "astro";
 import { getComponents, addComponent } from "@services/components";
 import { validateComponent } from "@utils/validateComponent";
+import { getSession } from "auth-astro/server";
+import { checkUserMail } from "@services/auth";
 
 // REST API Route
 
@@ -30,10 +32,18 @@ export const GET: APIRoute = async () => {
 
 // POST
 export const POST: APIRoute = async ({ request }) => {
-  // TODO call a function to generate the Thumbnail and get the route
-  // TODO Protect endpoints with JWT
   // TODO Generate thumbnail
+
+  const session = await getSession(request);
+
+  if (!session?.user) {
+    return new Response(null, { status: 401, statusText: "User Unauthorized" });
+  }
+
   try {
+    // Try to get the user id from the database
+    const userId = checkUserMail(session?.user.email);
+
     // If the POST body is not a JSON
     if (request.headers.get("Content-Type") === "application/json") {
       // Getting the JSON
@@ -41,7 +51,7 @@ export const POST: APIRoute = async ({ request }) => {
       // Component data array
       const component = {
         categoryId: body.categoryId,
-        userId: 1,
+        userId: userId,
         name: body.name,
         description: body.description,
         thumbnail: "https://ximg.es/300x200",
