@@ -8,9 +8,7 @@
 ## DEVELOP
 
 [ ] Code editors and viewers
-[ ] Comment card for profile
 [ ] Component card for profile
-[ ] Comment card for my profile
 [ ] Component card for my profile
 [ ] Component deletion system
 [ ] Component modify system

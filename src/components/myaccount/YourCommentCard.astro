@@ -1,0 +1,53 @@
+---
+/**
+ * This component is for representing a comment in a card
+ * Also have the functions to delete a comment that belogs to your user from the DB
+ */
+
+interface Props {
+  commentId;
+  userId;
+  userAvatar;
+  userName;
+  commentDate;
+  content;
+  componentId?;
+}
+const { userId, userAvatar, userName, commentDate, content, componentId } =
+  Astro.props;
+
+const timestamp = new Date(commentDate * 1000);
+/**
+ * Convert UnixTimestamp to ISO format
+ */
+const date = timestamp
+  .toISOString()
+  .replace("T", " ")
+  .replace(/\.\d+Z$/, "");
+---
+
+<div class="flex justify-start gap-4 bg-slate-700 p-4 lg:w-2/3 rounded">
+  <a class="w-16 md:w-24 shrink-0" href={"/users/" + userId}>
+    <img class="w-full" src={userAvatar} alt="User avatar" />
+  </a>
+  <div class="">
+    <p>
+      <a class="custom-link text-xl" href={"/users/" + userId}>{userName}</a>
+      <span class="ml-4">
+        {date}
+      </span>
+    </p>
+    <p class="mt-2 font-light">
+      {content}
+    </p>
+    {
+      componentId != undefined && (
+        <p class="mt-2 font-light">
+          <a class="custom-link" href={"/components/" + componentId}>
+            View Component
+          </a>
+        </p>
+      )
+    }
+  </div>
+</div>
