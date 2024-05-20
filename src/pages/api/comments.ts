@@ -6,10 +6,15 @@
  */
 
 // Imports
-import { addComment } from "@services/comments";
+import {
+  addComment,
+  deleteComment,
+  getCommentAuthor,
+} from "@services/comments";
 import { checkUserMail } from "@services/auth";
 import type { APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
+import { getComponentAuthor } from "@services/components";
 
 // REST API Route
 
@@ -36,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
 
       // Comment object
       const comment = {
-        userId: userId, // Via email chexk
+        userId: userId, // Via email check
         componentId: body.componentId,
         content: body.content,
       };
@@ -49,7 +54,15 @@ export const POST: APIRoute = async ({ request }) => {
         });
       }
 
-      // Call component insert fucntion to insert Data into the DB
+      // Avoid user to upload a component in it own component (Because its not fair)
+      if (userId == (await getComponentAuthor(comment.componentId))) {
+        return new Response(JSON.stringify([]), {
+          status: 401,
+          statusText: "User unauthorized",
+        });
+      }
+
+      // Call comment insert fucntion to insert Data into the DB
       const response = await addComment([
         comment.userId,
         comment.componentId,
@@ -63,6 +76,64 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify([]), {
         status: 400,
         statusText: "bad requests",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    // API Response with bad request status
+    return new Response(JSON.stringify([]), {
+      status: 500,
+      statusText: "Internal Server Error",
+    });
+  }
+};
+
+// POST
+export const DELETE: APIRoute = async ({ request }) => {
+  // Retrieving the session using request object via headers cookie
+  const session = await getSession(request);
+
+  // If there is no session send a 401 response
+  if (!session?.user)
+    return new Response(JSON.stringify([]), {
+      status: 401,
+      statusText: "User Unauthorized",
+    });
+
+  try {
+    // If the POST body is not a JSON
+    if (request.headers.get("Content-Type") === "application/json") {
+      // Check if user exist and get the id
+      const userId = await checkUserMail(session?.user.email);
+
+      // Getting the JSON
+      const body = await request.json();
+
+      // Getting the id of the comment that will be deleted
+      const commentId = body.commentId;
+
+      // Check if comment belong to the user via getCommentAuthor function
+      if (userId != (await getCommentAuthor(commentId)))
+        return new Response(JSON.stringify([]), {
+          status: 401,
+          statusText: "user unauthorized",
+        });
+
+      // Call function to delete a comment
+      const response = await deleteComment(commentId);
+
+      // Check if comment was deleted
+      if (!response) {
+        throw new Error("Comment not deleted");
+      }
+
+      // Return the response with 200 status
+      return new Response(JSON.stringify({ deleted: response }));
+    } else {
+      // API Response with bad request status
+      return new Response(JSON.stringify([]), {
+        status: 400,
+        statusText: "bad request",
       });
     }
   } catch (err) {

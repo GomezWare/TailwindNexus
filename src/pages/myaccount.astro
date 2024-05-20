@@ -7,6 +7,7 @@ import Layout from "../layouts/Layout.astro";
 import MyInformation from "../components/myaccount/MyInformation.astro";
 import UserSharer from "src/components/user/UserSharer.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
+import YourCommentCard from "src/components/myaccount/YourCommentCard.astro";
 import { getSession } from "auth-astro/server";
 import { registerUser, checkUserMail } from "@services/auth";
 
@@ -76,7 +77,11 @@ if (user.comments.length == 0) {
   />
   <UserSharer id={userId} />
   <section class="container">
-    <h2 class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left">Your components:</h2>
+    <h2
+      class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left"
+    >
+      Your components:
+    </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
       {
         haveComponents ? (
@@ -104,20 +109,23 @@ if (user.comments.length == 0) {
     </div>
   </section>
   <section class="container">
-    <h2 class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left">Your comments:</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+    <h2
+      class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left"
+    >
+      {user.name}'s comments:
+    </h2>
+    <div class="grid grid-cols-1 gap-5 mt-10">
       {
-        haveComponents ? (
+        haveComments ? (
           <Fragment>
-            {user.components.map((component) => (
-              <ComponentCard
-                id={component.id}
-                name={component.name}
-                thumbnail={component.thumbnail}
-                needsAlpine={component.needsAlpine}
-                needsCDN={component.needsCDN}
-                userData={user}
-                totalComments={component.totalComments}
+            {user.comments.map((comment) => (
+              <YourCommentCard
+                commentId={comment.id}
+                userId={userId}
+                userName={user.name}
+                userAvatar={user.avatar}
+                commentDate={comment.createdAt}
+                content={comment.content}
               />
             ))}
           </Fragment>
@@ -131,4 +139,28 @@ if (user.comments.length == 0) {
       }
     </div>
   </section>
+
+  {
+    /* This is a custom dialog for confirm the delete of comments and components */
+  }
+  <dialog
+    id="deleteDialog"
+    class="rounded-lg p-6  bg-slate-600 text-white shadow-lg"
+  >
+    <form method="dialog">
+      <p class="text-lg">Do you want to proceed with deletion?</p>
+      <menu class="flex justify-end gap-4 mt-4">
+        <button
+          id="cancelButton"
+          class="px-4 py-2 border bg-slate-700 hover:bg-slate-600 rounded"
+          >Cancel</button
+        >
+        <button
+          id="confirmButton"
+          class="px-4 py-2 border bg-rose-600 hover:bg-rose-500 rounded"
+          >Delete</button
+        >
+      </menu>
+    </form>
+  </dialog>
 </Layout>

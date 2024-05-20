@@ -1,0 +1,120 @@
+---
+/**
+ * This component is for representing a comment in a card
+ * Also have the functions to delete a comment that belogs to your user from the DB
+ */
+
+interface Props {
+  commentId;
+  userId;
+  userAvatar;
+  userName;
+  commentDate;
+  content;
+}
+const { commentId, userId, userAvatar, userName, commentDate, content } =
+  Astro.props;
+
+const timestamp = new Date(commentDate * 1000);
+/**
+ * Convert UnixTimestamp to ISO format
+ */
+const date = timestamp
+  .toISOString()
+  .replace("T", " ")
+  .replace(/\.\d+Z$/, "");
+---
+
+<div class="flex justify-start gap-4 bg-slate-700 p-4 lg:w-2/3 rounded">
+  <a class="w-16 md:w-24 shrink-0" href={"/users/" + userId}>
+    <img class="w-full" src={userAvatar} alt="User avatar" />
+  </a>
+  <div class="">
+    <p>
+      <a class="custom-link text-xl" href={"/users/" + userId}>{userName}</a>
+      <span class="ml-4">
+        {date}
+      </span>
+    </p>
+    <p class="mt-2 font-light">
+      {content}
+    </p>
+
+    <p class="mt-2 font-light">
+      <button
+        class="deleteCommentButton px-3 py-1 bg-red-600 rounded border font-bold hover:bg-red-500"
+        data-target={commentId}
+      >
+        Delete Comment
+      </button>
+    </p>
+  </div>
+</div>
+<script>
+  // Event to wait for DOM Load to avoid errors
+  document.addEventListener("DOMContentLoaded", () => {
+    // Revover dialog element from my account page
+    const dialog = document.querySelector("#deleteDialog") as HTMLDialogElement;
+    // Global variable to set the comment that will be deleted (Awaiting confirmartion)
+    let commentIdToDelete = null;
+
+    // Event if user wants to delete a comment (Delete Comment Button)
+    document.querySelectorAll(".deleteCommentButton").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        // Get the current target for recover the componentId
+        const target = event.currentTarget;
+        if (target instanceof HTMLElement) {
+          // Getting the component id from frontmatter
+          commentIdToDelete = target.getAttribute("data-target");
+          // Shows the confirm dialog if is all ok
+          if (dialog && commentIdToDelete) {
+            dialog.showModal();
+          }
+        }
+      });
+    });
+
+    // Event if user decide to delete the comment (The button is rendered in my account page)
+    document
+      .querySelector("#confirmButton")
+      .addEventListener("click", async () => {
+        // Check if there was a id in the global variable
+        if (commentIdToDelete) {
+          // Call to the API Endpoint
+          await fetch(window.location.origin + "/api/comments", {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json", // Indicates the content
+            },
+            body: JSON.stringify({
+              commentId: commentIdToDelete,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // Check if the comment was deleted
+              if (data.deleted) {
+                // Reload page to show the comment was deleted
+                window.location.href = window.location.href;
+              } else {
+                alert("Error deleting comment");
+              }
+            })
+            .catch((error) => {
+              // Show error if the comment was not deleted
+              console.log("Error deleting component");
+              alert("Error deleting comment");
+            });
+          dialog.close();
+        }
+      });
+
+    // Event if user decide to not delete a comment
+    document.querySelector("#cancelButton").addEventListener("click", () => {
+      // Close the dialog
+      dialog.close();
+      // Reset global variable to null
+      commentIdToDelete = null;
+    });
+  });
+</script>
