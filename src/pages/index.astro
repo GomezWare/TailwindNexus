@@ -8,7 +8,7 @@ import Layout from "../layouts/Layout.astro";
 import HomeTopHero from "../components/home/HomeTopHero.astro";
 import HomeCards from "../components/home/HomeCards.astro";
 import HomeSliderLatest from "../components/home/HomeSliderLatest.astro";
-import HomeSliderBest from "src/components/home/HomeSliderBest.astro";
+import HomeSliderTrending from "src/components/home/HomeSliderTrending.astro";
 
 // Check if the site is in manteniance and redirect
 if (import.meta.env.SERVER_MAINTENANCE == "true") {
@@ -20,5 +20,5 @@ if (import.meta.env.SERVER_MAINTENANCE == "true") {
   <HomeTopHero />
   <HomeCards />
   <HomeSliderLatest />
-  <HomeSliderBest />
+  <HomeSliderTrending />
 </Layout>
