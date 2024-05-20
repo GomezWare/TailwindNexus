@@ -7,7 +7,7 @@ interface Props {
   username: string;
   avatar: string;
   components: number;
-  followers: number;
+  followers?: number;
 }
 
 const { username, avatar, components, followers } = Astro.props;
@@ -26,9 +26,12 @@ const { username, avatar, components, followers } = Astro.props;
     <div class="flex space content-between gap-4">
       <h3>
         <span class="text-lg font-bold text-teal-400">{components}</span> Components
-      </h3><h3>
-        <span class="text-lg font-bold text-teal-400">{followers}</span> Followers
       </h3>
+      <!--
+        <h3>
+          <span class="text-lg font-bold text-teal-400">{followers}</span> Followers
+        </h3>
+       -->
     </div>
   </div>
 </section>

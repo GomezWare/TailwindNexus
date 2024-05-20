@@ -19,7 +19,9 @@
 [ ] Component modify system
 [ ] Comment deletion system via profile
 
-## OPTIMIZE
+## DEPLOY
+
+[ ] Deploy the project
 
 ## DOC
 
