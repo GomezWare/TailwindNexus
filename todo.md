@@ -23,13 +23,8 @@
 ## DOC
 
 [ ] Update project Docs
-[ ] Document Endpoints
-[ ] Document Services
-[ ] Document Pages
 [ ] Add async to async functions
-[ ] Document Auth
 
-[ ] Phase 1: Update
 [ ] Phase 2: Update
 
 - [ ] Wireframe update
