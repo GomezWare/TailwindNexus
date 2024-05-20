@@ -9,6 +9,7 @@ import { getComponents, addComponent } from "@services/components";
 import { validateComponent } from "@utils/validateComponent";
 import { getSession } from "auth-astro/server";
 import { checkUserMail } from "@services/auth";
+import { renderThumbnail } from "@utils/thumbnails";
 
 // REST API Route
 
@@ -54,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
         userId: userId,
         name: body.name,
         description: body.description,
-        thumbnail: "https://ximg.es/300x200",
+        thumbnail: "",
         needsAlpine: Boolean(body.needsAlpine),
         needsCDN: Boolean(body.needsCDN),
         tailwind: body.tailwind,
@@ -63,21 +64,22 @@ export const POST: APIRoute = async ({ request }) => {
 
       // Validate data and make the request to the database
       if (validateComponent(component)) {
-        return new Response(
-          JSON.stringify(
-            (await addComponent([
-              component.categoryId,
-              component.userId,
-              component.name,
-              component.description,
-              component.thumbnail,
-              component.needsAlpine,
-              component.needsCDN,
-              component.tailwind,
-              component.javascript,
-            ])) || []
-          )
-        );
+        // Generate component thumbnail
+        const thumbnail = await renderThumbnail(component.tailwind);
+
+        const componentInsert = await addComponent([
+          component.categoryId,
+          component.userId,
+          component.name,
+          component.description,
+          thumbnail,
+          component.needsAlpine,
+          component.needsCDN,
+          component.tailwind,
+          component.javascript,
+        ]);
+
+        return new Response(JSON.stringify(componentInsert));
       } else {
         return new Response(JSON.stringify("Validation Failed"), {
           status: 403,
