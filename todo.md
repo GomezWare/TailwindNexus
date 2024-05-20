@@ -7,10 +7,11 @@
 ## OPTIMIZE
 
 ## DOC
+
 [ ] Update project Docs
 
 [ ] Document Endpoints
 [ ] Document Services
-
+[ ] Add async to async functions
+[ ] Document Auth
 ## EVIROMENT TASKS
-[ ] Merge BD implementation

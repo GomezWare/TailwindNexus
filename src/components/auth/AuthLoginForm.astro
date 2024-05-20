@@ -1,0 +1,122 @@
+<section
+  class="container -mt-16 h-screen w-screen flex justify-center items-center"
+>
+  <div class="w-96 px-4 py-8 rounded bg-slate-700 shadow relative">
+    <img
+      class="absolute -mt-24 w-36 right-1/2 translate-x-1/2 pointer-events-none shadow-slate-50"
+      src="/img/logos/TailwindNexus.svg"
+    />
+    
+    <div class="p-3 pt-24">
+      <h2 class="text-center text-2xl font-semibold mb-4">
+        Join Tailwind Nexus, today!
+      </h2>
+      <div class="flex pt-4 font-bold mb-8">
+        <button
+          id="login-tab"
+          class="custom-button-active hover:border-teal-200 hover:text-teal-300 text-xl mx-auto border-b-2 px-6"
+          >Log in</button
+        >
+        <button
+          id="signin-tab"
+          class="text-xl hover:border-teal-200 hover:text-teal-300 mx-auto border-b-2 px-6"
+          >Log out</button
+        >
+      </div>
+      <div
+        class="space-y-3 transition-opacity duration-500 ease-in-out"
+        id="buttons"
+      >
+        <button
+          id="git-login"
+          class="bg-slate-600 p-2 py-1 rounded border hover:bg-slate-500 w-full flex px-16 items-center gap-2 font-medium font-title transition-colors"
+          ><img
+            class="w-8 bg-gray-100 rounded-full p-0.5"
+            src="/img/icons/github-mark.svg"
+            alt="Github logo"
+          /> Login with GitHub</button
+        >
+        <button
+          id="google-login"
+          class="bg-slate-600 p-2 py-1 rounded border hover:bg-slate-500 w-full flex px-16 items-center gap-2 font-medium font-title transition-colors"
+          ><img
+            class="w-8 p-0.5 bg-gray-100 rounded-full"
+            src="/img/icons/google.svg"
+            alt="Google logo"
+          /> Login with Google</button
+        >
+        <button
+          id="facebook-login"
+          class="bg-slate-600 p-2 py-1 rounded border hover:bg-slate-500 w-full flex px-16 items-center gap-2 font-medium font-title transition-colors"
+          ><img
+            class="w-8 bg-gray-100 rounded-full p-0.5"
+            src="/img/icons/meta.svg"
+            alt="Meta logo"
+          /> Login with Meta</button
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // TODO Document this
+  // Auth event listener
+  const { signIn } = await import("auth-astro/client");
+  document.querySelector("#git-login").addEventListener("click", async () => {
+    const userData = await signIn("github", {
+      redirect: false,
+      callbackUrl: `${window.location.origin}/myaccount`,
+    });
+
+    console.log(userData);
+  });
+  document
+    .querySelector("#google-login")
+    .addEventListener("click", async () => {
+      const userData = await signIn("google", {
+        redirect: false,
+        callbackUrl: `${window.location.origin}/myaccount`,
+      });
+
+      console.log(userData);
+    });
+  document
+    .querySelector("#facebook-login")
+    .addEventListener("click", async () => {
+      const userData = await signIn("facebook", {
+        redirect: false,
+        callbackUrl: `${window.location.origin}/myaccount`,
+      });
+
+      console.log(userData);
+    });
+
+  // buttons fucntion animation USABILITY
+  const buttons = document.querySelector("#buttons");
+
+  const loginTab = document.querySelector("#login-tab");
+
+  const signinTab = document.querySelector("#signin-tab");
+
+  const fadeAnimation = () => {
+    buttons.classList.add("opacity-0");
+    setTimeout(() => {
+      buttons.classList.remove("opacity-0");
+    }, 700);
+  };
+
+  loginTab.addEventListener("click", () => {
+    fadeAnimation();
+
+    loginTab.classList.add("custom-button-active");
+    signinTab.classList.remove("custom-button-active");
+  });
+
+  signinTab.addEventListener("click", () => {
+    fadeAnimation();
+
+    loginTab.classList.remove("custom-button-active");
+    signinTab.classList.add("custom-button-active");
+  });
+</script>

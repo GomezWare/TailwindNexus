@@ -1,3 +1,5 @@
+//TODO Improve documentation
+
 /**
  * This Endpoint return a JSON with all components
  * Uses the function getComponents in components services
@@ -5,23 +7,36 @@
 
 // Imports
 import { addComment } from "@services/comments";
+import { checkUserMail } from "@services/auth";
 import type { APIRoute } from "astro";
+import { getSession } from "auth-astro/server";
 
 // REST API Route
 
 // POST
 export const POST: APIRoute = async ({ request }) => {
-  // TODO Protect endpoints with JWT (User verification)
+  // Retrieving the session using request object via headers cookie
+  const session = await getSession(request);
+
+  // If there is no session send a 401 response
+  if (!session?.user)
+    return new Response(JSON.stringify([]), {
+      status: 401,
+      statusText: "User Unauthorized",
+    });
 
   try {
     // If the POST body is not a JSON
     if (request.headers.get("Content-Type") === "application/json") {
+      // Check if user exist and get the id
+      const userId = await checkUserMail(session?.user.email);
+
       // Getting the JSON
       const body = await request.json();
 
       // Comment object
       const comment = {
-        userId: 1,
+        userId: userId, // Via email chexk
         componentId: body.componentId,
         content: body.content,
       };

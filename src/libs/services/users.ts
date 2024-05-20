@@ -115,7 +115,6 @@ const getUser = async (id: Number) => {
       name: userDataRows[0].name,
       avatar: userDataRows[0].avatar,
       email: userDataRows[0].email,
-      password: userDataRows[0].password,
       components: componentsRows.map((component) => ({
         id: component.id,
         name: component.name,

@@ -1,0 +1,57 @@
+---
+/**
+ * Displays a user's information on the user page.
+ */
+
+interface Props {
+  username: string;
+  avatar: string;
+  components: number;
+  followers: number;
+}
+
+const { username, avatar, components, followers } = Astro.props;
+---
+
+<section class="container mb-12 pt-4">
+  <div class="flex flex-col space-y-3 justify-center items-center">
+    <div>
+      <img class="w-44" src={avatar} />
+    </div>
+    <div>
+      <h2 class="text-xl font-medium font-title line-clamp-1 px-1/2">
+        {username}
+      </h2>
+    </div>
+    <div class="flex space content-between gap-4">
+      <h3>
+        <span class="text-lg font-bold text-teal-400">{components}</span> Components
+      </h3>
+      <h3>
+        <span class="text-lg font-bold text-teal-400">{followers}</span> Followers
+      </h3>
+    </div>
+    <div class="flex flex-col gap-3 pt-4">
+      <a
+        class="bg-teal-600 text-center p-2 py-1 rounded border hover:bg-teal-500 w-52"
+        href={Astro.url.origin + "/upload"}
+      >
+        Upload new component
+      </a>
+      <button
+        id="logout"
+        class="bg-rose-600 p-2 py-1 rounded border hover:bg-rose-500 w-52"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</section>
+<script>
+  import { signOut } from "auth-astro/client";
+
+  document.querySelector("#logout").addEventListener("click", () => {
+    signOut();
+    window.location.reload;
+  });
+</script>

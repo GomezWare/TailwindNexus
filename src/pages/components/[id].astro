@@ -14,6 +14,8 @@ import ComponentSharer from "src/components/component/ComponentSharer.astro";
 import ComponentsComments from "src/components/component/ComponentsComments.astro";
 import ComponerCommentCount from "src/components/component/ComponerCommentCount.astro";
 import ComponentForm from "src/components/component/ComponentForm.astro";
+import { getSession } from "auth-astro/server";
+import { checkUserMail } from "@services/auth";
 
 // Get id via Astro params
 const { id } = Astro.params;
@@ -26,6 +28,16 @@ const component = await fetch(Astro.url.origin + "/api/component/" + id).then(
 // If the api returned a blank array (null response) redirect user to 404
 if (component.length == 0) {
   return Astro.redirect("/404");
+}
+
+// We need to check if the component belongs to same user comment user
+// If you are the owner of the component you cant comment
+
+const session = await getSession(Astro.request);
+
+let userId = -1;
+if (session?.user.email) {
+  userId = await checkUserMail(session.user.email);
 }
 ---
 
@@ -44,6 +56,6 @@ if (component.length == 0) {
   />
   <ComponentSharer id={id} />
   <ComponerCommentCount count={component.comments.length} />
-  <ComponentForm componentId={id} />
+  {!(userId == component.user.id) && <ComponentForm componentId={id} />}
   <ComponentsComments comments={component.comments} />
 </Layout>

@@ -18,3 +18,7 @@ input[type="search"]:focus + img {
 .swiper-button-prev::after {
   content: " " !important;
 }
+
+.custom-button-active {
+  @apply border-teal-400 text-teal-400
+}
