@@ -7,6 +7,7 @@ import Layout from "../../layouts/Layout.astro";
 import UserInfo from "../../components/user/UserInfo.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 import UserSharer from "src/components/user/UserSharer.astro";
+import CommentCard from "src/components/partials/cards/CommentCard.astro";
 
 // Get id via Astro params
 const { id } = Astro.params;
@@ -24,12 +25,19 @@ if (user.length == 0) {
 // Variable to know if user have components
 let haveComponents;
 
-// Check
-
 if (user.components.length == 0) {
   haveComponents = false;
 } else {
   haveComponents = true;
+}
+
+// Variable to know if user have comments
+
+let haveComments;
+if (user.comments.length == 0) {
+  haveComments = false;
+} else {
+  haveComments = true;
 }
 ---
 
@@ -44,7 +52,11 @@ if (user.components.length == 0) {
   <UserSharer id={id} />
 
   <section class="container">
-    <h2 class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left">{user.name}'s components:</h2>
+    <h2
+      class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left"
+    >
+      {user.name}'s components:
+    </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
       {
         haveComponents ? (
@@ -70,5 +82,36 @@ if (user.components.length == 0) {
         )
       }
     </div>
-  </section></Layout
->
+  </section>
+  <section class="container">
+    <h2
+      class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left"
+    >
+      {user.name}'s comments:
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 mt-10">
+      {
+        haveComments ? (
+          <Fragment>
+            {user.comments.map((comment) => (
+              <CommentCard
+                userId={comment.userId}
+                commentDate={comment.createdAt}
+                userAvatar={user.avatar}
+                content={comment.content}
+                userName={user.name}
+                componentId={comment.componentId}
+              />
+            ))}
+          </Fragment>
+        ) : (
+          <div class="col-span-3 flex flex-col border rounded bg-slate-700 items-center">
+            <p class=" mx-auto w-1/3 text-center p-5 text-teal-200">
+              User have not commented yet 😞
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Layout>

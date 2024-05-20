@@ -7,11 +7,23 @@ import CommentCard from "../partials/cards/CommentCard.astro";
 interface Props {
   comments;
 }
+
 const { comments } = Astro.props;
+console.log(comments);
 ---
 
 <section class="container">
   <div class="space-y-3">
-    {comments.map((comment) => <CommentCard comment={comment} />)}
+    {
+      comments.map((comment) => (
+        <CommentCard
+          userId={comment.user.id}
+          userName={comment.user.name}
+          userAvatar={comment.user.avatar}
+          commentDate={comment.createdAt}
+          content={comment.content}
+        />
+      ))
+    }
   </div>
 </section>

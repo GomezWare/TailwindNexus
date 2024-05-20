@@ -107,7 +107,7 @@ if (user.comments.length == 0) {
     <h2 class="text-3xl mt-16 font-title text-cyan-400 text-center sm:text-left">Your comments:</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
       {
-        haveComponents ? (
+        haveComments ? (
           <Fragment>
             {user.components.map((component) => (
               <ComponentCard
