@@ -1,3 +1,5 @@
+// TODO Document service
+
 import { dbQuery } from "@utils/dbQuery";
 
 /**
@@ -136,4 +138,34 @@ const getUser = async (id: Number) => {
   }
 };
 
-export { getUser };
+/**
+ * Return users with more components
+ */
+const getTopDevelopers = async () => {
+  try {
+    const [userDataRows, userDataFields] = await dbQuery(
+      `
+      SELECT
+      u.user_id AS id,
+      u.name,
+      u.avatar,
+      COUNT(c.component_id) AS totalComponents
+  FROM
+      users u
+  LEFT JOIN
+      components c ON u.user_id = c.user_id
+  GROUP BY
+      u.user_id, u.name, u.avatar
+  ORDER BY
+      totalComponents DESC
+  LIMIT 10;
+      `
+    );
+    return userDataRows;
+  } catch (error) {
+    console.log(error);
+    return undefined;
+  }
+};
+
+export { getUser, getTopDevelopers };

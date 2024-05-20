@@ -4,16 +4,17 @@
  */
 
 import ComponentCard from "../partials/cards/ComponentCard.astro";
+import UserCardRanking from "../partials/cards/UserCardRanking.astro";
 import SwiperButtonsScrollbar from "../partials/swiper/SwiperButtonsScrollbar.astro";
 
 // Fetch data from the API
-const best = await fetch(Astro.url.origin + "/api/trending").then((data) =>
-  data.json()
+const users = await fetch(Astro.url.origin + "/api/topDevelopers").then(
+  (data) => data.json()
 );
 
 // Checks if respnse was blank
 let blankResponse;
-if (best.length == 0) {
+if (users.length == 0) {
   blankResponse = true;
 } else {
   blankResponse = false;
@@ -22,14 +23,14 @@ if (best.length == 0) {
 
 <section class="container pt-16">
   <a
-    href="/categories/trending"
+    href="/users"
     class="custom-link font-bold font-title text-center md:text-left text-2xl md:text-3xl"
   >
     Top Developers
   </a>
   <p class="font-light text-center md:text-left md:text-lg mb-6 mt-4">
-    Here are the most commented comments of all Tailwind Nexus, remember that
-    your opinions are very much appreciated and should be respected.
+    Here are the developers who have made the most contributions to Tailwind
+    Nexus
   </p>
 
   {
@@ -39,18 +40,16 @@ if (best.length == 0) {
       </span>
     ) : (
       <Fragment>
-        <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperBest">
+        <div class="swiper h-full bg-gray-700 !p-4 rounded" id="swiperTop">
           <div class="swiper-wrapper">
-            {best.map((component) => (
+            {users.map((user, index) => (
               <div class="swiper-slide px-4 py-5 bg-slate-600 rounded">
-                <ComponentCard
-                  id={component.id}
-                  name={component.name}
-                  needsAlpine={component.needsAlpine}
-                  needsCDN={component.needsCDN}
-                  thumbnail={component.thumbnail}
-                  totalComments={component.comments.length}
-                  userData={component.user}
+                <UserCardRanking
+                  id={user.id}
+                  username={user.name}
+                  avatar={user.avatar}
+                  totalComponents={user.totalComponents}
+                  rank={index + 1}
                 />
               </div>
             ))}
@@ -76,7 +75,7 @@ if (best.length == 0) {
   import "swiper/css/bundle";
 
   // To use Swiper you only need to declare this constant with a swiper options
-  const swiper = new Swiper("#swiperBest", {
+  const swiper = new Swiper("#swiperTop", {
     // The options that Swiper provides are easily discernible
     modules: [Navigation, Pagination, Scrollbar],
     slidesPerView: 1,
