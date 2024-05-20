@@ -1,11 +1,15 @@
 # TASKS
 
 ## FIXES
+[ ] Resolve all todos from docuemnts
 
 ## DEVELOP
 
 [ ] Follow/unfollow system
+[ ] Miniature system for components
 [ ] Comment card for profile
+[ ] Follower card for profile
+[ ] Component card for profile
 [ ] Component deletion system
 [ ] Component modify system
 [ ] Comment deletion system via profile
