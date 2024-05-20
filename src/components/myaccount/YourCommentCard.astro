@@ -11,9 +11,8 @@ interface Props {
   userName;
   commentDate;
   content;
-  componentId?;
 }
-const { userId, userAvatar, userName, commentDate, content, componentId } =
+const { commentId, userId, userAvatar, userName, commentDate, content } =
   Astro.props;
 
 const timestamp = new Date(commentDate * 1000);
@@ -40,14 +39,82 @@ const date = timestamp
     <p class="mt-2 font-light">
       {content}
     </p>
-    {
-      componentId != undefined && (
-        <p class="mt-2 font-light">
-          <a class="custom-link" href={"/components/" + componentId}>
-            View Component
-          </a>
-        </p>
-      )
-    }
+
+    <p class="mt-2 font-light">
+      <button
+        class="deleteCommentButton px-3 py-1 bg-red-600 rounded border font-bold hover:bg-red-500"
+        data-target={commentId}
+      >
+        Delete Comment
+      </button>
+    </p>
   </div>
 </div>
+<script>
+  // Event to wait for DOM Load to avoid errors
+  document.addEventListener("DOMContentLoaded", () => {
+    // Revover dialog element from my account page
+    const dialog = document.querySelector("#deleteDialog") as HTMLDialogElement;
+    // Global variable to set the comment that will be deleted (Awaiting confirmartion)
+    let commentIdToDelete = null;
+
+    // Event if user wants to delete a comment (Delete Comment Button)
+    document.querySelectorAll(".deleteCommentButton").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        // Get the current target for recover the componentId
+        const target = event.currentTarget;
+        if (target instanceof HTMLElement) {
+          // Getting the component id from frontmatter
+          commentIdToDelete = target.getAttribute("data-target");
+          // Shows the confirm dialog if is all ok
+          if (dialog && commentIdToDelete) {
+            dialog.showModal();
+          }
+        }
+      });
+    });
+
+    // Event if user decide to delete the comment (The button is rendered in my account page)
+    document
+      .querySelector("#confirmButton")
+      .addEventListener("click", async () => {
+        // Check if there was a id in the global variable
+        if (commentIdToDelete) {
+          // Call to the API Endpoint
+          await fetch(window.location.origin + "/api/comments", {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json", // Indicates the content
+            },
+            body: JSON.stringify({
+              commentId: commentIdToDelete,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // Check if the comment was deleted
+              if (data.deleted) {
+                // Reload page to show the comment was deleted
+                window.location.href = window.location.href;
+              } else {
+                alert("Error deleting comment");
+              }
+            })
+            .catch((error) => {
+              // Show error if the comment was not deleted
+              console.log("Error deleting component");
+              alert("Error deleting comment");
+            });
+          dialog.close();
+        }
+      });
+
+    // Event if user decide to not delete a comment
+    document.querySelector("#cancelButton").addEventListener("click", () => {
+      // Close the dialog
+      dialog.close();
+      // Reset global variable to null
+      commentIdToDelete = null;
+    });
+  });
+</script>

@@ -2,17 +2,16 @@
 
 ## FIXES
 
+[ ] !!! Add loading to add component fetch (Upload forms) !!!
 [ ] Remove password field from model
 [ ] User show latest components and comments
 
 ## DEVELOP
 
 [ ] Code editors and viewers
-[ ] Component card for profile
 [ ] Component card for my profile
 [ ] Component deletion system
 [ ] Component modify system
-[ ] Comment deletion system via profile
 
 ## DEPLOY
 

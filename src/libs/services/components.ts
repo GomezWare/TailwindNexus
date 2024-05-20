@@ -392,10 +392,43 @@ VALUES
   }
 };
 
+/**
+ * Function to get the author of a component via a ID
+ *
+ * @async
+ * @param {number} commentId
+ * @return {number}
+ */
+const getComponentAuthor = async (componentId) => {
+  try {
+    // Query to DB
+    const [userDataRows, userDataFields] = await dbQuery(
+      `
+      SELECT user_id
+      FROM components
+      WHERE component_id = ?;
+      `,
+      [componentId]
+    );
+
+    // If there is any result return -1 else the author id
+    if (userDataRows.length == 0) {
+      return -1;
+    } else {
+      return userDataRows[0].user_id;
+    }
+  } catch (error) {
+    console.log(error);
+    // Special return if server is down
+    return -404;
+  }
+};
+
 export {
   getComponents,
   getComponent,
   getLatest,
   getBestComponent,
   addComponent,
+  getComponentAuthor,
 };
