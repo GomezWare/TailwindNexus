@@ -3,25 +3,21 @@
 ## FIXES
 
 [ ] Remove password field from model
-[ ] Resolve all todos from docuemnts
+[ ] Resolve all todos from documents
 [ ] Remove Follow/unfollow system
 
 ## DEVELOP
-
 [ ] Miniature system for components
+[ ] Code editors and viewers
 [ ] Comment card for profile
-[ ] Follower card for profile
 [ ] Component card for profile
 [ ] Comment card for my profile
-[ ] Follower card for my profile
 [ ] Component card for my profile
 [ ] Component deletion system
 [ ] Component modify system
 [ ] Comment deletion system via profile
 
 ## OPTIMIZE
-
-[ ] Improve code viewing
 
 ## DOC
 

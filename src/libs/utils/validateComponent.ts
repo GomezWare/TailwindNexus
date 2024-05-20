@@ -55,7 +55,7 @@ const validateComponent = (componentData) => {
   if (
     typeof componentData.tailwind !== "string" ||
     /<script[\s\S]*?>/i.test(componentData.tailwind) ||
-    /on\w+\s*=/i.test(componentData.tailwind) ||
+    // /on\w+\s*=/i.test(componentData.tailwind) ||
     /<iframe[\s\S]*?>/i.test(componentData.tailwind) ||
     componentData.tailwind.trim() === ""
   ) {
@@ -130,7 +130,7 @@ const validateComponentClient = (componentData) => {
   if (
     typeof componentData.tailwind !== "string" ||
     /<script[\s\S]*?>/i.test(componentData.tailwind) ||
-    /on\w+\s*=/i.test(componentData.tailwind) ||
+    // /on\w+\s*=/i.test(componentData.tailwind) ||
     /<iframe[\s\S]*?>/i.test(componentData.tailwind) ||
     componentData.tailwind.trim() === ""
   ) {
