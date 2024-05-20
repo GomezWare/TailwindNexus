@@ -9,6 +9,7 @@ import HomeTopHero from "../components/home/HomeTopHero.astro";
 import HomeCards from "../components/home/HomeCards.astro";
 import HomeSliderLatest from "../components/home/HomeSliderLatest.astro";
 import HomeSliderTrending from "src/components/home/HomeSliderTrending.astro";
+import HomeSliderTopDevelopers from "src/components/home/HomeSliderTopDevelopers.astro";
 
 // Check if the site is in manteniance and redirect
 if (import.meta.env.SERVER_MAINTENANCE == "true") {
@@ -19,6 +20,7 @@ if (import.meta.env.SERVER_MAINTENANCE == "true") {
 <Layout title="Tailwind Nexus" footer={true}>
   <HomeTopHero />
   <HomeCards />
+  <HomeSliderTopDevelopers />
   <HomeSliderLatest />
   <HomeSliderTrending />
 </Layout>

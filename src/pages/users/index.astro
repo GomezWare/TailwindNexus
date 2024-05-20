@@ -1,0 +1,41 @@
+---
+/**
+ * This page is for showing users with more created components (Top developers)
+ */
+import Layout from "../../layouts/Layout.astro";
+
+import CategoryHeader from "../../components/category/CategoryHeader.astro";
+import UserCardsRanking from "src/components/partials/cards/UserCardRanking.astro";
+
+// Fetch datas from the API
+const users = await fetch(Astro.url.origin + "/api/topDevelopers").then(
+  (data) => data.json()
+);
+
+// If the api returned a blank array (null response) redirect user to 404
+if (users.length == 0) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title="Categories" footer={true}>
+  <CategoryHeader
+    name="Top Developers"
+    description="Here are the developers who have made the most contributions to Tailwind Nexus"
+  />
+  <section class="container flex justify-center  w-full">
+    <div class="grid grid-cols-1 gap-10 w-full ">
+      {
+        users.map((user, index) => (
+          <UserCardsRanking
+            id={user.id}
+            username={user.name}
+            avatar={user.avatar}
+            totalComponents={user.totalComponents}
+            rank={index + 1}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Layout>
