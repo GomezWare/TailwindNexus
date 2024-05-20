@@ -15,16 +15,16 @@
         <button
           id="login-tab"
           class="custom-button-active hover:border-teal-200 hover:text-teal-300 text-xl mx-auto border-b-2 px-6"
-          >Log in</button
+          >Login</button
         >
         <button
           id="signin-tab"
           class="text-xl hover:border-teal-200 hover:text-teal-300 mx-auto border-b-2 px-6"
-          >Log out</button
+          >Signin</button
         >
       </div>
       <div
-        class="space-y-3 transition-opacity duration-500 ease-in-out"
+        class="space-y-3 transition-opacity duration-300 ease-in-out"
         id="buttons"
       >
         <button
@@ -92,7 +92,7 @@
       console.log(userData);
     });
 
-  // buttons fucntion animation USABILITY
+  // buttons function animation for usability to the user since page is only login
   const buttons = document.querySelector("#buttons");
 
   const loginTab = document.querySelector("#login-tab");
@@ -103,7 +103,7 @@
     buttons.classList.add("opacity-0");
     setTimeout(() => {
       buttons.classList.remove("opacity-0");
-    }, 700);
+    }, 300);
   };
 
   loginTab.addEventListener("click", () => {

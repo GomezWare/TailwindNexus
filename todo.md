@@ -4,12 +4,9 @@
 
 [ ] Remove password field from model
 [ ] User show latest components and comments
-[ ] Resolve all todos from documents
-[ ] Remove Follow/unfollow system
 
 ## DEVELOP
 
-[ ] Miniature system for components
 [ ] Code editors and viewers
 [ ] Comment card for profile
 [ ] Component card for profile

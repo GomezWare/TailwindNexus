@@ -5,6 +5,13 @@
 import Layout from "../layouts/Layout.astro";
 
 import UploadFormComponent from "../components/upload/UploadFormComponent.astro";
+import { getSession } from "auth-astro/server";
+
+// Check if there is a session else redirect to login page
+
+const session = await getSession(Astro.request);
+
+if (!session?.user) return Astro.redirect("login");
 ---
 
 <Layout title="Component upload" footer={true}>
