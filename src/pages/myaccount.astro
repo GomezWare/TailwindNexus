@@ -1,6 +1,6 @@
 ---
 /**
- * This is the user page, it will show the user indicated in the url
+ * This is the your user page, you can delete your components or comments here or upload a component
  */
 
 import Layout from "../layouts/Layout.astro";
@@ -58,7 +58,7 @@ if (user.components.length == 0) {
 }
 ---
 
-<Layout title="User" footer={true}>
+<Layout title="Your profile" footer={true}>
   <MyInformation
     username={user.name}
     avatar={user.avatar}

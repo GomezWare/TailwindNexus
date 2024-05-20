@@ -2,7 +2,6 @@
 
 ## FIXES
 
-[ ] Titles of pages fix
 [ ] Remove password field from model
 [ ] User show latest components and comments
 [ ] Resolve all todos from documents

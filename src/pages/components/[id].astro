@@ -41,7 +41,7 @@ if (session?.user.email) {
 }
 ---
 
-<Layout title="Component" footer={true}>
+<Layout title={component.name} footer={true}>
   <ComponentHeader name={component.name} description={component.description} />
   <UserCard
     id={component.user.id}

@@ -1,4 +1,7 @@
 ---
+/**
+ * This page is for login and create a sesion via login buttons
+ */
 import Layout from "src/layouts/Layout.astro";
 
 import AuthLoginForm from "src/components/auth/AuthLoginForm.astro";
@@ -12,6 +15,6 @@ if (session) {
 }
 ---
 
-<Layout title="Sign-in" footer={true}>
+<Layout title="Login" footer={true}>
   <AuthLoginForm />
 </Layout>
