@@ -10,7 +10,7 @@ import CategoryHeader from "../../components/category/CategoryHeader.astro";
 import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 
 // Fetch datas from the API
-const best = await fetch(Astro.url.origin + "/api/best").then((data) =>
+const best = await fetch(Astro.url.origin + "/api/trending").then((data) =>
   data.json()
 );
 
@@ -22,13 +22,13 @@ if (best.length == 0) {
 
 <Layout title="Categories" footer={true}>
   <CategoryHeader
-    name="Best components"
+    name="Trending components"
     description="On this page you can find the that have had the most reviews and comments."
   />
   <section class="container">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {
-        best.map((component) => (
+        best?.map((component) => (
           <ComponentCard
             id={component.id}
             name={component.name}
