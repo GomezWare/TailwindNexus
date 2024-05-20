@@ -4,10 +4,10 @@
 
 [ ] Remove password field from model
 [ ] Resolve all todos from docuemnts
+[ ] Remove Follow/unfollow system
 
 ## DEVELOP
 
-[ ] Follow/unfollow system
 [ ] Miniature system for components
 [ ] Comment card for profile
 [ ] Follower card for profile
