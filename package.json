@@ -10,17 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "astro": "^4.8.3",
     "@astrojs/node": "^8.2.5",
     "@astrojs/tailwind": "^5.1.0",
+    "tailwindcss": "^3.4.3",
     "@auth/core": "^0.18.6",
-    "astro": "^4.8.3",
     "auth-astro": "^4.1.1",
     "mysql2": "^3.9.7",
-    "prism-theme-one-dark": "^1.0.0",
-    "prismjs": "^1.29.0",
     "puppeteer": "^22.9.0",
-    "swiper": "^11.1.1",
-    "tailwindcss": "^3.4.3"
+    "swiper": "^11.1.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.11"
