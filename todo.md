@@ -2,11 +2,14 @@
 
 ## FIXES
 
+[ ] Titles of pages fix
 [ ] Remove password field from model
+[ ] User show latest components and comments
 [ ] Resolve all todos from documents
 [ ] Remove Follow/unfollow system
 
 ## DEVELOP
+
 [ ] Miniature system for components
 [ ] Code editors and viewers
 [ ] Comment card for profile
@@ -17,9 +20,18 @@
 [ ] Component modify system
 [ ] Comment deletion system via profile
 
-## OPTIMIZE
+## DEPLOY
+
+[ ] Deploy the project
 
 ## DOC
+
+[ ] Update project Docs
+[ ] Document Endpoints
+[ ] Document Services
+[ ] Document Pages
+[ ] Add async to async functions
+[ ] Document Auth
 
 [ ] Phase 1: Update
 [ ] Phase 2: Update
@@ -31,10 +43,5 @@
       [ ] Phase 4:
 - [ ] Presentation
 - [ ] Final memory
-      [ ] Update project Docs
-      [ ] Document Endpoints
-      [ ] Document Services
-      [ ] Add async to async functions
-      [ ] Document Auth
 
 ## EVIROMENT TASKS
