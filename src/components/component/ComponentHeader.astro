@@ -7,9 +7,32 @@
 interface Props {
   name: string;
   description: string;
+  date: number;
+  cdn: boolean;
+  alpine: boolean;
 }
 
-const { name, description } = Astro.props;
+const { name, description, date, cdn, alpine } = Astro.props;
+
+/*
+ * FIX booleans doesnt work because needs conversions
+ * Conversions via if-else
+ */
+
+let needsCDN;
+let needsAlpine;
+
+if (cdn) {
+  needsCDN = true;
+} else {
+  needsCDN = false;
+}
+
+if (alpine) {
+  needsAlpine = true;
+} else {
+  needsAlpine = false;
+}
 ---
 
 <section class="container">
@@ -20,5 +43,26 @@ const { name, description } = Astro.props;
   </p>
   <p class="md:w-4/5 lg:w-2/5 font-light mb-5">
     {description}
+  </p>
+  <div class="flex gap-4 mb-4">
+    {
+      needsCDN && (
+        <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+          <img class="w-7" src="/img/icons/tailwind.svg" alt="Tailwind logo" />
+          Tailwind CDN
+        </div>
+      )
+    }
+    {
+      needsAlpine && (
+        <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+          <img class="w-7" src="/img/icons/alpine.svg" alt="Tailwind logo" />
+          AlpineJS
+        </div>
+      )
+    }
+  </div>
+  <p class="md:w-4/5 lg:w-2/5 font-medium italic text-teal-500">
+    <span>Uploaded on </span><span class="dateConvert" data-date={date}></span>
   </p>
 </section>
