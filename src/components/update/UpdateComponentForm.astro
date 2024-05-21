@@ -3,6 +3,8 @@
  * This is the form to upload components, if you are not logged in you cannot get to this page.
  */
 
+import CodeMirror from "../partials/editor/CodeMirror";
+
 interface Props {
   name;
   description;
@@ -43,13 +45,12 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             Component name
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="componentName"
             type="text"
             placeholder="My component"
             value={name}
           />
-          <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -61,12 +62,11 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             Description
           </label>
           <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="componentDescription"
             rows="4"
             placeholder="This is my nice component">{description}</textarea
           >
-          <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
 
@@ -118,14 +118,16 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
           >
             Tailwind Code
           </label>
-          <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          <input id="oldTWCode" type="hidden" value={tailwind} />
+          <CodeMirror
             id="TWCode"
-            rows="4"
-            placeholder={`<h1 class="text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500" x-on:click="">Hello world</h1>`}
-            >{tailwind}</textarea
-          >
-          <p class="text-red-600 italic">Please fill out this field.</p>
+            value={tailwind}
+            height="400px"
+            readonly={false}
+            haveEvent={true}
+            eventName={"tailwindUpdate"}
+            client:only
+          />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -136,17 +138,20 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
           >
             JavaScript Code
           </label>
-          <textarea
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          <input id="oldJSCode" type="hidden" value={javascript} />
+          <CodeMirror
             id="JSCode"
-            rows="4"
-            placeholder={`function showAlert() { window.alert('Hello world');}`}
-            >{javascript}</textarea
-          >
-          <p class="text-red-600 italic">Please fill out this field.</p>
+            value={javascript}
+            height="400px"
+            readonly={false}
+            haveEvent={true}
+            eventName={"jsUpdate"}
+            client:only
+          />
         </div>
       </div>
     </div>
+
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0 space-y-6">
@@ -160,7 +165,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
                   type="checkbox"
                   id="cdn"
                   class="size-6 accent-teal-400"
-                  checked
+                  checked="checked"
                 />
               ) : (
                 <input
@@ -183,7 +188,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
                   type="checkbox"
                   id="alpine"
                   class="size-6 accent-teal-400"
-                  checked
+                  checked="checked"
                 />
               ) : (
                 <input
@@ -218,14 +223,10 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       />
     </div>
   </form>
-
   <dialog
     id="errorModal"
     class="p-4 rounded-lg bg-slate-600 text-white backdrop:bg-gray-800 backdrop:bg-opacity-30 backdrop:backdrop-blur"
   >
-    <p class="text-rose-500 mb-4 text-xl font-bold text-center mx-auto">
-      There are some errors in the form
-    </p>
     <ul id="errorList" class="space-y-2 mx-8 list-disc"></ul>
     <button
       id="closeModal"
@@ -241,33 +242,33 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     getErrorsComponent,
   } from "@utils/validateComponent";
 
-  // Get modals
+  // Recover the old JS and Tailwind code if user doesnt change code editor to avoid errors
+  const oldTWCode = (document.querySelector("#oldTWCode") as HTMLInputElement)
+    .value;
+  const oldJSCode = (document.querySelector("#oldJSCode") as HTMLInputElement)
+    .value;
+
+  // Code global variables for capturing an event initialized with old component values
+
+  let tailwind = oldTWCode;
+  let javascript = oldJSCode;
+
+  // Event for capturing the contents of the code editors when user change it
+
+  window.addEventListener("tailwindUpdate", (event: CustomEvent) => {
+    tailwind = event.detail.content;
+  });
+
+  window.addEventListener("jsUpdate", (event: CustomEvent) => {
+    javascript = event.detail.content;
+  });
+
+  // Get modal
   const modal: HTMLDialogElement = document.querySelector("#errorModal");
 
   // Event listener to close the modal
   document.querySelector("#closeModal").addEventListener("click", () => {
     modal.close();
-  });
-  // Accessing form fields
-  const form = document.querySelector("#uploadForm");
-
-  // Event listeners for input fields to show/hide error messages
-  const inputFields = form.querySelectorAll<
-    HTMLInputElement | HTMLTextAreaElement
-  >("input[type='text'], textarea");
-  inputFields.forEach((inputField) => {
-    inputField.addEventListener("input", () => {
-      const errorParagraph = inputField.nextElementSibling;
-      if (!inputField.value.trim()) {
-        errorParagraph.classList.remove("hidden");
-        errorParagraph.previousElementSibling.classList.add("border-red-500");
-      } else {
-        errorParagraph.classList.add("hidden");
-        errorParagraph.previousElementSibling.classList.remove(
-          "border-red-500"
-        );
-      }
-    });
   });
 
   // Recover sbmit button
@@ -275,32 +276,28 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
   submit.addEventListener("click", () => {
     // Obtain fields values
     const componentName =
-      form.querySelector<HTMLInputElement>("#componentName").value;
+      document.querySelector<HTMLInputElement>("#componentName").value;
 
     /* Fix Data types
         Category was obtained like a string so we need to parse to number */
-    const componentDescription = form.querySelector<HTMLInputElement>(
+    const componentDescription = document.querySelector<HTMLInputElement>(
       "#componentDescription"
     ).value;
 
     const componentCategory = Number(
-      form.querySelector<HTMLSelectElement>("#componentCategory").value
+      document.querySelector<HTMLSelectElement>("#componentCategory").value
     );
-    const tailwind = form.querySelector<HTMLTextAreaElement>("#TWCode").value;
-    const javascript = form.querySelector<HTMLTextAreaElement>("#JSCode").value;
 
-    const needsCDN = (
-      form.querySelector<HTMLInputElement>("#cdn") as HTMLInputElement
-    ).checked;
-    const needsAlpine = (
-      form.querySelector<HTMLInputElement>("#alpine") as HTMLInputElement
-    ).checked;
+    const needsCDN = (document.querySelector("#cdn") as HTMLInputElement)
+      .checked;
+    const needsAlpine = (document.querySelector("#alpine") as HTMLInputElement)
+      .checked;
 
-    const clear = form.querySelector<HTMLInputElement>(
+    const clear = document.querySelector<HTMLInputElement>(
       "#clear"
     ) as HTMLInputElement;
 
-    // request body buiilded to be Stringify
+    // request body builded to be Stringified
     const request = {
       categoryId: componentCategory,
       name: componentName,

@@ -1,14 +1,9 @@
 # TASKS
 
 ## FIXES
-
-## DEVELOP
-
-[ ] Code editors and viewers
-
-## DEPLOY
-
-[ ] Deploy the project
+[ ] Creation date doesnt show on component preview
+[ ] Tailwind/Alpine badges date doesnt show on component preview 
+[ ] The client:only directive for CodeMirror is not recognized.
 
 ## DOC
 

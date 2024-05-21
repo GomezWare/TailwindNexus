@@ -3,10 +3,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@data/*": ["jsons/*"],
-      "@services/*": ["src/libs/services/*"],
-      "@utils/*": ["src/libs/utils/*"],
+      "@data/*": [
+        "jsons/*"
+      ],
+      "@services/*": [
+        "src/libs/services/*"
+      ],
+      "@utils/*": [
+        "src/libs/utils/*"
+      ]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }
