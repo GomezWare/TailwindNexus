@@ -6,7 +6,6 @@ CREATE TABLE
         user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
         name TEXT,
         email TEXT,
-        password TEXT,
         avatar TEXT,
         created_at INTEGER,
         updated_at INTEGER

@@ -2,57 +2,33 @@ USE tnexus;
 
 /*USERS*/
 INSERT INTO
-    users (
-        name,
-        email,
-        password,
-        avatar,
-        created_at,
-        updated_at
-    )
+    users (name, email, avatar, created_at, updated_at)
 VALUES
     (
         'admin',
         'admin@admin.com',
-        SHA2 ('admin', 256),
         'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
 
 INSERT INTO
-    users (
-        name,
-        email,
-        password,
-        avatar,
-        created_at,
-        updated_at
-    )
+    users (name, email, avatar, created_at, updated_at)
 VALUES
     (
         'user1',
         'user1@mail.com',
-        SHA2 ('user1', 256),
         'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
     );
 
 INSERT INTO
-    users (
-        name,
-        email,
-        password,
-        avatar,
-        created_at,
-        updated_at
-    )
+    users (name, email, avatar, created_at, updated_at)
 VALUES
     (
         'user2',
         'user2@mail.com',
-        SHA2 ('user2', 256),
         'https://ximg.es/128x128',
         UNIX_TIMESTAMP (),
         UNIX_TIMESTAMP ()
