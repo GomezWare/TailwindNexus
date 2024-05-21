@@ -5,7 +5,6 @@
 ## DEVELOP
 
 [ ] Code editors and viewers
-[ ] Component modify system
 
 ## DEPLOY
 
