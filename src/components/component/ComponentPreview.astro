@@ -3,6 +3,8 @@
  * Component preview allows users to preview components and view the source code so that they can import it directly into their projects.
  */
 
+import CodeMirror from "../partials/editor/CodeMirror";
+
 interface Props {
   tailwind: string;
   javascript: string;
@@ -91,34 +93,39 @@ const { tailwind, javascript } = Astro.props;
         id="preview-container"
         style="width: 100%;"></iframe>
       <div
-        class="hidden relative w-full py-5"
+        class="hidden relative w-full"
         data-code={tailwind}
         id="tailwind-container"
       >
         <button
           id="copyTW"
-          class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3 top-2"
+          class="absolute p-1 !z-10 bg-slate-600 hover:bg-slate-500 active:bg-cyan-600 rounded border right-3 top-2"
           ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
-        <pre
-          class="!w-auto -z-10">
-          <code class="font-mono language-html line-numbers" id="tailwind-codeShow" />
-        </pre>
+        <CodeMirror
+          value={tailwind}
+          height="100px"
+          readonly={true}
+          client:only
+        />
       </div>
       <div
-        class="hidden relative w-full py-5"
+        class="hidden relative w-full"
         data-code={javascript}
         id="javascript-container"
       >
         <button
           id="copyJS"
-          class="absolute p-1 bg-slate-500 hover:bg-slate-400 active:bg-cyan-600 rounded border right-3 top-2"
+          class="absolute p-1 !z-10 bg-slate-600 hover:bg-slate-500 active:bg-cyan-600 rounded border right-3 top-2"
           ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
-        <pre
-          class="!w-auto -z-10">
-          <code class="font-mono language-js line-numbers" id="js-codeShow" />
-        </pre>
+
+        <CodeMirror
+          value={javascript}
+          height="100px"
+          readonly={true}
+          client:only
+        />
       </div>
     </div>
   </div>
@@ -163,10 +170,6 @@ const { tailwind, javascript } = Astro.props;
   /**
    * Inserting the code into containers
    */
-
-  // Insert the source code as text into code display
-  tailwindCodeShower.innerText = TWCode;
-  javascriptCodeShower.innerText = JSCode;
 
   // HTML Injection with tailwind
   previewContainer.srcdoc =

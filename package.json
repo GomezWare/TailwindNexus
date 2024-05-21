@@ -18,6 +18,7 @@
     "@codemirror/lang-javascript": "^6.2.2",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
+    "@uiw/codemirror-theme-dracula": "^4.22.1",
     "@uiw/react-codemirror": "^4.22.1",
     "astro": "^4.8.3",
     "auth-astro": "^4.1.1",
