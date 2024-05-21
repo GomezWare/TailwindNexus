@@ -3,6 +3,8 @@
  * This is the form to upload components, if you are not logged in you cannot get to this page.
  */
 
+import CodeMirror from "../partials/editor/CodeMirror";
+
 // Fetch categories data
 const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
   res.json()
@@ -81,7 +83,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     </div>
     <div>
       <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="w-full xl:w-[65%] px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
             for="TWCode"
@@ -94,11 +96,19 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             rows="4"
             placeholder={`<h1 class="text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500" x-on:click="">Hello world</h1>`}
           ></textarea>
+          <div class="border rounded overflow-hidden">
+            <CodeMirror
+              value={"<!-- Your HTML code Here -->"}
+              height="100px"
+              readonly={false}
+              client:only
+            />
+          </div>
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full xl:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="w-full xl:w-[65%] px-3 mb-6 md:mb-0">
           <label
             class="block uppercase tracking-wide text-gray-200 font-bold mb-2"
             for="JSCode"
@@ -111,6 +121,14 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             rows="4"
             placeholder={`function showAlert() { window.alert('Hello world');}`}
           ></textarea>
+          <div class="border rounded overflow-hidden">
+            <CodeMirror
+              value={"// Your JS goes here"}
+              height="100px"
+              readonly={false}
+              client:only
+            />
+          </div>
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
@@ -222,6 +240,9 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     const componentCategory = Number(
       form.querySelector<HTMLSelectElement>("#componentCategory").value
     );
+
+    // TDOO Recover tailwnind and javacript code from editors
+
     const tailwind = form.querySelector<HTMLTextAreaElement>("#TWCode").value;
     const javascript = form.querySelector<HTMLTextAreaElement>("#JSCode").value;
 

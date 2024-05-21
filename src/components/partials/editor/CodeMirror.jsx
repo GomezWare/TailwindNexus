@@ -5,9 +5,7 @@ import { html } from "@codemirror/lang-html";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 
 function App(props) {
-  const [value, setValue] = React.useState(
-    `console.log('hello world!');console.log('hello world!');console.log('hello world!');console.log('hello world!);`
-  );
+  const [value, setValue] = React.useState("val");
   const onChange = React.useCallback((val, viewUpdate) => {
     console.log("val:", val);
   }, []);
@@ -22,6 +20,7 @@ function App(props) {
       onChange={onChange}
       theme={dracula}
       readOnly={props.readonly}
+      client:only="astro"
     />
   );
 }
