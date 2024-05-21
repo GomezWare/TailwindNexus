@@ -14,15 +14,6 @@ interface Props {
 }
 const { userId, userAvatar, userName, commentDate, content, componentId } =
   Astro.props;
-
-const timestamp = new Date(commentDate * 1000);
-/**
- * Convert UnixTimestamp to ISO format
- */
-const date = timestamp
-  .toISOString()
-  .replace("T", " ")
-  .replace(/\.\d+Z$/, "");
 ---
 
 <div class="flex justify-start gap-4 bg-slate-700 p-4 lg:w-2/3 rounded">
@@ -32,9 +23,7 @@ const date = timestamp
   <div class="">
     <p>
       <a class="custom-link text-xl" href={"/users/" + userId}>{userName}</a>
-      <span class="ml-4">
-        {date}
-      </span>
+      <span class="dateConvert ml-4" data-date={commentDate}> </span>
     </p>
     <p class="mt-2 font-light">
       {content}
@@ -50,3 +39,25 @@ const date = timestamp
     }
   </div>
 </div>
+
+<script>
+  // This script is for convert time to user timezone and format unix timestamps
+  import { convertUnixTimestampToLocalTime } from "@utils/time";
+
+  // Event for convert all dates from UTC timestamps to user based timezone ISO String
+  // We have to wait until all dom is loaded
+  window.addEventListener("DOMContentLoaded", () => {
+    // Recover all dates
+    document.querySelectorAll(".dateConvert").forEach((date) => {
+      // get unix timestamp front frontmatter
+      const unixTimestamp = date.getAttribute("data-date");
+
+      // Convert the time using the fucntion and writting into the span element
+      // Timezone is obtain ny user navigator property
+      date.innerHTML = convertUnixTimestampToLocalTime(
+        unixTimestamp,
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+      );
+    });
+  });
+</script>

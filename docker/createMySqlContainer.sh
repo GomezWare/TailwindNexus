@@ -12,8 +12,7 @@ docker run --name tnexus-mysql \
   -e MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password \
   -p 3306:3306 \
   -v ./scripts:/docker-entrypoint-initdb.d \
-  -d mysql \
-  hwclock
+  -d mysql 
 
  else
    echo "Passwords do not match. Please try again."
