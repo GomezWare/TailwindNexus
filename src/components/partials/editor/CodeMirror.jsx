@@ -7,7 +7,16 @@ import { dracula } from "@uiw/codemirror-theme-dracula";
 function App(props) {
   const [value, setValue] = React.useState("val");
   const onChange = React.useCallback((val, viewUpdate) => {
-    console.log("val:", val);
+    if (props.haveEvent) {
+      const event = new CustomEvent(props.eventName, {
+        detail: {
+          content: val,
+        },
+      });
+      window.dispatchEvent(event);
+    }
+    setValue(val);
+    s;
   }, []);
   return (
     <CodeMirror
@@ -20,7 +29,6 @@ function App(props) {
       onChange={onChange}
       theme={dracula}
       readOnly={props.readonly}
-      client:only="astro"
     />
   );
 }

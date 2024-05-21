@@ -102,7 +102,7 @@ const { tailwind, javascript } = Astro.props;
           class="absolute p-1 !z-10 bg-slate-600 hover:bg-slate-500 active:bg-cyan-600 rounded border right-3 top-2"
           ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
-        <CodeMirror value={tailwind} height="100px" readonly={true} />
+        <CodeMirror value={tailwind} height="100px" readonly={true}  client:only/>
       </div>
       <div
         class="hidden relative w-full"
@@ -115,7 +115,7 @@ const { tailwind, javascript } = Astro.props;
           ><img class="w-9" src="/img/icons/copy.svg" alt="Copy code" /></button
         >
 
-        <CodeMirror value={javascript} height="100px" readonly={true} />
+        <CodeMirror value={javascript} height="100px" readonly={true} client:only />
       </div>
     </div>
   </div>
@@ -144,14 +144,6 @@ const { tailwind, javascript } = Astro.props;
   /**
    * Getting the Frontmatter variables via x-data
    */
-
-  // Tailwind source code (The code itself)
-  const tailwindCodeShower: HTMLElement =
-    document.querySelector("#tailwind-codeShow");
-
-  //  JavaScript source code (The code itself)
-  const javascriptCodeShower: HTMLElement =
-    document.querySelector("#js-codeShow");
 
   // Get the code from Astro props via attributes
   const TWCode = tailwindCodeContainer.getAttribute("data-code");
