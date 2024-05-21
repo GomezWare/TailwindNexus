@@ -1,6 +1,8 @@
+// TODO document Endpoint
 /**
  * This Endpoint return a JSON with all components
  * Uses the function getComponents in components services
+ *
  */
 
 // Imports
@@ -10,6 +12,7 @@ import {
   addComponent,
   getComponentAuthor,
   deleteComponent,
+  updateComponent,
 } from "@services/components";
 import { validateComponent } from "@utils/validateComponent";
 import { getSession } from "auth-astro/server";
@@ -38,8 +41,6 @@ export const GET: APIRoute = async () => {
 
 // POST
 export const POST: APIRoute = async ({ request }) => {
-  // TODO Generate thumbnail
-
   const session = await getSession(request);
 
   if (!session?.user) {
@@ -85,6 +86,75 @@ export const POST: APIRoute = async ({ request }) => {
         ]);
 
         return new Response(JSON.stringify(componentInsert));
+      } else {
+        return new Response(JSON.stringify("Validation Failed"), {
+          status: 403,
+          statusText: "Validation Failed",
+        });
+      }
+    }
+    return new Response(null, { status: 400, statusText: "Bad Request" });
+  } catch (err) {
+    console.log(err);
+    return new Response(null, { status: 500, statusText: "Server error" });
+  }
+};
+
+// PUT
+export const PUT: APIRoute = async ({ request }) => {
+  const session = await getSession(request);
+
+  if (!session?.user) {
+    return new Response(null, { status: 401, statusText: "User Unauthorized" });
+  }
+
+  try {
+    // Try to get the user id from the database
+    const userId = await checkUserMail(session?.user.email);
+
+    // If the POST body is not a JSON
+    if (request.headers.get("Content-Type") === "application/json") {
+      // Getting the JSON
+      const body = await request.json();
+      // Component data array
+      const component = {
+        componentId: body.componentId,
+        categoryId: body.categoryId,
+        userId: userId,
+        name: body.name,
+        description: body.description,
+        thumbnail: "",
+        needsAlpine: Boolean(body.needsAlpine),
+        needsCDN: Boolean(body.needsCDN),
+        tailwind: body.tailwind,
+        javascript: body.javascript,
+      };
+
+      // Check if comment belong to the user via getCommentAuthor function
+      if (userId != (await getComponentAuthor(component.componentId)))
+        return new Response(JSON.stringify([]), {
+          status: 401,
+          statusText: "user unauthorized",
+        });
+
+      // Validate data and make the request to the database
+      if (validateComponent(component)) {
+        // Generate component thumbnail
+        const thumbnail = await renderThumbnail(component.tailwind);
+
+        await updateComponent([
+          component.categoryId,
+          component.name,
+          component.description,
+          thumbnail,
+          component.needsAlpine,
+          component.needsCDN,
+          component.tailwind,
+          component.javascript,
+          component.componentId,
+        ]);
+
+        return new Response(JSON.stringify(true));
       } else {
         return new Response(JSON.stringify("Validation Failed"), {
           status: 403,

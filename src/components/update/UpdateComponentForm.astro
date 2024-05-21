@@ -11,10 +11,19 @@ interface Props {
   javascript;
   cdn;
   alpine;
+  componentId;
 }
 
-const { name, description, categoryId, tailwind, javascript, cdn, alpine } =
-  Astro.props;
+const {
+  name,
+  description,
+  categoryId,
+  tailwind,
+  javascript,
+  cdn,
+  alpine,
+  componentId,
+} = Astro.props;
 
 // Fetch categories data
 const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
@@ -198,7 +207,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
         id="submit"
         type="button"
         class="px-8 py-2 bg-slate-600 rounded border hover:bg-cyan-600 transition-colors w-auto"
-        >Submit Component</button
+        data-target={componentId}>Submit Component</button
       >
       <label for="clear" class="sr-only"> Clear forms </label>
       <input
@@ -300,6 +309,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       javascript: javascript,
       needsCDN: needsCDN,
       needsAlpine: needsAlpine,
+      componentId: submit.getAttribute("data-target"),
     };
 
     // Run validations via validations util
@@ -308,15 +318,15 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       submit.setAttribute("disabled", "disabled");
 
       // Show a loading message and appareance for usability
-      submit.innerHTML = "Uploading...";
+      submit.innerHTML = "Updating...";
       submit.classList.add("opacity-50");
 
       // Disable clear button too
       clear.setAttribute("disabled", "disabled");
       clear.classList.add("opacity-50");
-      // Send posting data to the server
+      // Send update data to the server
       fetch(window.location.origin + "/api/components", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -324,11 +334,11 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data.inserted == -1) {
+          if (data != true) {
             throw Error("Server Error");
           }
           window.location.href =
-            window.location.origin + "/components/" + data.inserted;
+            window.location.origin + "/components/" + request.componentId;
         })
         .catch((err) => {
           console.log(err);
