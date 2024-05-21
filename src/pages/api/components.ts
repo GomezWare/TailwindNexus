@@ -5,7 +5,12 @@
 
 // Imports
 import type { APIRoute } from "astro";
-import { getComponents, addComponent } from "@services/components";
+import {
+  getComponents,
+  addComponent,
+  getComponentAuthor,
+  deleteComponent,
+} from "@services/components";
 import { validateComponent } from "@utils/validateComponent";
 import { getSession } from "auth-astro/server";
 import { checkUserMail } from "@services/auth";
@@ -91,5 +96,63 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (err) {
     console.log(err);
     return new Response(null, { status: 500, statusText: "Server error" });
+  }
+};
+
+// DELETE
+export const DELETE: APIRoute = async ({ request }) => {
+  // Retrieving the session using request object via headers cookie
+  const session = await getSession(request);
+
+  // If there is no session send a 401 response
+  if (!session?.user)
+    return new Response(JSON.stringify([]), {
+      status: 401,
+      statusText: "User Unauthorized",
+    });
+
+  try {
+    // If the POST body is not a JSON
+    if (request.headers.get("Content-Type") === "application/json") {
+      // Check if user exist and get the id
+      const userId = await checkUserMail(session?.user.email);
+
+      // Getting the JSON
+      const body = await request.json();
+
+      // Getting the id of the compoenent that will be deleted
+      const componentId = body.componentId;
+
+      // Check if comment belong to the user via getCommentAuthor function
+      if (userId != (await getComponentAuthor(componentId)))
+        return new Response(JSON.stringify([]), {
+          status: 401,
+          statusText: "user unauthorized",
+        });
+
+      // Call function to delete a comment
+      const response = await deleteComponent(componentId);
+
+      // Check if component was deleted
+      if (!response) {
+        throw new Error("Component not deleted");
+      }
+
+      // Return the response with 200 status
+      return new Response(JSON.stringify({ deleted: response }));
+    } else {
+      // API Response with bad request status
+      return new Response(JSON.stringify([]), {
+        status: 400,
+        statusText: "bad request",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    // API Response with bad request status
+    return new Response(JSON.stringify([]), {
+      status: 500,
+      statusText: "Internal Server Error",
+    });
   }
 };

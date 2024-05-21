@@ -88,7 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 };
 
-// POST
+// DELETE
 export const DELETE: APIRoute = async ({ request }) => {
   // Retrieving the session using request object via headers cookie
   const session = await getSession(request);

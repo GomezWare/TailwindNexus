@@ -6,7 +6,7 @@
 import Layout from "../layouts/Layout.astro";
 import MyInformation from "../components/myaccount/MyInformation.astro";
 import UserSharer from "src/components/user/UserSharer.astro";
-import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
+import YourComponentCard from "src/components/myaccount/YourComponentCard.astro";
 import YourCommentCard from "src/components/myaccount/YourCommentCard.astro";
 import { getSession } from "auth-astro/server";
 import { registerUser, checkUserMail } from "@services/auth";
@@ -87,13 +87,12 @@ if (user.comments.length == 0) {
         haveComponents ? (
           <Fragment>
             {user.components.map((component) => (
-              <ComponentCard
+              <YourComponentCard
                 id={component.id}
                 name={component.name}
                 thumbnail={component.thumbnail}
                 needsAlpine={component.needsAlpine}
                 needsCDN={component.needsCDN}
-                userData={user}
                 totalComments={component.totalComments}
               />
             ))}
@@ -141,14 +140,14 @@ if (user.comments.length == 0) {
   </section>
 
   {
-    /* This is a custom dialog for confirm the delete of comments and components */
+    /* This is a custom dialog for confirm the delete of comments */
   }
   <dialog
     id="deleteDialog"
-    class="rounded-lg p-6  bg-slate-600 text-white shadow-lg"
+    class="rounded-lg p-6 bg-slate-600 text-white shadow-lg"
   >
     <form method="dialog">
-      <p class="text-lg">Do you want to proceed with deletion?</p>
+      <p class="text-lg">Do you want to delete this comment?</p>
       <menu class="flex justify-end gap-4 mt-4">
         <button
           id="cancelButton"
@@ -157,6 +156,29 @@ if (user.comments.length == 0) {
         >
         <button
           id="confirmButton"
+          class="px-4 py-2 border bg-rose-600 hover:bg-rose-500 rounded"
+          >Delete</button
+        >
+      </menu>
+    </form>
+  </dialog>
+  {
+    /* This is a custom dialog for confirm the delete of compoenents */
+  }
+  <dialog
+    id="deleteDialogComponent"
+    class="rounded-lg p-6 bg-slate-600 text-white shadow-lg"
+  >
+    <form method="dialog">
+      <p class="text-lg">Do you want to delete this component?</p>
+      <menu class="flex justify-end gap-4 mt-4">
+        <button
+          id="cancelButtonComponent"
+          class="px-4 py-2 border bg-slate-700 hover:bg-slate-600 rounded"
+          >Cancel</button
+        >
+        <button
+          id="confirmButtonComponent"
           class="px-4 py-2 border bg-rose-600 hover:bg-rose-500 rounded"
           >Delete</button
         >
