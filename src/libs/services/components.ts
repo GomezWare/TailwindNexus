@@ -393,6 +393,36 @@ VALUES
 };
 
 /**
+ * Funcion to update components from the database, its verifierd on API
+ *
+ * @param {Array} componentData
+ * @return {object}
+ */
+const updateComponent = async (componentData) => {
+  try {
+    const [rows, fields] = await dbQuery(
+      `
+      UPDATE components SET
+    category_id = ?,
+    name = ?,
+    description = ?,
+    thumbnail = ?,
+    needs_alpine = ?,
+    needs_cdn = ?,
+    tailwind_code = ?,
+    javascript_code = ?,
+    updated_at = UNIX_TIMESTAMP ()
+WHERE
+    component_id = ?`,
+      componentData
+    );
+    return true;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+/**
  * Function to get the author of a component via a ID
  *
  * @async
@@ -457,5 +487,6 @@ export {
   getBestComponent,
   getComponentAuthor,
   addComponent,
+  updateComponent,
   deleteComponent,
 };
