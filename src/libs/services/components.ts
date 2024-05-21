@@ -424,11 +424,38 @@ const getComponentAuthor = async (componentId) => {
   }
 };
 
+/**
+ * Function to delete a component from the DB
+ *
+ * @async
+ * @param {number}
+ * @returns {boolean}
+ */
+const deleteComponent = async (componentId) => {
+  try {
+    // Query to DB
+    const [userDataRows, userDataFields] = await dbQuery(
+      `
+      DELETE FROM components WHERE component_id = ?;
+      `,
+      [componentId]
+    );
+
+    // If there is any affected rowss return true else return false
+    return true;
+  } catch (error) {
+    console.log(error);
+    // Special return if server is down
+    return false;
+  }
+};
+
 export {
   getComponents,
   getComponent,
   getLatest,
   getBestComponent,
-  addComponent,
   getComponentAuthor,
+  addComponent,
+  deleteComponent,
 };

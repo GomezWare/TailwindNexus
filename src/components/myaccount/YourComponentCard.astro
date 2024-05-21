@@ -1,0 +1,162 @@
+---
+import type { Code } from "astro:components";
+
+/**
+ * component card, provides basic data to the user about the component.
+ *
+ * Reviceves the components data via props
+ */
+
+interface Props {
+  id: Number;
+  name: string;
+  thumbnail: string;
+  needsAlpine;
+  needsCDN;
+  totalComments: Number;
+}
+
+const { id, name, thumbnail, needsAlpine, needsCDN, totalComments } =
+  Astro.props;
+
+let alpine;
+let cdn;
+/*
+ * FIX booleans doesnt work because needs conversions
+ * Conversions via if-else
+ */
+
+if (needsAlpine) {
+  alpine = true;
+} else {
+  alpine = false;
+}
+
+if (needsCDN) {
+  cdn = true;
+} else {
+  cdn = false;
+}
+---
+
+<div class="flex flex-col border-slate-600 border p-1.5 rounded">
+  <a href={`/components/${id}`} class="relative">
+    <img src={thumbnail} class="w-full" alt="Component preview" />
+    <div class="absolute bottom-2 right-3 flex gap-4">
+      {
+        alpine && (
+          <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+            <img class="w-7" src="/img/icons/alpine.svg" alt="Tailwind logo" />
+            AlpineJS
+          </div>
+        )
+      }
+      {
+        cdn && (
+          <div class="bg-slate-700 p-1 rounded text-sm flex justify-evenly gap-1 items-center border-slate-900 border">
+            <img
+              class="w-7"
+              src="/img/icons/tailwind.svg"
+              alt="Tailwind logo"
+            />
+            Tailwind CDN
+          </div>
+        )
+      }
+    </div>
+  </a>
+  <div class="mt-2">
+    <a
+      href={"/components/" + id}
+      class="font-bold text-xl line-clamp-1 custom-link px-5">{name}</a
+    >
+    <div class="flex justify-between mt-3">
+      <div class="flex justify-center items-center gap-1">
+        <img src="/img/icons/comments.svg" alt="Comments icon" />
+        <span class="text-xl font-bold">{totalComments}</span>
+      </div>
+      <div class="flex flex-col items-center justify-end gap-3 items-bottom">
+        <a
+          class="px-3 py-1 bg-teal-600 rounded border hover:bg-teal-500 transition-colors"
+          href={"/components/update/" + id}>Update Component</a
+        >
+        <button
+          class="deleteComponentButton px-3 py-1 bg-red-600 rounded border font-bold hover:bg-red-500 transition-colors"
+          data-target={id}>Delete Component</button
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Event to wait for DOM Load to avoid errors
+  document.addEventListener("DOMContentLoaded", () => {
+    // Revover dialog element from my account page
+    const dialog = document.querySelector(
+      "#deleteDialogComponent"
+    ) as HTMLDialogElement;
+    // Global variable to set the component that will be deleted (Awaiting confirmartion)
+    let componentIdToDelete = null;
+
+    // Event if user wants to delete a comment (Delete Comment Button)
+    document.querySelectorAll(".deleteComponentButton").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        // Get the current target for recover the componentId
+        const target = event.currentTarget;
+        if (target instanceof HTMLElement) {
+          // Getting the component id from frontmatter
+          componentIdToDelete = target.getAttribute("data-target");
+          // Shows the confirm dialog if is all ok
+          if (dialog && componentIdToDelete) {
+            dialog.showModal();
+          }
+        }
+      });
+    });
+
+    // Event if user decide to delete the component (The button is rendered in my account page)
+    document
+      .querySelector("#confirmButtonComponent")
+      .addEventListener("click", async () => {
+        // Check if there was a id in the global variable
+        if (componentIdToDelete) {
+          // Call to the API Endpoint
+          await fetch(window.location.origin + "/api/components", {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json", // Indicates the content
+            },
+            body: JSON.stringify({
+              componentId: componentIdToDelete,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // Check if the component was deleted
+              if (data.deleted) {
+                // Reload page to show the component was deleted
+                window.location.href = window.location.href;
+              } else {
+                alert("Error deleting component");
+              }
+            })
+            .catch((error) => {
+              // Show error if the component was not deleted
+              alert("Error deleting component");
+            });
+          dialog.close();
+        }
+      });
+
+    // Event if user decide to not delete a comment
+    document
+      .querySelector("#cancelButtonComponent")
+      .addEventListener("click", () => {
+        // Close the dialog
+        dialog.close();
+        // Reset global variable to null
+        componentIdToDelete = null;
+      });
+  });
+</script>

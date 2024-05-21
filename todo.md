@@ -2,13 +2,9 @@
 
 ## FIXES
 
-[ ] Remove password field from model
-
 ## DEVELOP
 
 [ ] Code editors and viewers
-[ ] Component card for my profile
-[ ] Component deletion system
 [ ] Component modify system
 
 ## DEPLOY
