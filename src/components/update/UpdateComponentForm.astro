@@ -3,6 +3,19 @@
  * This is the form to upload components, if you are not logged in you cannot get to this page.
  */
 
+interface Props {
+  name;
+  description;
+  categoryId;
+  tailwind;
+  javascript;
+  cdn;
+  alpine;
+}
+
+const { name, description, categoryId, tailwind, javascript, cdn, alpine } =
+  Astro.props;
+
 // Fetch categories data
 const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
   res.json()
@@ -25,6 +38,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             id="componentName"
             type="text"
             placeholder="My component"
+            value={name}
           />
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
@@ -41,7 +55,8 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="componentDescription"
             rows="4"
-            placeholder="This is my nice component"></textarea>
+            placeholder="This is my nice component">{description}</textarea
+          >
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
@@ -59,9 +74,15 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             id="componentCategory"
           >
             {
-              categories.map((category) => (
-                <option value={category.id}>{category.name}</option>
-              ))
+              categories.map((category) =>
+                category.id == categoryId ? (
+                  <option selected value={category.id}>
+                    {category.name}
+                  </option>
+                ) : (
+                  <option value={category.id}>{category.name}</option>
+                )
+              )
             }
           </select>
           <div
@@ -93,7 +114,8 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             id="TWCode"
             rows="4"
             placeholder={`<h1 class="text-teal-300 w-full h-96 text-3xl sm:bg-cyan-500 md:bg-red-500" x-on:click="">Hello world</h1>`}
-          ></textarea>
+            >{tailwind}</textarea
+          >
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
@@ -110,7 +132,8 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             id="JSCode"
             rows="4"
             placeholder={`function showAlert() { window.alert('Hello world');}`}
-          ></textarea>
+            >{javascript}</textarea
+          >
           <p class="text-red-600 italic">Please fill out this field.</p>
         </div>
       </div>
@@ -122,14 +145,46 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             class="flex items-center gap-4 uppercase tracking-wide text-gray-200 font-bold mb-2 text-sm"
             for="cdn"
           >
-            <input type="checkbox" id="cdn" class="size-6 accent-teal-400" />
+            {
+              cdn ? (
+                <input
+                  type="checkbox"
+                  id="cdn"
+                  class="size-6 accent-teal-400"
+                  checked
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  id="cdn"
+                  class="size-6 accent-teal-400"
+                />
+              )
+            }
+
             Works on Tailwind CDN?
           </label>
           <label
             class="flex items-center gap-4 uppercase tracking-wide text-gray-200 font-bold mb-2 text-sm"
             for="alpine"
           >
-            <input type="checkbox" id="alpine" class="size-6 accent-teal-400" />
+            {
+              alpine ? (
+                <input
+                  type="checkbox"
+                  id="alpine"
+                  class="size-6 accent-teal-400"
+                  checked
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  id="alpine"
+                  class="size-6 accent-teal-400"
+                />
+              )
+            }
+
             Need's Alpine for functions?
           </label>
         </div>
@@ -235,6 +290,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     const clear = form.querySelector<HTMLInputElement>(
       "#clear"
     ) as HTMLInputElement;
+
     // request body buiilded to be Stringify
     const request = {
       categoryId: componentCategory,
@@ -258,7 +314,6 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
       // Disable clear button too
       clear.setAttribute("disabled", "disabled");
       clear.classList.add("opacity-50");
-
       // Send posting data to the server
       fetch(window.location.origin + "/api/components", {
         method: "POST",

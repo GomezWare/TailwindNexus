@@ -1,0 +1,45 @@
+---
+/**
+ * This is the page where the components are uploaded
+ */
+import Layout from "../../layouts/Layout.astro";
+
+import UpdateComponentForm from "../../components/update/UpdateComponentForm.astro";
+import { getSession } from "auth-astro/server";
+// @ts-expect-error
+import { checkUserMail } from "@services/auth";
+
+// Check if there is a session else redirect to login page
+const session = await getSession(Astro.request);
+if (!session?.user) return Astro.redirect("login");
+
+// Get componentId via Astro params
+const { id } = Astro.params;
+
+// Get component data
+const component = await fetch(Astro.url.origin + "/api/component/" + id).then(
+  (data) => data.json()
+);
+
+// Check if component exists
+if (component.length == 0) {
+  return Astro.redirect("/404");
+}
+
+// Check if user is the owner of the component else redirect user
+if (component.user.id != (await checkUserMail(session.user.email))) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title="Component upload" footer={true}>
+  <UpdateComponentForm
+    name={component.name}
+    description={component.description}
+    categoryId={component.category.id}
+    tailwind={component.tailwind}
+    javascript={component.javascript}
+    cdn={component.needsCdn}
+    alpine={component.needsAlpine}
+  />
+</Layout>
