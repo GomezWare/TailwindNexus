@@ -6,7 +6,9 @@
 docker run --name tnexus-app \
   -p 4321:4321 \
   -v ./..:/usr/src/app \
-  -d node:22
+  -d node:22 \
+  -v /etc/timezone:/etc/timezone:ro \  
+  -v /etc/localtime:/etc/localtime:ro \
 
  else
    echo "Passwords do not match. Please try again."

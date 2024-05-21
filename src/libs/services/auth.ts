@@ -20,8 +20,8 @@ const registerUser = async (name, email, avatar) => {
     // Register user
     const [userDataRows, userDataFields] = await dbQuery(
       `
-      INSERT INTO users (name, email, password, avatar, created_at, updated_at) 
-      VALUES (?, ?, "", ?, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());`,
+      INSERT INTO users (name, email, avatar, created_at, updated_at) 
+      VALUES (?, ?, ?, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());`,
       [name, email, avatar]
     );
     return true;

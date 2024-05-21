@@ -22,8 +22,7 @@ const getUser = async (id: Number) => {
           user_id AS id,
           name,
           avatar,
-          email,
-          password
+          email
       FROM 
           users
       WHERE
