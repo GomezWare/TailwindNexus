@@ -16,7 +16,6 @@ function App(props) {
       window.dispatchEvent(event);
     }
     setValue(val);
-    s;
   }, []);
   return (
     <CodeMirror

@@ -186,7 +186,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
   // Code global variables for capturing an event
 
   let tailwind = "";
-  let javascript = "";
+  let javascript = "// This component doesnt have JavaScript code";
 
   // Event for capturing the contents of the code editors when user change it
 
@@ -198,7 +198,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     javascript = event.detail.content;
   });
 
-  // Get modals
+  // Get modal
   const modal: HTMLDialogElement = document.querySelector("#errorModal");
 
   // Event listener to close the modal
@@ -235,7 +235,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     const clear = form.querySelector<HTMLInputElement>(
       "#clear"
     ) as HTMLInputElement;
-    // request body buiilded to be Stringify
+    // request body builded to be Stringified
     const request = {
       categoryId: componentCategory,
       name: componentName,
