@@ -27,7 +27,7 @@ const getUser = async (id: Number) => {
       FROM 
           users
       WHERE
-          user_id = ?
+          user_id = ?;
       `,
       [id]
     );
@@ -52,6 +52,8 @@ const getUser = async (id: Number) => {
           c.user_id = ?
       GROUP BY
           c.component_id
+      ORDER BY
+      c.updated_at DESC;
       `,
       [id]
     );
@@ -71,7 +73,9 @@ const getUser = async (id: Number) => {
   JOIN
       components comp ON c.component_id = comp.component_id
   WHERE
-      c.user_id = ?;
+      c.user_id = ?
+  ORDER BY
+      c.created_at DESC;
       `,
       [id]
     );
@@ -89,6 +93,8 @@ const getUser = async (id: Number) => {
           users u ON f.follower_id = u.user_id
       WHERE
           f.followed_id = ?
+      ORDER BY
+          f.created_at DESC;
       `,
       [id]
     );
@@ -107,6 +113,8 @@ const getUser = async (id: Number) => {
           users u ON f.followed_id = u.user_id
       WHERE
           f.follower_id = ?
+      ORDER BY
+          f.created_at DESC;
       `,
       [id]
     );

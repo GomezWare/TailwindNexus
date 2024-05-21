@@ -2,9 +2,7 @@
 
 ## FIXES
 
-[ ] !!! Add loading to add component fetch (Upload forms) !!!
 [ ] Remove password field from model
-[ ] User show latest components and comments
 
 ## DEVELOP
 
