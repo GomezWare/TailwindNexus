@@ -206,7 +206,9 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
     });
   });
 
-  document.querySelector("#submit").addEventListener("click", () => {
+  // Recover sbmit button
+  const submit = document.querySelector("#submit");
+  submit.addEventListener("click", () => {
     // Obtain fields values
     const componentName =
       form.querySelector<HTMLInputElement>("#componentName").value;
@@ -243,6 +245,12 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
 
     // Run validations via validations util
     if (validateComponentClient(request)) {
+      // Disable submit button to avoid user making more petitions and
+      submit.setAttribute("disabled", "disabled");
+
+      // Show a loading message and appareance for usability
+      submit.innerHTML = "Uploading...";
+      submit.classList.add("opacity-50");
       // Send posting data to the server
       fetch(window.location.origin + "/api/components", {
         method: "POST",
