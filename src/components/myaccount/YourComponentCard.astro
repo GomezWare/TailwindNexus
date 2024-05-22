@@ -136,7 +136,7 @@ if (needsCDN) {
               // Check if the component was deleted
               if (data.deleted) {
                 // Reload page to show the component was deleted
-                window.location.href = window.location.href;
+                window.location.reload()
               } else {
                 alert("Error deleting component");
               }
