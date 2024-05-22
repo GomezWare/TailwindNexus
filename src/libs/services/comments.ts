@@ -1,10 +1,10 @@
-// TODO Document this service when its finally complete
 import { dbQuery } from "@utils/dbQuery";
 
 /**
  * Add comments to the database
- * @param {Array<any>}
- * @return {Array<Object>}
+ * +@async
+ * @param {Array<any>} comment data
+ * @return {Array<Boolean>}
  */
 
 const addComment = async (comment) => {
@@ -30,7 +30,7 @@ VALUES
       comment
     );
 
-    // Retuern result
+    // Return result
     return { inserted: true };
   } catch (err) {
     // If there is an error

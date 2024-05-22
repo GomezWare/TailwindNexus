@@ -1,10 +1,9 @@
-// TODO Document service when finished
-
 import { dbQuery } from "@utils/dbQuery";
 
 /**
  * Return components filtered by param from database
  *
+ * @async
  * @param {String}
  * @return {Array<Object>}
  */

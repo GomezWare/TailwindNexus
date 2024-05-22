@@ -1,6 +1,10 @@
-// TODO Document this service when its finally complete
 import { dbQuery } from "@utils/dbQuery";
 
+/**
+ * Fucntion to return basic category data from the DB
+ * @async
+ * @return {Object, undefined}
+ */
 const getMenu = async () => {
   // Query for get Menu JSON from MySQL using dbQuery util
   try {
@@ -40,7 +44,7 @@ LEFT JOIN
     // Data is sended to the API
     return categories;
   } catch (err) {
-    // If there is
+    // If there is a erro return undefined
     console.log(err);
     return undefined;
   }
@@ -49,8 +53,9 @@ LEFT JOIN
 /**
  * Function to get a category data from ID param
  *
+ * @async
  * @param {Number} id
- * @return {Object}
+ * @return {Object, undefined}
  */
 const getCategory = async (id) => {
   try {
@@ -103,8 +108,10 @@ GROUP BY
     we pass an array we need to get only the first row*/
     const category = rows[0];
 
+    // Returning the data
     return category;
   } catch (err) {
+    // If there was an error return undefined
     console.log(err);
     return undefined;
   }

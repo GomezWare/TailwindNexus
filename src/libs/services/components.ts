@@ -1,10 +1,10 @@
-// TODO Document this service when its finally complete
 import { dbQuery } from "@utils/dbQuery";
 
 /**
  * Return all components from the Database
  *
- * @return {Array<Object>}
+ * @async
+ * @return {Array<Object>, undefined}
  */
 const getComponents = async () => {
   try {
@@ -77,7 +77,7 @@ GROUP BY
     // Return all components
     return components;
   } catch (err) {
-    // If there is an error
+    // If there is an error return undefined
     console.log(err);
     return undefined;
   }
@@ -86,12 +86,13 @@ GROUP BY
 /**
  * Return a component from it ID
  *
+ * @async
  * @param id {Number}
- * @returns {Object}
+ * @returns {Object, undefined}
  */
 const getComponent = async (id) => {
   try {
-    // Execting the query in the DB
+    // Execting the query in the DB with id param
     const [rows, fields] = await dbQuery(
       `SELECT 
     components.component_id AS id,
@@ -166,7 +167,7 @@ GROUP BY
     // Return all components
     return component;
   } catch (err) {
-    // If there is an error
+    // If there is an error return undefined
     console.log(err);
     return undefined;
   }
@@ -175,7 +176,8 @@ GROUP BY
 /**
  * Return the best 15 componentes (Components with most comments)
  *
- * @return {Object}
+ * @async
+ * @return {Object, undefined}
  */
 const getBestComponent = async () => {
   try {
@@ -252,7 +254,7 @@ const getBestComponent = async () => {
     // Return best components
     return components;
   } catch (err) {
-    // If there is an error
+    // If there is an error return undefined
     console.log(err);
     return undefined;
   }
@@ -261,7 +263,8 @@ const getBestComponent = async () => {
 /**
  * Return the last 15 components from the database
  *
- * @return {*}
+ * @async
+ * @return {object, undefined}
  */
 
 const getLatest = async () => {
@@ -339,7 +342,7 @@ LIMIT 15;
     // Return latest components
     return components;
   } catch (err) {
-    // If there is an error
+    // If there is an error return undefined
     console.log(err);
     return undefined;
   }
@@ -348,10 +351,12 @@ LIMIT 15;
 /**
  * Funcion to add components to the database, its verifierd on API
  *
+ * @async
  * @param {Array} componentData
  * @return {object}
  */
 const addComponent = async (componentData) => {
+  // Make the INSERT SQL query inserting via prepared statmen array
   try {
     const [rows, fields] = await dbQuery(
       `
@@ -385,20 +390,25 @@ VALUES
     );`,
       componentData
     );
+
+    // If data was inserted return component inserted ID
     return { inserted: rows["insertId"] };
   } catch (err) {
+    // If there was an error return a negative insertion ID
     console.log(err);
     return { inserted: -1 };
   }
 };
 
 /**
- * Funcion to update components from the database, its verifierd on API
+ * Function to update components from the database, its verifierd on API
  *
+ * @async
  * @param {Array} componentData
- * @return {object}
+ * @return {boolean}
  */
 const updateComponent = async (componentData) => {
+  // Make the INSERT SQL query inserting via prepared statmen array
   try {
     const [rows, fields] = await dbQuery(
       `
@@ -416,8 +426,11 @@ WHERE
     component_id = ?`,
       componentData
     );
+
+    // If the component was updated return true
     return true;
   } catch (err) {
+    // If there was an error return false
     console.log(err);
     return false;
   }
@@ -471,7 +484,7 @@ const deleteComponent = async (componentId) => {
       [componentId]
     );
 
-    // If there is any affected rowss return true else return false
+    // If there is any affected rows return true else return false
     return true;
   } catch (error) {
     console.log(error);

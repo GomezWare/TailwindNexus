@@ -6,7 +6,7 @@
       class="absolute -mt-24 w-36 right-1/2 translate-x-1/2 pointer-events-none shadow-slate-50"
       src="/img/logos/TailwindNexus.svg"
     />
-    
+
     <div class="p-3 pt-24">
       <h2 class="text-center text-2xl font-semibold mb-4">
         Join Tailwind Nexus, today!
@@ -60,62 +60,71 @@
 </section>
 
 <script>
-  // TODO Document this
-  // Auth event listener
+  // Import singIn function from authjs library
   const { signIn } = await import("auth-astro/client");
+
+  // Event listener for github button
   document.querySelector("#git-login").addEventListener("click", async () => {
-    const userData = await signIn("github", {
+    // Use AuthJS library to login
+    await signIn("github", {
       redirect: false,
       callbackUrl: `${window.location.origin}/myaccount`,
     });
-
-    console.log(userData);
   });
+  // Event listener for google button
   document
     .querySelector("#google-login")
     .addEventListener("click", async () => {
-      const userData = await signIn("google", {
+      await signIn("google", {
+        // Use AuthJS library to login
         redirect: false,
         callbackUrl: `${window.location.origin}/myaccount`,
       });
-
-      console.log(userData);
     });
+
+  // Event listener for github button
   document
     .querySelector("#facebook-login")
     .addEventListener("click", async () => {
-      const userData = await signIn("facebook", {
+      // Use AuthJS library to login
+      await signIn("facebook", {
         redirect: false,
         callbackUrl: `${window.location.origin}/myaccount`,
       });
-
-      console.log(userData);
     });
 
   // buttons function animation for usability to the user since page is only login
+
+  // Recover DOM Elements
   const buttons = document.querySelector("#buttons");
-
   const loginTab = document.querySelector("#login-tab");
-
   const signinTab = document.querySelector("#signin-tab");
 
+  // Timeout to make the fade away animation
   const fadeAnimation = () => {
+    // Set opacity to 0
     buttons.classList.add("opacity-0");
     setTimeout(() => {
+      // Set opacity normal again
       buttons.classList.remove("opacity-0");
     }, 300);
   };
 
+  // Click listener to activate the login tab
   loginTab.addEventListener("click", () => {
+    // Do the animation
     fadeAnimation();
 
+    // Activate this tab and deactivate the other if it was active
     loginTab.classList.add("custom-button-active");
     signinTab.classList.remove("custom-button-active");
   });
 
+  // Click listener to activate the singin tab
   signinTab.addEventListener("click", () => {
     fadeAnimation();
 
+    // Activate this tab and deactivate the other if it was active
     loginTab.classList.remove("custom-button-active");
     signinTab.classList.add("custom-button-active");
   });

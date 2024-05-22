@@ -1,5 +1,4 @@
 ---
-// TODO More documentation
 /**
  * This is the search page, it will show the category indicated in the url
  *
@@ -13,6 +12,7 @@ import ComponentCard from "src/components/partials/cards/ComponentCard.astro";
 
 // Get search query via Astro params with Astro.url utility
 const query = Astro.url.searchParams.get("q");
+
 // Fetch data from the API using a POST request
 const searchResults = await fetch(Astro.url.origin + "/api/search", {
   method: "POST",

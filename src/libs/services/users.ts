@@ -1,13 +1,11 @@
-// TODO Document service
-
 import { dbQuery } from "@utils/dbQuery";
 
 /**
  * Return all information of a user
  *
+ * @async
  * @param {Number} id
  * @return {object}
- *
  */
 const getUser = async (id: Number) => {
   try {
@@ -79,45 +77,6 @@ const getUser = async (id: Number) => {
       [id]
     );
 
-    // Query to get user followers
-    const [followersRows, followersFields] = await dbQuery(
-      `
-      SELECT 
-          u.user_id AS id,
-          u.name,
-          u.avatar
-      FROM 
-          follow f
-      JOIN
-          users u ON f.follower_id = u.user_id
-      WHERE
-          f.followed_id = ?
-      ORDER BY
-          f.created_at DESC;
-      `,
-      [id]
-    );
-
-    // Query to get users that follow the user (Followed)
-
-    const [followingRows, followingFields] = await dbQuery(
-      `
-      SELECT 
-          u.user_id AS id,
-          u.name,
-          u.avatar
-      FROM 
-          follow f
-      JOIN
-          users u ON f.followed_id = u.user_id
-      WHERE
-          f.follower_id = ?
-      ORDER BY
-          f.created_at DESC;
-      `,
-      [id]
-    );
-
     // Build the object with all the queried data
     const user = {
       id: userDataRows[0].id,
@@ -135,12 +94,12 @@ const getUser = async (id: Number) => {
         totalComments: component.totalComments || 0, // If totalComments is null, default to 0
       })),
       comments: commentsRows || [],
-      followers: followersRows || [],
-      following: followingRows || [],
     };
 
+    // Return user Object
     return user;
   } catch (error) {
+    // If there is an error return undefined
     return undefined;
   }
 };
@@ -150,6 +109,8 @@ const getUser = async (id: Number) => {
  */
 const getTopDevelopers = async () => {
   try {
+
+    // Executing the query in the database
     const [userDataRows, userDataFields] = await dbQuery(
       `
       SELECT
@@ -168,8 +129,11 @@ const getTopDevelopers = async () => {
   LIMIT 10;
       `
     );
+
+    // Return users array with object
     return userDataRows;
   } catch (error) {
+    // If there is a error return undefined
     console.log(error);
     return undefined;
   }
