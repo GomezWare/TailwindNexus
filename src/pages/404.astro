@@ -4,17 +4,6 @@
  */
 import Layout from "../layouts/Layout.astro";
 
-export const prerender = true;
-
-/**
- * If a user goes to a incorrect route for example /component/noExist
- * Even if Astro already redirects to the 404 page, this way we ensure that the routes are followed and the links to the resources are not broken.
- */
-
-if (Astro.url.pathname != "/404") {
-  return Astro.redirect("/404");
-}
-
 /* Checks if the server is under maintenance and assigns the status
  * for display in the page.
  */

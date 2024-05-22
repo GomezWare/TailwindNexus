@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "server": "export HOST=0.0.0.0 && node ./dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
