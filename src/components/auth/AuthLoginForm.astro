@@ -20,7 +20,7 @@
       <div class="flex pt-4 font-bold mb-8">
         <button
           id="login-tab"
-          class="custom-button-active hover:border-teal-200 hover:text-teal-300 text-xl mx-auto border-b-2 px-6"
+          class="border-teal-400 text-teal-400 hover:border-teal-200 hover:text-teal-300 text-xl mx-auto border-b-2 px-6"
           >Login</button
         >
         <button
@@ -122,8 +122,10 @@
     fadeAnimation();
 
     // Activate this tab and deactivate the other if it was active
-    loginTab.classList.add("custom-button-active");
-    signinTab.classList.remove("custom-button-active");
+    loginTab.classList.add("border-teal-400 ");
+    loginTab.classList.add("text-teal-400 ");
+    signinTab.classList.remove("border-teal-400");
+    signinTab.classList.remove("text-teal-400");
   });
 
   // Click listener to activate the singin tab
@@ -131,7 +133,9 @@
     fadeAnimation();
 
     // Activate this tab and deactivate the other if it was active
-    loginTab.classList.remove("custom-button-active");
-    signinTab.classList.add("custom-button-active");
+    loginTab.classList.remove("border-teal-400 ");
+    loginTab.classList.remove("text-teal-400 ");
+    signinTab.classList.add("border-teal-400");
+    signinTab.classList.add("text-teal-400");
   });
 </script>

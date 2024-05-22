@@ -10,9 +10,12 @@ export default defineConfig({
   integrations: [tailwind(), auth(), react()],
   output: "server",
   devToolbar: {
-    enabled: false
+    enabled: false,
   },
   adapter: node({
-    mode: "standalone"
-  })
+    mode: "standalone",
+  }),
+  server: {
+    port: 80,
+  },
 });

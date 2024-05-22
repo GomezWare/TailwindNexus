@@ -13,6 +13,7 @@ WORKDIR /usr/src/app
 COPY ./*.json ./
 COPY ./src ./src
 COPY ./public ./public
+COPY ./upload ./upload
 COPY ./.env ./
 COPY ./*.mjs ./
 
@@ -24,10 +25,7 @@ RUN npm i
 RUN npm run build
 
 
-EXPOSE 4321
+EXPOSE 80
 
 ENV HOST="0.0.0.0"
-# CMD [ "node", "./ecommerce/dist/server.js"]
-#CMD [ "npm", "run", "start"]
-#CMD [ "HOST=\"0.0.0.0\" && node", "./dist/server/entry.mjs"]
 CMD [ "node", "./dist/server/entry.mjs"]
