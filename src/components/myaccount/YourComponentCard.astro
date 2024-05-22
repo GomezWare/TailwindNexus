@@ -1,10 +1,9 @@
 ---
-import type { Code } from "astro:components";
-
 /**
  * component card, provides basic data to the user about the component.
  *
  * Reviceves the components data via props
+ * Also have the functions to erase or modify components because its your component
  */
 
 interface Props {
@@ -136,7 +135,7 @@ if (needsCDN) {
               // Check if the component was deleted
               if (data.deleted) {
                 // Reload page to show the component was deleted
-                window.location.reload()
+                window.location.reload();
               } else {
                 alert("Error deleting component");
               }

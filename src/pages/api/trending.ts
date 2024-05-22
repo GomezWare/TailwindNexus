@@ -1,6 +1,5 @@
 /**
- * This Endpoint return a JSON with all components ordered by creation date
- * Uses the function getLatest in components services
+ * This Endpoint return a JSON with all components ordered by comment number
  */
 
 // Imports

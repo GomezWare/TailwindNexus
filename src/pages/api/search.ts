@@ -1,3 +1,7 @@
+/**
+ * Search endpoint 
+ */
+
 import type { APIRoute } from "astro";
 import { getComponentsByQuery } from "@services/search";
 

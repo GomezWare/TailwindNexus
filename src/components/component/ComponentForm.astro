@@ -1,4 +1,7 @@
 ---
+/**
+ * This compoent is for upload comments to a component
+ */
 import { getSession } from "auth-astro/server";
 
 interface Props {
@@ -8,6 +11,7 @@ interface Props {
 // This property is inserted via a data-x attribute
 const { componentId } = Astro.props;
 
+// Retrieving the session
 const session = await getSession(Astro.request);
 
 // This variable checks if user is logged and hide the form

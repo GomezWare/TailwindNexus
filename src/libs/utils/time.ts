@@ -24,6 +24,7 @@ const convertUnixTimestampToLocalTime = (unixTimestamp, timeZone) => {
   // Format date in a ISO String to show the date properly
   const isoFormattedDate = localTime.format("YYYY-MM-DD HH:mm:ss");
 
+  // Return date string with correct format with timezone updated
   return isoFormattedDate;
 };
 

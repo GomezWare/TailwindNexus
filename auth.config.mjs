@@ -1,3 +1,7 @@
+/** 
+ * AuthJS library configuration and auth providers imports
+ */
+
 import Facebook from "@auth/core/providers/facebook";
 import GitHub from "@auth/core/providers/github";
 import Google from "@auth/core/providers/google";
