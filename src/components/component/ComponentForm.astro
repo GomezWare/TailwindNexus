@@ -1,4 +1,7 @@
 ---
+/**
+ * This compoent is for upload comments to a component
+ */
 import { getSession } from "auth-astro/server";
 
 interface Props {
@@ -8,49 +11,47 @@ interface Props {
 // This property is inserted via a data-x attribute
 const { componentId } = Astro.props;
 
+// Retrieving the session
 const session = await getSession(Astro.request);
 
 // This variable checks if user is logged and hide the form
 let isUserLogged = false;
 if (session?.user) isUserLogged = true;
-
 ---
-{isUserLogged && (
-<section class="container pb-4">
-  <form>
-    <div
-      class="flex justify-start relative items-center gap-16 bg-slate-700 p-4 lg:w-2/3 rounded"
-    >
-      <a class="w-16 md:w-24 shrink-0">
-        <img class="w-full" src={session.user.image} alt="Your avatar" />
-      </a>
-      <div class="w-full flex flex-col justify-evenly items-center">
-        <textarea
-          id="comment"
-          data-component={componentId}
-          class="bg-slate-500 text-gray-50 p-2 rounded w-full"></textarea>
 
-        <p id="error" class="hidden absolute top-1 text-rose-500">
-          The comment is empty
-        </p>
-      </div>
-      <div>
-        <button
-          type="button"
-          id="send"
-          class="size-16 flex justify-center items-center bg-slate-500 hover:bg-slate-400 transition-colors rounded"
-          ><img
-            class="w-8"
-            src="/img/icons/plane.svg"
-            alt="Send Button"
-          /></button
-        >
-      </div>
-    </div>
-  </form>
-</section>
-)}
+{
+  isUserLogged && (
+    <section class="container pb-4">
+      <form>
+        <div class="flex justify-start relative items-center gap-16 bg-slate-700 p-4 lg:w-2/3 rounded">
+          <a class="w-16 md:w-24 shrink-0">
+            <img class="w-full" src={session.user.image} alt="Your avatar" />
+          </a>
+          <div class="w-full flex flex-col justify-evenly items-center">
+            <textarea
+              id="comment"
+              data-component={componentId}
+              class="bg-slate-500 text-gray-50 p-2 rounded w-full"
+            />
 
+            <p id="error" class="hidden absolute top-1 text-rose-500">
+              The comment is empty
+            </p>
+          </div>
+          <div>
+            <button
+              type="button"
+              id="send"
+              class="size-16 flex justify-center items-center bg-slate-500 hover:bg-slate-400 transition-colors rounded"
+            >
+              <img class="w-8" src="/img/icons/plane.svg" alt="Send Button" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  )
+}
 
 <script>
   /** Script for posting comments */
@@ -84,7 +85,7 @@ if (session?.user) isUserLogged = true;
         body: JSON.stringify(request),
       }).then((res) => {
         // When the comment is sended reload the page to show the result
-        window.location.href = window.location.href;
+        window.location.reload();
       });
     }
   });

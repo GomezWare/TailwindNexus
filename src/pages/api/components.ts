@@ -1,4 +1,3 @@
-// TODO document Endpoint
 /**
  * This Endpoint return a JSON with all components
  * Uses the function getComponents in components services
@@ -39,10 +38,12 @@ export const GET: APIRoute = async () => {
   }
 };
 
-// POST
+// POST ROUTE
 export const POST: APIRoute = async ({ request }) => {
+  // Recover the sesion via request object
   const session = await getSession(request);
 
+  // If there are no session or user send user unauthorized status
   if (!session?.user) {
     return new Response(null, { status: 401, statusText: "User Unauthorized" });
   }
@@ -73,6 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
         // Generate component thumbnail
         const thumbnail = await renderThumbnail(component.tailwind);
 
+        // Call the component insert service to insert component to the DB
         const componentInsert = await addComponent([
           component.categoryId,
           component.userId,
@@ -85,25 +87,31 @@ export const POST: APIRoute = async ({ request }) => {
           component.javascript,
         ]);
 
+        // Return a 200 response with the last insert ID
         return new Response(JSON.stringify(componentInsert));
       } else {
+        // If validation failed send a 403 response
         return new Response(JSON.stringify("Validation Failed"), {
           status: 403,
           statusText: "Validation Failed",
         });
       }
     }
+    // If there are no JSON suplied send a Bad request response
     return new Response(null, { status: 400, statusText: "Bad Request" });
   } catch (err) {
+    // If there is a server error send the 500 internal server fail status
     console.log(err);
     return new Response(null, { status: 500, statusText: "Server error" });
   }
 };
 
-// PUT
+// PUT ROUTE
 export const PUT: APIRoute = async ({ request }) => {
+  // Recover the sesion via request object
   const session = await getSession(request);
 
+  // If there are no session or user send user unauthorized status
   if (!session?.user) {
     return new Response(null, { status: 401, statusText: "User Unauthorized" });
   }
@@ -142,6 +150,7 @@ export const PUT: APIRoute = async ({ request }) => {
         // Generate component thumbnail
         const thumbnail = await renderThumbnail(component.tailwind);
 
+        // Executing query in the database via service
         await updateComponent([
           component.categoryId,
           component.name,
@@ -154,17 +163,21 @@ export const PUT: APIRoute = async ({ request }) => {
           component.componentId,
         ]);
 
+        // Return 200 response with true boolean
         return new Response(JSON.stringify(true));
       } else {
+        // If validation fails send a 403 Failed Validation response
         return new Response(JSON.stringify("Validation Failed"), {
           status: 403,
           statusText: "Validation Failed",
         });
       }
     }
+    // If there are not a JSON suplied send a bad request response
     return new Response(null, { status: 400, statusText: "Bad Request" });
   } catch (err) {
     console.log(err);
+    // If there is a server error send the 500 internal server fail status
     return new Response(null, { status: 500, statusText: "Server error" });
   }
 };
@@ -218,8 +231,8 @@ export const DELETE: APIRoute = async ({ request }) => {
       });
     }
   } catch (err) {
+    // If there is a server error send the 500 internal server fail status
     console.log(err);
-    // API Response with bad request status
     return new Response(JSON.stringify([]), {
       status: 500,
       statusText: "Internal Server Error",

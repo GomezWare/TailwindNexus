@@ -1,5 +1,3 @@
-// TODO Document this
-
 // Imports
 import { dbQuery } from "@utils/dbQuery";
 
@@ -17,15 +15,18 @@ import { dbQuery } from "@utils/dbQuery";
  */
 const registerUser = async (name, email, avatar) => {
   try {
-    // Register user
+    // Register user calling dbQuery function and pasing params to SQL query
     const [userDataRows, userDataFields] = await dbQuery(
       `
       INSERT INTO users (name, email, avatar, created_at, updated_at) 
       VALUES (?, ?, ?, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());`,
       [name, email, avatar]
     );
+
+    // if user register return true boolean
     return true;
   } catch (error) {
+    // Else return false
     console.log(error);
     return false;
   }
@@ -39,6 +40,7 @@ const registerUser = async (name, email, avatar) => {
  */
 const checkUserMail = async (mail) => {
   try {
+    // Get user ID from DB via user mail
     const [userDataRows, userDataFields] = await dbQuery(
       `
       SELECT user_id
@@ -47,6 +49,8 @@ const checkUserMail = async (mail) => {
       `,
       [mail]
     );
+
+    // If user id was found return the user ID else return a negative ID
     if (userDataRows.length == 0) {
       return -1;
     } else {
@@ -54,7 +58,7 @@ const checkUserMail = async (mail) => {
     }
   } catch (error) {
     console.log(error);
-    // Special return if server is down
+    // Special return if server is down or there was a error in the query
     return -404;
   }
 };

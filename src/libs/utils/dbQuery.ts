@@ -12,7 +12,6 @@ const dbQuery = async (
   sql: string,
   values: any[] = []
 ): Promise<[RowDataPacket[], FieldPacket[]]> => {
-    
   // Establishing a database connection
   const dbConnection = await mysql.createConnection({
     host: import.meta.env.DB_HOST, // Database host obtained from eviroment variables (Using Astro meta import)

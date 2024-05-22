@@ -1,6 +1,4 @@
 ---
-import type { Code } from "astro:components";
-
 /**
  * component card, provides basic data to the user about the component.
  *
@@ -42,7 +40,11 @@ if (needsCDN) {
 
 <div class="flex flex-col border-slate-600 border p-1.5 rounded">
   <a href={`/components/${id}`} class="relative">
-    <img src={thumbnail} class="w-full" alt="Component preview" />
+    <img
+      src={"/thumbnail/" + thumbnail}
+      class="w-full"
+      alt="Component preview"
+    />
     <div class="absolute bottom-2 right-3 flex gap-4">
       {
         alpine && (
@@ -69,7 +71,8 @@ if (needsCDN) {
   <div class="mt-2">
     <a
       href={"/components/" + id}
-      class="font-bold text-xl line-clamp-1 custom-link px-5">{name}</a
+      class="font-bold text-xl line-clamp-1 text-teal-400 hover:bg-cyan-800 underline transition-all px-5"
+      >{name}</a
     >
     <div class="flex justify-between mt-3">
       <div class="flex justify-center items-center gap-1">
@@ -78,7 +81,7 @@ if (needsCDN) {
       </div>
       <div class="flex justify-end gap-3 items-bottom">
         <a
-          class="self-end custom-link text-white"
+          class="self-end text-teal-400 hover:bg-cyan-800 underline transition-all"
           href={`/users/${userData.id}`}
           ><span class="text-clamp-1">{userData.name}</span></a
         >

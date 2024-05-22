@@ -14,7 +14,6 @@ interface Props {
 }
 const { commentId, userId, userAvatar, userName, commentDate, content } =
   Astro.props;
-
 ---
 
 <div class="flex justify-start gap-4 bg-slate-700 p-4 lg:w-2/3 rounded">
@@ -23,9 +22,8 @@ const { commentId, userId, userAvatar, userName, commentDate, content } =
   </a>
   <div class="">
     <p>
-      <a class="custom-link text-xl" href={"/users/" + userId}>{userName}</a>
-      <span class="dateConvert ml-4" data-date={commentDate}>
-      </span>
+      <a class="text-teal-400 hover:bg-cyan-800 underline transition-all text-xl" href={"/users/" + userId}>{userName}</a>
+      <span class="dateConvert ml-4" data-date={commentDate}> </span>
     </p>
     <p class="mt-2 font-light">
       {content}
@@ -86,7 +84,7 @@ const { commentId, userId, userAvatar, userName, commentDate, content } =
               // Check if the comment was deleted
               if (data.deleted) {
                 // Reload page to show the comment was deleted
-                window.location.href = window.location.href;
+                window.location.reload();
               } else {
                 alert("Error deleting comment");
               }

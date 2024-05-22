@@ -18,14 +18,12 @@ import { getSession } from "auth-astro/server";
 import { checkUserMail } from "@services/auth";
 
 // Get id via Astro params
-const {id} = Astro.params;
+const { id } = Astro.params;
 
 // Fetch data from the API
 const component = await fetch(Astro.url.origin + "/api/component/" + id).then(
   (data) => data.json()
 );
-
-
 
 // If the api returned a blank array (null response) redirect user to 404
 if (component.length == 0) {
@@ -44,7 +42,13 @@ if (session?.user.email) {
 ---
 
 <Layout title={component.name} footer={true}>
-  <ComponentHeader name={component.name} description={component.description} />
+  <ComponentHeader
+    name={component.name}
+    description={component.description}
+    date={component.createdAt}
+    cdn={component.needsCDN}
+    alpine={component.needsAlpine}
+  />
   <UserCard
     id={component.user.id}
     username={component.user.name}

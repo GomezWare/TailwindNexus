@@ -1,6 +1,6 @@
 ---
 /**
- * Swiper buttons, used on all Swipers
+ * Custom Swiper buttons, used on all Swipers
  */
 ---
 
@@ -16,3 +16,10 @@
 </div>
 
 <div class="swiper-scrollbar !h-1.5 !bg-gray-600"></div>
+
+<style>
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    content: " " !important;
+  }
+</style>

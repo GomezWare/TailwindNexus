@@ -126,7 +126,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             readonly={false}
             haveEvent={true}
             eventName={"tailwindUpdate"}
-            client:only
+            client:only="react"
           />
         </div>
       </div>
@@ -146,7 +146,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) =>
             readonly={false}
             haveEvent={true}
             eventName={"jsUpdate"}
-            client:only
+            client:only="react"
           />
         </div>
       </div>

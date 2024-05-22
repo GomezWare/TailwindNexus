@@ -1,4 +1,3 @@
-//TODO Improve documentation
 
 /**
  * This Endpoint return a JSON with all components
@@ -137,6 +136,7 @@ export const DELETE: APIRoute = async ({ request }) => {
       });
     }
   } catch (err) {
+    // If there is a error
     console.log(err);
     // API Response with bad request status
     return new Response(JSON.stringify([]), {

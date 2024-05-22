@@ -1,4 +1,10 @@
 ---
+/**
+ * This is the main Layout of the project
+ * Contain the page header navbar, search bar and search functions and a
+ * optional footer seteable via Astro props
+ */
+
 import MenuResponsive from "../components/partials/menu/MenuResponsive.astro";
 
 interface Props {
@@ -16,7 +22,6 @@ const { title, footer } = Astro.props;
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/css/main.css" />
     <title>{title}</title>
   </head>
   <body class="bg-slate-800 scroll-smooth">
@@ -27,7 +32,7 @@ const { title, footer } = Astro.props;
         <div>
           <a href="/"
             ><img
-              class=" h-[60px] md:h-[75px]"
+              class="h-[60px] md:h-[75px]"
               src="/img/logos/TailwindFull.png"
               alt="Tailwind Nexus Logo"
             /></a
@@ -125,7 +130,7 @@ const { title, footer } = Astro.props;
                 <a
                   href="https://github.com/GomezWare"
                   target="_blank"
-                  class="custom-link"
+                  class=" text-teal-400 hover:bg-cyan-800 underline transition-all"
                 >
                   GomezWare
                 </a>
@@ -187,7 +192,7 @@ const { title, footer } = Astro.props;
                 <a
                   href="https://github.com/GomezWare"
                   target="_blank"
-                  class="custom-link"
+                  class=" text-teal-400 hover:bg-cyan-800 underline transition-all"
                 >
                   GomezWare
                 </a>
@@ -201,9 +206,18 @@ const { title, footer } = Astro.props;
   </body>
 </html>
 
-<script>
-  // TODO Document search function
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+  @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+  @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,regular,500,600,700,800,900,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
+  /* For hide the magnifier icon in the search bar */
+  input[type="search"]:focus + img {
+    @apply hidden;
+  }
+</style>
+
+<script>
   // Recover of search fields
   const searchBar = document.querySelector(
     "#componentSearch"
@@ -212,18 +226,40 @@ const { title, footer } = Astro.props;
     "#componentSearchMobile"
   ) as HTMLInputElement;
 
-  // Event listeners
+  // Search envent listeners
+
+  /**
+   * BUG
+   *
+   * This for some reason dont work on firefox
+   * Search event is only in Chrome
+   */
+
   searchBar.addEventListener("search", () => {
+    // Get the search query content via input search form
     const query = searchBar.value;
+
+    // Build a new URL object with search page route
     const url = new URL(`${window.location.origin}/search/`);
+
+    // Set "q" query param via URL params (GET))
     url.searchParams.append("q", query);
+
+    // Go to the location using the custom URL
     window.location.href = url.toString();
   });
 
   searchBarMobile.addEventListener("search", () => {
+    // Get the search query content via input search form
     const query = searchBarMobile.value;
+
+    // Build a new URL object with search page route
     const url = new URL(`${window.location.origin}/search/`);
+
+    // Set "q" query param via URL params (GET))
     url.searchParams.append("q", query);
+
+    // Go to the location using the custom URL
     window.location.href = url.toString();
   });
 </script>

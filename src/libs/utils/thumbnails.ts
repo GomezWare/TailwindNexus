@@ -10,7 +10,7 @@ const renderThumbnail = async (tailwindCode) => {
   const uid = randomUUID();
 
   // Launch a Puppeteer browser
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   // Custom HTML as a string (includes tailwind cdn)
@@ -24,7 +24,7 @@ const renderThumbnail = async (tailwindCode) => {
 
   // Take a screenshot of the page
   await page.screenshot({
-    path: `public/uploads/component-${uid}.png`,
+    path: `upload/component-${uid}.png`,
     fullPage: false,
   });
 
@@ -32,7 +32,7 @@ const renderThumbnail = async (tailwindCode) => {
   await browser.close();
 
   // Return the path of the humbnail
-  return `/uploads/component-${uid}.png`;
+  return `component-${uid}.png`;
 };
 
 export { renderThumbnail };
