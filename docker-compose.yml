@@ -33,7 +33,7 @@ services:
       DB_DATABASE: "tnexus"
 
     expose:
-      - 4321
+      - 80
     
     depends_on:
       - db
