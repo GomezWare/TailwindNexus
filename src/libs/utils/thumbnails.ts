@@ -24,7 +24,7 @@ const renderThumbnail = async (tailwindCode) => {
 
   // Take a screenshot of the page
   await page.screenshot({
-    path: `public/uploads/component-${uid}.png`,
+    path: `upload/component-${uid}.png`,
     fullPage: false,
   });
 
@@ -32,7 +32,7 @@ const renderThumbnail = async (tailwindCode) => {
   await browser.close();
 
   // Return the path of the humbnail
-  return `/uploads/component-${uid}.png`;
+  return `component-${uid}.png`;
 };
 
 export { renderThumbnail };

@@ -40,7 +40,11 @@ if (needsCDN) {
 
 <div class="flex flex-col border-slate-600 border p-1.5 rounded">
   <a href={`/components/${id}`} class="relative">
-    <img src={thumbnail} class="w-full" alt="Component preview" />
+    <img
+      src={"/thumbnail/" + thumbnail}
+      class="w-full"
+      alt="Component preview"
+    />
     <div class="absolute bottom-2 right-3 flex gap-4">
       {
         alpine && (
