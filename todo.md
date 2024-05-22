@@ -1,8 +1,5 @@
 # TASKS
 
-## FIXES
-[ ] The client:only directive for CodeMirror is not recognized.
-
 ## DOC
 
 [ ] Update project Docs
