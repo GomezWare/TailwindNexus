@@ -27,7 +27,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
     >
       <img class="size-5" src="/img/icons/barLeft.svg" />
     </button>
-    <div class="w-full h-full flex flex-col items-center justify-start gap-3">
+    <div class="w-full h-screen flex flex-col items-center justify-start gap-3">
       <a
         href="/components"
         class="font-title font-semibold color py-2 w-[80%] text-center bg-slate-600 hover:bg-slate-500 border-2 border-slate-500 text-gray-50 rounded group transition-colors"
@@ -54,7 +54,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
         >Categories</a
       >
       <div
-        class="w-full text-gray-50 justify-start flex-col flex items-center space-y-2 overflow-y-scroll"
+        class="w-full text-gray-50 justify-start flex-col flex items-center space-y-2 overflow-y-scroll max-h-[calc(100dvh-280px)]"
       >
         {
           // Category menu render
@@ -106,7 +106,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
       document
         .querySelector("#categoriesMenu")
         .classList.remove("-translate-x-[100rem]");
-      document.querySelector("body").classList.add("overflow-y-hidden");
+      document.querySelector("body").classList.add("overflow-hidden");
     });
   });
 
@@ -120,7 +120,7 @@ const categories = await fetch(Astro.url.origin + "/api/menu").then((res) => {
       document
         .querySelector("#categoriesMenu")
         .classList.add("-translate-x-[100rem]");
-      document.querySelector("body").classList.remove("overflow-y-hidden");
+      document.querySelector("body").classList.remove("overflow-hidden");
     });
   });
 </script>
