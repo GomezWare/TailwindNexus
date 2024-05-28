@@ -66,7 +66,7 @@ If you don`t want to use Docker
 ## FAQ
 
 ### Can I deploy your project on a website I own?
-No, I wouldn't want you to do that because the public version of tailwind nexus is hosted at [tailwindnexus.com](tailwindnexus.com)
+No, I wouldn't want you to do that because the public version of tailwind nexus is hosted at [tailwindnexus.gomeware.dev](tailwindnexus.gomeware.dev)
 
 ### Can I use your project as a basis for something else?
 Of course you can, you don't need to give me credit but it would be nice of you.
