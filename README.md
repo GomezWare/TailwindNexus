@@ -3,6 +3,7 @@
 ## About Tailwind Nexus
 
 ### What is tailwind nexus?
+[tailwindnexus.gomeware.dev](https://tailwindnexus.gomeware.dev)
 Tailwind Nexus aims to be a platform to upload [Tailwind](https://tailwindcss.com/) components along with their functionality.
 
 Due to its nature it can be deployed locally, providing a secure space where your company, yourself or your friends can upload components.
@@ -66,7 +67,7 @@ If you don`t want to use Docker
 ## FAQ
 
 ### Can I deploy your project on a website I own?
-No, I wouldn't want you to do that because the public version of tailwind nexus is hosted at [tailwindnexus.gomeware.dev](tailwindnexus.gomeware.dev)
+No, I wouldn't want you to do that because the public version of tailwind nexus is hosted at [tailwindnexus.gomeware.dev](https://tailwindnexus.gomeware.dev)
 
 ### Can I use your project as a basis for something else?
 Of course you can, you don't need to give me credit but it would be nice of you.
