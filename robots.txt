@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin
+Disallow: /privado
+Allow: /publico
+Sitemap: https:/tailwindnexus.gomeware.dev/sitemap.xml
