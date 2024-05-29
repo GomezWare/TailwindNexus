@@ -32,6 +32,14 @@ const { title, footer } = Astro.props;
     <meta name="robots" content="index,follow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <script src="/js/cookie-consent.js" is:inline></script>
+    <script is:inline>
+      CookieConsent.config({
+        cookiesPolicyLink:
+          "https://www.freeprivacypolicy.com/live/1ce09af8-435c-4931-b114-6ab5f3ea2326",
+        locale: "en",
+      });
+    </script>
   </head>
   <body class="bg-slate-800 scroll-smooth">
     <header>
